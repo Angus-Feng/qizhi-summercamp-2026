@@ -270,9 +270,15 @@ app.get('/api/export', (req, res) => {
   }
 });
 
-// ── 启动服务器 ──────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`启智归塾夏令营报名服务已启动: http://localhost:${PORT}`);
-  console.log(`管理页面: http://localhost:${PORT}/api/registrations`);
-  console.log(`导出CSV: http://localhost:${PORT}/api/export`);
-});
+// ── 启动服务器 / 导出 for Vercel ────────────────────────
+if (process.env.VERCEL) {
+  // Vercel Serverless: 导出 app
+  module.exports = app;
+} else {
+  // 本地开发: 启动 HTTP 服务
+  app.listen(PORT, () => {
+    console.log(`启智归塾夏令营报名服务已启动: http://localhost:${PORT}`);
+    console.log(`管理页面: http://localhost:${PORT}/api/registrations`);
+    console.log(`导出CSV: http://localhost:${PORT}/api/export`);
+  });
+}
