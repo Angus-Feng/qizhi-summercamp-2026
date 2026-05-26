@@ -2,5 +2,6 @@ node_modules/
 registrations.db
 registrations.db-shm
 registrations.db-wal
+registrations.json
 *.log
 .DS_Store

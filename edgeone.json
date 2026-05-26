@@ -1,0 +1,6 @@
+{
+  "outputDirectory": ".",
+  "installCommand": "npm install",
+  "buildCommand": "",
+  "nodeVersion": "20"
+}

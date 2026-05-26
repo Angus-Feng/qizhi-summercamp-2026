@@ -14,7 +14,7 @@
 |---|------|
 | 前端 | 原生 HTML + CSS + JS（单文件） |
 | 后端 | Node.js + Express |
-| 数据库 | SQLite（better-sqlite3） |
+| 数据库 | JSON 文件存储（/tmp/registrations.json） |
 
 ## 本地开发
 
@@ -34,26 +34,26 @@ npm start
 | GET | `/api/registrations` | 查看报名列表（支持分页 `?page=1&page_size=20`） |
 | GET | `/api/export` | 导出CSV文件（含BOM，Excel可直接打开） |
 
-## 上线方案（推荐）
+## 上线方案
 
-### 方案一：全栈部署在 Vercel（最简）
+### 🏅 方案一：腾讯云 EdgeOne Pages（国内首选，免费）
 
-1. 将项目推送到 GitHub 仓库
-2. 在 [Vercel](https://vercel.com) 导入该仓库
-3. Vercel 自动识别 Node.js 项目，无需额外配置
-4. 自动获得 HTTPS 域名，完全免费
+Vercel 在国内被墙，EdgeOne Pages 是腾讯云的全栈部署平台，国内直连，支持 Express 后端。
 
-### 方案二：前后端分离（更灵活）
+1. 打开 [EdgeOne Pages 控制台](https://console.cloud.tencent.com/edgeone/pages)
+2. 用 GitHub 账号授权登录
+3. 点击「导入 Git 仓库」→ 选择 `Angus-Feng/qizhi-summercamp-2026`
+4. 框架预设选 **Express**，构建配置无需修改
+5. 点击「开始部署」，1-2 分钟完成
+6. 获得 `https://xxx.edgeonepages.com` 国内可访问域名
 
-- **前端**：GitHub Pages（免费托管静态页面）
-  - 将 `index.html` 推送到 GitHub 仓库
-  - Settings → Pages 启用
-  - 记得修改 `index.html` 中 `API_BASE_URL` 指向后端地址
+> **数据持久化**：EdgeOne Pages 免费版 `/tmp` 目录在冷启动后会清空。建议定期导出 CSV 备份，或后续接入腾讯云轻量数据库（最低 30 元/月）。
 
-- **后端**：Vercel / Netlify Functions / Railway（免费额度）
-  - Vercel：直接导入仓库，自动部署
-  - Railway：免费 $5/月额度，足够使用
-  - 数据库文件会随部署保留
+### 方案二：Vercel（海外可用，免费）
+
+1. 推送到 GitHub → [Vercel](https://vercel.com) 导入
+2. 自动获得 `https://xxx.vercel.app` 域名
+3. ⚠️ 国内访问需要 VPN
 
 ### 方案三：云服务器（传统方案）
 
@@ -71,11 +71,13 @@ pm2 startup  # 开机自启
 
 ```
 summercamp/
-├── index.html        # 前端主页面（HTML+CSS+JS全部内嵌）
-├── server.js         # Express后端服务
-├── package.json      # 依赖配置
-├── README.md         # 本文档
-└── registrations.db  # SQLite数据库（运行后自动生成）
+├── index.html                              # 前端主页面（HTML+CSS+JS 全部内嵌）
+├── server.js                               # Express 后端（本地开发 / Vercel）
+├── node-functions/express/[[default]].js   # EdgeOne Pages Node Functions 入口
+├── edgeone.json                            # EdgeOne Pages 配置
+├── package.json                            # 依赖配置
+├── vercel.json                             # Vercel 配置
+└── README.md                               # 本文档
 ```
 
 ## 注意事项
