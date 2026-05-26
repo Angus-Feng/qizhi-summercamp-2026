@@ -1,0 +1,15 @@
+{
+  "name": "qizhi-summercamp",
+  "version": "1.0.0",
+  "description": "启智归塾2026夏令营报名系统",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0"
+  }
+}

@@ -1,0 +1,2117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="启智归塾2026夏令营·顺势归心自然生长——淮安日月洲度假村，家庭生命成长道场">
+<title>启智归塾·2026夏令营 - 顺势归心·自然生长</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   CSS Custom Properties & Reset
+   ═══════════════════════════════════════════════════════ */
+:root {
+  --bg:        #FAF7F2;
+  --text:      #3D322C;
+  --text-light:#6B5E56;
+  --green:     #5B7B5E;
+  --green-lt:  #E8EFE9;
+  --green-dk:  #3D5A40;
+  --sienna:    #A0522D;
+  --sienna-lt: #F5EDE8;
+  --white:     #FFFFFF;
+  --border:    #E0D8CF;
+  --shadow-sm: 0 2px 8px rgba(61,50,44,0.06);
+  --shadow-md: 0 4px 20px rgba(61,50,44,0.10);
+  --shadow-lg: 0 8px 32px rgba(61,50,44,0.12);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --font-serif: 'Noto Serif SC', 'STSong', 'Songti SC', 'SimSun', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+               'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --max-w: 720px;
+  --nav-h: 56px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+  font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+/* ═══════════════════════════════════════════════════════
+   Navigation
+   ═══════════════════════════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: var(--nav-h);
+  background: rgba(250,247,242,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.nav-inner {
+  width: 100%; max-width: var(--max-w);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px;
+}
+
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--green-dk);
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+
+.nav-links { display: flex; gap: 20px; list-style: none; }
+
+.nav-links a {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  transition: color 0.2s;
+  letter-spacing: 0.3px;
+}
+.nav-links a:hover, .nav-links a:active { color: var(--green); }
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--text); border-radius: 1px;
+  transition: all 0.3s;
+}
+.nav-hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.active span:nth-child(2) { opacity: 0; }
+.nav-hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile nav overlay */
+.nav-mobile-menu {
+  display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
+  background: rgba(250,247,242,0.98);
+  backdrop-filter: blur(16px);
+  z-index: 999;
+  flex-direction: column; align-items: center;
+  padding-top: 40px; gap: 24px;
+}
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a {
+  font-size: 1.1rem;
+  color: var(--text);
+  font-family: var(--font-serif);
+  padding: 8px 0;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Section Common
+   ═══════════════════════════════════════════════════════ */
+.section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 36px;
+  letter-spacing: 0.5px;
+}
+
+/* Decorative divider */
+.divider {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin: 0 auto 36px;
+}
+.divider::before, .divider::after {
+  content: ''; width: 40px; height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+}
+.divider-symbol {
+  font-size: 0.6rem; color: var(--green);
+  font-family: var(--font-serif);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Beta Banner
+   ═══════════════════════════════════════════════════════ */
+.beta-banner {
+  position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 999;
+  background: #C62828;
+  color: #fff;
+  text-align: center;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  animation: betaPulse 2s ease-in-out infinite;
+}
+@keyframes betaPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banner */
+
+/* ═══════════════════════════════════════════════════════
+   1. Hero Section
+   ═══════════════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  padding: calc(var(--nav-h) + 40px) 20px 60px;
+  background: linear-gradient(180deg,
+    #F5F0E8 0%,
+    #F8F4EE 30%,
+    #FAF7F2 60%,
+    #FDFBF8 100%
+  );
+}
+
+.hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
+}
+
+/* Mountain layers - CSS art */
+.hero-mountain-1 {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 35%;
+  background: linear-gradient(175deg,
+    transparent 0%,
+    rgba(91,123,94,0.06) 30%,
+    rgba(91,123,94,0.12) 60%,
+    rgba(91,123,94,0.18) 100%
+  );
+  clip-path: polygon(
+    0% 100%, 0% 60%, 8% 50%, 16% 58%, 24% 45%, 32% 52%,
+    40% 40%, 48% 48%, 56% 38%, 64% 44%, 72% 35%, 80% 42%,
+    88% 48%, 95% 55%, 100% 50%, 100% 100%
+  );
+}
+
+.hero-mountain-2 {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 25%;
+  background: linear-gradient(175deg,
+    transparent 0%,
+    rgba(160,82,45,0.04) 40%,
+    rgba(160,82,45,0.10) 80%,
+    rgba(160,82,45,0.14) 100%
+  );
+  clip-path: polygon(
+    0% 100%, 0% 70%, 10% 62%, 22% 68%, 34% 58%, 46% 64%,
+    58% 55%, 68% 60%, 78% 54%, 88% 62%, 100% 58%, 100% 100%
+  );
+}
+
+/* Mist effect */
+.hero-mist {
+  position: absolute; bottom: 20%; left: -10%; right: -10%;
+  height: 120px;
+  background: radial-gradient(ellipse at center,
+    rgba(250,247,242,0.7) 0%,
+    rgba(250,247,242,0.3) 60%,
+    transparent 100%
+  );
+  filter: blur(20px);
+}
+
+/* Sun circle */
+.hero-sun {
+  position: absolute; top: 18%; right: 12%;
+  width: 80px; height: 80px;
+  background: radial-gradient(circle,
+    rgba(160,82,45,0.15) 0%,
+    rgba(160,82,45,0.06) 50%,
+    transparent 70%
+  );
+  border-radius: 50%;
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center; max-width: 500px;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--green);
+  background: var(--green-lt);
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  font-family: var(--font-serif);
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.3;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.hero-title .accent { color: var(--green-dk); }
+
+.hero-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 3.5vw, 1.3rem);
+  font-weight: 600;
+  color: var(--sienna);
+  letter-spacing: 4px;
+  margin-bottom: 16px;
+}
+
+.hero-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.8;
+  margin-bottom: 32px;
+  letter-spacing: 0.5px;
+}
+
+.hero-meta {
+  display: flex; justify-content: center; gap: 24px;
+  flex-wrap: wrap; margin-bottom: 28px;
+}
+
+.hero-meta-item {
+  text-align: center;
+  font-family: var(--font-serif);
+}
+.hero-meta-item .label {
+  font-size: 0.7rem; color: var(--text-light);
+  letter-spacing: 1px; margin-bottom: 2px;
+}
+.hero-meta-item .value {
+  font-size: 0.85rem; font-weight: 600;
+  color: var(--text);
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--green);
+  color: var(--white);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 36px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-sans);
+  box-shadow: 0 2px 12px rgba(91,123,94,0.25);
+}
+.btn-primary:hover { background: var(--green-dk); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-outline {
+  display: inline-block;
+  background: transparent;
+  color: var(--green);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 10px 28px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 1px;
+  border: 1.5px solid var(--green);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: all 0.3s;
+}
+.btn-outline:hover { background: var(--green-lt); }
+
+.hero-scroll-hint {
+  position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+.hero-scroll-hint span {
+  font-size: 0.65rem; color: var(--text-light);
+  letter-spacing: 1px;
+}
+.hero-scroll-arrow {
+  width: 20px; height: 20px;
+  border-right: 1.5px solid var(--text-light);
+  border-bottom: 1.5px solid var(--text-light);
+  transform: rotate(45deg);
+}
+
+/* ═══════════════════════════════════════════════════════
+   2. Why Us Section (Feature Cards)
+   ═══════════════════════════════════════════════════════ */
+.why-section { padding-top: 40px; }
+
+.feature-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.feature-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 28px 20px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s;
+  border: 1px solid transparent;
+  position: relative; overflow: hidden;
+}
+.feature-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border);
+  transform: translateY(-2px);
+}
+
+.feature-card-icon {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--green-lt);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+}
+
+.feature-card h3 {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+}
+
+.feature-card .badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  color: var(--green);
+  background: var(--green-lt);
+  padding: 2px 10px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.feature-card p {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════════
+   3. Product Selection
+   ═══════════════════════════════════════════════════════ */
+.product-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+
+.product-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 24px 16px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+  position: relative;
+}
+.product-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.product-card.selected {
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px rgba(91,123,94,0.08), var(--shadow-md);
+  background: linear-gradient(180deg, #FAFBF9 0%, #FFFFFF 100%);
+}
+
+.product-card .product-icon {
+  font-size: 1.5rem; margin-bottom: 10px;
+}
+
+.product-card .product-name {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.product-card .product-duration {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-bottom: 10px;
+}
+
+.product-card .product-price {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--sienna);
+  margin-bottom: 4px;
+}
+.product-card .product-price small {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--text-light);
+}
+
+.product-card .check-badge {
+  display: none;
+  position: absolute; top: -8px; right: -8px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--white);
+  font-size: 0.7rem;
+  align-items: center; justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+.product-card.selected .check-badge { display: flex; }
+
+.accompany-info {
+  text-align: center; margin-top: 20px;
+  padding: 14px 20px;
+  background: var(--sienna-lt);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--sienna);
+  letter-spacing: 0.5px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   4. Discount Rules
+   ═══════════════════════════════════════════════════════ */
+.discount-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.discount-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-family: var(--font-serif);
+  color: var(--text);
+  border-bottom: 2px solid var(--border);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.discount-table td {
+  padding: 12px 14px;
+  border-bottom: 1px dashed var(--border);
+  color: var(--text-light);
+  vertical-align: middle;
+}
+
+.discount-table .highlight {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.discount-table .discount-amount {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--sienna);
+  font-size: 1rem;
+}
+
+.discount-table .discount-checkbox {
+  text-align: center;
+}
+
+.discount-table input[type="checkbox"] {
+  width: 18px; height: 18px;
+  accent-color: var(--green);
+  cursor: pointer;
+}
+
+.discount-note {
+  text-align: center; margin-top: 16px;
+  font-size: 0.75rem; color: var(--green);
+  letter-spacing: 0.5px;
+}
+.discount-note::before { content: '✨ '; }
+
+/* ═══════════════════════════════════════════════════════
+   5. Schedule & Phases (Collapsible)
+   ═══════════════════════════════════════════════════════ */
+.accordion { margin-bottom: 12px; }
+
+.accordion-header {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.3s;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.accordion-header:hover { border-color: var(--green); }
+
+.accordion-arrow {
+  font-size: 0.7rem; color: var(--text-light);
+  transition: transform 0.3s;
+}
+.accordion-header.open .accordion-arrow { transform: rotate(180deg); }
+
+.accordion-body {
+  display: none;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  padding: 20px;
+  margin-top: -1px;
+  animation: fadeIn 0.3s;
+}
+.accordion-body.open { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.schedule-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.8rem;
+}
+.schedule-table th, .schedule-table td {
+  padding: 8px 10px;
+  border-bottom: 1px dashed var(--border);
+  text-align: left;
+}
+.schedule-table th {
+  font-family: var(--font-serif);
+  color: var(--text);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+.schedule-table td:first-child {
+  font-weight: 600; color: var(--green);
+  white-space: nowrap;
+}
+
+.phase-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.phase-card {
+  background: var(--green-lt);
+  border-radius: var(--radius-sm);
+  padding: 20px 14px;
+  text-align: center;
+}
+
+.phase-card .phase-num {
+  font-family: var(--font-serif);
+  font-size: 0.7rem;
+  color: var(--green);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.phase-card h4 {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.phase-card p {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.phase-card .phase-days {
+  font-size: 0.65rem;
+  color: var(--sienna);
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   6. Registration Form
+   ═══════════════════════════════════════════════════════ */
+.form-section { padding-top: 20px; }
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+.form-label .required {
+  color: var(--sienna);
+  margin-left: 2px;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s;
+  outline: none;
+  appearance: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(91,123,94,0.08);
+}
+.form-input.error, .form-select.error {
+  border-color: #C0392B;
+  box-shadow: 0 0 0 3px rgba(192,57,43,0.06);
+}
+
+.form-textarea {
+  min-height: 80px; resize: vertical;
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B5E56' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+
+.form-hint {
+  font-size: 0.7rem; color: var(--text-light);
+  margin-top: 4px;
+}
+
+.form-error {
+  font-size: 0.7rem; color: #C0392B;
+  margin-top: 4px; display: none;
+}
+.form-error.visible { display: block; }
+
+/* Price Calculator */
+.price-calc {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  margin: 24px 0 20px;
+}
+
+.price-calc h4 {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: 1px;
+  display: flex; align-items: center; gap: 8px;
+}
+.price-calc h4::before {
+  content: ''; width: 4px; height: 18px;
+  background: var(--green); border-radius: 2px;
+}
+
+.price-row {
+  display: flex; justify-content: space-between;
+  align-items: center; padding: 8px 0;
+  font-size: 0.82rem;
+  border-bottom: 1px dashed var(--border);
+}
+.price-row:last-child { border-bottom: none; }
+.price-row .label { color: var(--text-light); }
+.price-row .value {
+  font-weight: 600; color: var(--text);
+  font-family: var(--font-sans);
+}
+.price-row .value.negative { color: var(--green); }
+
+.price-total {
+  display: flex; justify-content: space-between;
+  align-items: center;
+  padding-top: 12px; margin-top: 8px;
+  border-top: 2px solid var(--green);
+  font-size: 0.9rem;
+}
+.price-total .label {
+  font-family: var(--font-serif);
+  font-weight: 700;
+}
+.price-total .value {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--sienna);
+}
+
+.form-submit {
+  width: 100%;
+  padding: 14px;
+  background: var(--green);
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-sm);
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 2px 12px rgba(91,123,94,0.25);
+}
+.form-submit:hover { background: var(--green-dk); }
+.form-submit:disabled {
+  opacity: 0.5; cursor: not-allowed;
+}
+
+/* ═══════════════════════════════════════════════════════
+   7 & 8. Academy & Resort Info
+   ═══════════════════════════════════════════════════════ */
+.info-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+.info-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+  display: flex; align-items: center; gap: 10px;
+}
+.info-card h3::before {
+  content: ''; width: 4px; height: 22px;
+  background: var(--green); border-radius: 2px;
+}
+
+.info-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.info-stat {
+  text-align: center;
+  padding: 14px 10px;
+  background: var(--green-lt);
+  border-radius: var(--radius-sm);
+}
+.info-stat .num {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--green-dk);
+}
+.info-stat .label {
+  font-size: 0.7rem; color: var(--text-light);
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+.info-list {
+  list-style: none; padding: 0;
+  font-size: 0.82rem; color: var(--text-light);
+  line-height: 2;
+}
+
+.info-list li::before {
+  content: '·';
+  color: var(--green);
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+.resort-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.resort-gallery img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  transition: transform 0.3s ease;
+}
+.resort-gallery img:hover {
+  transform: scale(1.03);
+}
+
+.resort-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.resort-feature {
+  background: var(--sienna-lt);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  text-align: center;
+}
+.resort-feature .num {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--sienna);
+}
+.resort-feature .label {
+  font-size: 0.7rem; color: var(--text-light);
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   9. Footer
+   ═══════════════════════════════════════════════════════ */
+.footer {
+  background: var(--green-dk);
+  color: rgba(255,255,255,0.85);
+  padding: 48px 20px 32px;
+  text-align: center;
+}
+
+.footer-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.footer-info {
+  font-size: 0.8rem;
+  line-height: 2;
+  margin-bottom: 24px;
+}
+
+.footer-divider {
+  width: 60px; height: 1px;
+  background: rgba(255,255,255,0.2);
+  margin: 0 auto 20px;
+}
+
+.footer-copy {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.5px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Toast & Modal
+   ═══════════════════════════════════════════════════════ */
+.toast {
+  position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
+  z-index: 9999;
+  background: var(--white);
+  padding: 14px 24px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  font-size: 0.85rem;
+  display: none;
+  text-align: center;
+  max-width: 90vw;
+  border-left: 4px solid var(--green);
+}
+.toast.show { display: block; animation: toastIn 0.3s; }
+.toast.success { border-color: var(--green); }
+.toast.error { border-color: #C0392B; }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.success-modal {
+  display: none;
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(61,50,44,0.5);
+  backdrop-filter: blur(4px);
+  align-items: center; justify-content: center;
+}
+.success-modal.show { display: flex; }
+
+.success-modal-content {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 40px 28px;
+  text-align: center;
+  max-width: 380px; width: 90%;
+  box-shadow: var(--shadow-lg);
+}
+
+.success-icon {
+  width: 64px; height: 64px;
+  margin: 0 auto 20px;
+  background: var(--green-lt);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+}
+
+.success-modal-content h3 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.success-modal-content p {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Scroll Animations
+   ═══════════════════════════════════════════════════════ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Responsive
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+
+  .feature-cards { grid-template-columns: 1fr; }
+
+  .product-cards { grid-template-columns: 1fr; max-width: 340px; margin: 0 auto; }
+
+  .phase-cards { grid-template-columns: 1fr; }
+
+  .form-row, .form-row-3 { grid-template-columns: 1fr; }
+
+  .section { padding: 40px 16px; }
+
+  .info-stats, .resort-features { grid-template-columns: 1fr 1fr; }
+
+  .resort-gallery img { height: 140px; }
+
+  .discount-table { font-size: 0.75rem; }
+  .discount-table th, .discount-table td { padding: 8px 8px; }
+}
+
+@media (max-width: 380px) {
+  .hero-title { font-size: 1.6rem; }
+  .section-title { font-size: 1.3rem; }
+  .info-stats { grid-template-columns: 1fr; }
+  .resort-features { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     Navigation
+     ═══════════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">启智归塾·夏令营</a>
+    <ul class="nav-links">
+      <li><a href="#why">特色</a></li>
+      <li><a href="#products">产品</a></li>
+      <li><a href="#schedule">作息</a></li>
+      <li><a href="#register">报名</a></li>
+      <li><a href="#about">关于</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="#why" data-close>特色亮点</a>
+  <a href="#products" data-close>产品选型</a>
+  <a href="#discounts" data-close>优惠规则</a>
+  <a href="#schedule" data-close>每日作息</a>
+  <a href="#register" data-close>在线报名</a>
+  <a href="#about" data-close>关于我们</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ⚠️ 测试版提示
+     ═══════════════════════════════════════════════════════ -->
+<div class="beta-banner">
+  ⚠️ 测试版，仅供内部讨论使用
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     1. Hero Section
+     ═══════════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-sun"></div>
+    <div class="hero-mountain-2"></div>
+    <div class="hero-mountain-1"></div>
+    <div class="hero-mist"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-tag">2026 暑期 · 家庭生命成长道场</div>
+    <h1 class="hero-title">
+      启智归塾<br><span class="accent">2026夏令营</span>
+    </h1>
+    <p class="hero-subtitle">顺势归心 · 自然生长</p>
+    <p class="hero-desc">
+      告别内卷，活出本真。<br>
+      孩子独立修学 · 家长独立觉醒 · 亲子共修<br>
+      一个家庭，完整看见成长。
+    </p>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="label">时间</div>
+        <div class="value">2026年8月</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">地点</div>
+        <div class="value">淮安·日月洲度假村</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">可选</div>
+        <div class="value">7 / 14 / 21天</div>
+      </div>
+    </div>
+
+    <a href="#register" class="btn-primary">立即报名</a>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span>向下探索</span>
+    <div class="hero-scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     2. Why Us
+     ═══════════════════════════════════════════════════════ -->
+<section class="section why-section fade-in" id="why">
+  <h2 class="section-title">为什么选择启智归塾</h2>
+  <div class="divider"><span class="divider-symbol">◆</span></div>
+
+  <div class="feature-cards">
+    <!-- Card 1 -->
+    <div class="feature-card">
+      <div class="feature-card-icon">🌱</div>
+      <span class="badge">核心理念</span>
+      <h3>不是培训，是修复家庭生长节奏</h3>
+      <p>21天，让孩子褪去浮躁、家长告别焦虑、家庭同频共振。回归自然节奏，找回生命的本真状态。</p>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="feature-card">
+      <div class="feature-card-icon">💡</div>
+      <span class="badge">核心特色</span>
+      <h3>每日案例拆解专场</h3>
+      <p>现场家庭提问 → 老师深度拆解 → 针对性破局指导。不套模板，每个家庭都是独特的个案。</p>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="feature-card">
+      <div class="feature-card-icon">🤝</div>
+      <span class="badge">独家模式</span>
+      <h3>独家家庭共修模式</h3>
+      <p>孩子独立修学 + 家长独立觉醒 + 亲子共修，三位一体。一个家庭，完整看见彼此的成长轨迹。</p>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="feature-card">
+      <div class="feature-card-icon">🏞️</div>
+      <span class="badge">实景道场</span>
+      <h3>日月洲度假村实景道场</h3>
+      <p>淮安4A景区旁，庭院劳作、静定修身、晚间观星。全年365天道场，远离城市喧嚣的成长空间。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     3. Product Selection
+     ═══════════════════════════════════════════════════════ -->
+<section class="section fade-in" id="products">
+  <h2 class="section-title">选择适合您的道场</h2>
+  <div class="divider"><span class="divider-symbol">◆</span></div>
+
+  <div class="product-cards" id="productCards">
+    <div class="product-card" data-product="7">
+      <div class="check-badge">✓</div>
+      <div class="product-icon">🌿</div>
+      <div class="product-name">体验道场</div>
+      <div class="product-duration">7天沉浸体验</div>
+      <div class="product-price">2,980 <small>元/人</small></div>
+    </div>
+    <div class="product-card" data-product="14">
+      <div class="check-badge">✓</div>
+      <div class="product-icon">🌳</div>
+      <div class="product-name">进阶道场</div>
+      <div class="product-duration">14天深度修学</div>
+      <div class="product-price">4,980 <small>元/人</small></div>
+    </div>
+    <div class="product-card" data-product="21">
+      <div class="check-badge">✓</div>
+      <div class="product-icon">🏔️</div>
+      <div class="product-name">完整道场</div>
+      <div class="product-duration">21天完整蜕变</div>
+      <div class="product-price">6,980 <small>元/人</small></div>
+    </div>
+  </div>
+
+  <div class="accompany-info">
+    💛 家长陪同：200-300元/天，按天计费（含食宿），与孩子共同成长
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     4. Discount Rules
+     ═══════════════════════════════════════════════════════ -->
+<section class="section fade-in" id="discounts">
+  <h2 class="section-title">优惠规则</h2>
+  <div class="divider"><span class="divider-symbol">◆</span></div>
+
+  <table class="discount-table">
+    <thead>
+      <tr>
+        <th>优惠类型</th>
+        <th>减免金额</th>
+        <th>适用条件</th>
+        <th>选择</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>🌅 <strong>早鸟价</strong></td>
+        <td class="discount-amount">-300元</td>
+        <td class="highlight">6月30日前报名</td>
+        <td class="discount-checkbox">
+          <input type="checkbox" id="discountEarly" onchange="updatePrice()">
+        </td>
+      </tr>
+      <tr>
+        <td>👥 <strong>团报价</strong></td>
+        <td class="discount-amount">-200元/人</td>
+        <td class="highlight">两组家庭同行</td>
+        <td class="discount-checkbox">
+          <input type="checkbox" id="discountGroup" onchange="updatePrice()">
+        </td>
+      </tr>
+      <tr>
+        <td>⭐ <strong>老学员专属</strong></td>
+        <td class="discount-amount">-100元</td>
+        <td class="highlight">启智书院老学员</td>
+        <td class="discount-checkbox">
+          <input type="checkbox" id="discountReturning" onchange="updatePrice()">
+        </td>
+      </tr>
+      <tr>
+        <td>📺 <strong>直播下单</strong></td>
+        <td class="discount-amount">-200元</td>
+        <td class="highlight">参加线上说明会直播下单</td>
+        <td class="discount-checkbox">
+          <input type="checkbox" id="discountLive" onchange="updatePrice()">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="discount-note">以上优惠可叠加使用，报名时勾选即可</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     5. Daily Schedule & Phases
+     ═══════════════════════════════════════════════════════ -->
+<section class="section fade-in" id="schedule">
+  <h2 class="section-title">每日作息 & 三阶段成长体系</h2>
+  <div class="divider"><span class="divider-symbol">◆</span></div>
+
+  <!-- Daily Schedule Accordion -->
+  <div class="accordion" id="accordionSchedule">
+    <div class="accordion-header" onclick="toggleAccordion('accordionSchedule')">
+      📋 每日作息时间表
+      <span class="accordion-arrow">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionScheduleBody">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>时间</th><th>内容</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>06:30</td><td>起床</td><td>伴随自然晨光醒来</td></tr>
+          <tr><td>07:00-07:30</td><td>晨练</td><td>太极 / 八段锦，唤醒身心</td></tr>
+          <tr><td>07:30-08:00</td><td>早餐</td><td>健康膳食，感恩进食</td></tr>
+          <tr><td>08:00-11:30</td><td>主题修学</td><td>生命教育主课+小组研讨</td></tr>
+          <tr><td>11:30-12:30</td><td>午餐 & 午休</td><td>静心休息，蓄养精力</td></tr>
+          <tr><td>12:30-14:00</td><td>午休</td><td>深度午睡，恢复能量</td></tr>
+          <tr><td>14:00-17:30</td><td>实践活动</td><td>庭院劳作 / 手工 / 自然探索</td></tr>
+          <tr><td>17:30-18:30</td><td>晚餐</td><td>田园晚餐，分享收获</td></tr>
+          <tr><td>18:30-20:00</td><td>晚间分享</td><td>案例拆解 / 家庭对话</td></tr>
+          <tr><td>20:00-21:00</td><td>静定修身</td><td>冥想 / 观星 / 日记</td></tr>
+          <tr><td>21:30</td><td>熄灯</td><td>安宁入眠，蓄力明日</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Three Phases Accordion -->
+  <div class="accordion" id="accordionPhases">
+    <div class="accordion-header" onclick="toggleAccordion('accordionPhases')">
+      🌱 三阶段成长主题
+      <span class="accordion-arrow">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionPhasesBody">
+      <div class="phase-cards">
+        <div class="phase-card">
+          <div class="phase-num">第一阶段</div>
+          <h4>归本溯源</h4>
+          <p>回归自然节奏，放下手机，建立与自我、与他人、与自然的深度联结</p>
+          <div class="phase-days">第 1-7 天</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">第二阶段</div>
+          <h4>观照自省</h4>
+          <p>深度觉察自我模式，照见惯性反应，唤醒内在力量与觉知</p>
+          <div class="phase-days">第 8-14 天</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">第三阶段</div>
+          <h4>修己共进</h4>
+          <p>知行合一，家庭共修。将所学内化为日常，带着觉知回归生活</p>
+          <div class="phase-days">第 15-21 天</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     6. Registration Form
+     ═══════════════════════════════════════════════════════ -->
+<section class="section form-section fade-in" id="register">
+  <h2 class="section-title">在线报名</h2>
+  <div class="divider"><span class="divider-symbol">◆</span></div>
+
+  <form id="registrationForm" onsubmit="handleSubmit(event)" novalidate>
+    <!-- 家长信息 -->
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="parentName">家长姓名<span class="required">*</span></label>
+        <input type="text" class="form-input" id="parentName" placeholder="请输入您的姓名" required>
+        <div class="form-error" id="errorParentName"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="phone">手机号<span class="required">*</span></label>
+        <input type="tel" class="form-input" id="phone" placeholder="请输入11位手机号" required maxlength="11">
+        <div class="form-error" id="errorPhone"></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="wechat">微信号<span class="required">*</span></label>
+      <input type="text" class="form-input" id="wechat" placeholder="请输入微信号，方便我们联系您" required>
+      <div class="form-error" id="errorWechat"></div>
+    </div>
+
+    <!-- 孩子信息 -->
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="childName">孩子姓名<span class="required">*</span></label>
+        <input type="text" class="form-input" id="childName" placeholder="请输入孩子姓名" required>
+        <div class="form-error" id="errorChildName"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="childGender">孩子性别<span class="required">*</span></label>
+        <select class="form-select" id="childGender" required>
+          <option value="">请选择</option>
+          <option value="男">男</option>
+          <option value="女">女</option>
+        </select>
+        <div class="form-error" id="errorChildGender"></div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="childAge">孩子年龄<span class="required">*</span></label>
+        <select class="form-select" id="childAge" required>
+          <option value="">请选择</option>
+        </select>
+        <div class="form-hint">6-18岁</div>
+        <div class="form-error" id="errorChildAge"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="childGrade">孩子年级</label>
+        <select class="form-select" id="childGrade">
+          <option value="">请选择（选填）</option>
+          <option value="学前">学前</option>
+          <option value="小1-3">小学1-3年级</option>
+          <option value="小4-6">小学4-6年级</option>
+          <option value="初中">初中</option>
+          <option value="高中">高中</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 报名产品 -->
+    <div class="form-group">
+      <label class="form-label" for="product">报名产品<span class="required">*</span></label>
+      <select class="form-select" id="product" required onchange="onProductChange()">
+        <option value="">请选择报名产品</option>
+        <option value="7">体验道场（7天）- 2,980元/人</option>
+        <option value="14">进阶道场（14天）- 4,980元/人</option>
+        <option value="21">完整道场（21天）- 6,980元/人</option>
+      </select>
+      <div class="form-error" id="errorProduct"></div>
+    </div>
+
+    <!-- 家长陪同 -->
+    <div class="form-group">
+      <label class="form-label" for="parentAccompany">是否家长陪同<span class="required">*</span></label>
+      <select class="form-select" id="parentAccompany" required onchange="onAccompanyChange()">
+        <option value="">请选择</option>
+        <option value="no">否，孩子独立参加</option>
+        <option value="yes">是，家长陪同（250元/天）</option>
+      </select>
+      <div class="form-error" id="errorParentAccompany"></div>
+    </div>
+
+    <div class="form-group" id="accompanyDaysGroup" style="display:none;">
+      <label class="form-label" for="accompanyDays">家长陪同天数</label>
+      <input type="number" class="form-input" id="accompanyDays"
+             placeholder="请输入陪同天数" min="1" value="7" onchange="updatePrice()">
+      <div class="form-hint" id="accompanyDaysHint">家长陪同费用：250元/天（含食宿）</div>
+      <div class="form-error" id="errorAccompanyDays"></div>
+    </div>
+
+    <!-- 特殊需求 -->
+    <div class="form-group">
+      <label class="form-label" for="hasSpecialNeeds">有无特殊需求</label>
+      <select class="form-select" id="hasSpecialNeeds" onchange="onSpecialNeedsChange()">
+        <option value="no">无</option>
+        <option value="yes">有</option>
+      </select>
+    </div>
+
+    <div class="form-group" id="specialNeedsGroup" style="display:none;">
+      <label class="form-label" for="specialNeedsDetail">特殊需求说明</label>
+      <textarea class="form-textarea" id="specialNeedsDetail"
+                placeholder="请说明具体情况（过敏/药物/饮食禁忌/其他）"></textarea>
+    </div>
+
+    <!-- 推荐人与渠道 -->
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="referrer">推荐人</label>
+        <input type="text" class="form-input" id="referrer" placeholder="选填">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="source">渠道来源</label>
+        <select class="form-select" id="source">
+          <option value="">请选择（选填）</option>
+          <option value="朋友圈">朋友圈</option>
+          <option value="公众号">公众号</option>
+          <option value="抖音">抖音</option>
+          <option value="朋友推荐">朋友推荐</option>
+          <option value="线下活动">线下活动</option>
+          <option value="其他">其他</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 开放性问题（必填） -->
+    <div class="form-divider">
+      <span>开放性问题（必填）</span>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="qa1">
+        1. 孩子最近一次让你意外或触动的事是什么？
+        <span class="required">*</span>
+      </label>
+      <p class="form-hint">这道题没有标准答案，只是帮助我们了解——你能不能看见孩子真实的样子。</p>
+      <textarea class="form-textarea" id="qa1" placeholder="请分享一个具体的小故事或瞬间……" required></textarea>
+      <span class="error-msg" id="qa1Error"></span>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="qa2">
+        2. 你对本次夏令营的收获有什么期待？
+        <span class="required">*</span>
+      </label>
+      <p class="form-hint">写你心里真正想的就好。期待越具体，我们越能对准你的需要；没有期待也没关系，说明你愿意放手。</p>
+      <textarea class="form-textarea" id="qa2" placeholder="请写下你的真实期待……" required></textarea>
+      <span class="error-msg" id="qa2Error"></span>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="notes">备注</label>
+      <textarea class="form-textarea" id="notes" placeholder="如有其他需要说明的情况，请在此填写（选填）"></textarea>
+    </div>
+
+    <!-- 价格明细 -->
+    <div class="price-calc" id="priceCalc">
+      <h4>价格明细</h4>
+      <div id="priceDetails">
+        <div class="price-row">
+          <span class="label">请选择报名产品</span>
+          <span class="value">—</span>
+        </div>
+      </div>
+      <div class="price-total">
+        <span class="label">预估总价</span>
+        <span class="value" id="totalPrice">—</span>
+      </div>
+    </div>
+
+    <button type="submit" class="form-submit" id="submitBtn">提交报名</button>
+  </form>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     7. About Qizhi Academy
+     ═══════════════════════════════════════════════════════ -->
+<section class="section fade-in" id="about">
+  <h2 class="section-title">关于启智书院</h2>
+  <div class="divider"><span class="divider-symbol">◆</span></div>
+
+  <div class="info-card">
+    <h3>十二载深耕，只为生命教育</h3>
+    <ul class="info-list">
+      <li>成立于2013年，12年深耕全生命周期生命教育</li>
+      <li>使命：传道授业解惑与生命成长</li>
+      <li>12大服务板块 + 12大孵化公司，构建完整生命教育生态</li>
+      <li>服务55,000+中小学生，优化4,000+家庭关系</li>
+      <li>十六字方针：古今贯通 · 中西融汇 · 胸怀天下 · 有道有术</li>
+    </ul>
+
+    <div class="info-stats">
+      <div class="info-stat">
+        <div class="num">12年</div>
+        <div class="label">深耕生命教育</div>
+      </div>
+      <div class="info-stat">
+        <div class="num">55,000+</div>
+        <div class="label">中小学生服务</div>
+      </div>
+      <div class="info-stat">
+        <div class="num">4,000+</div>
+        <div class="label">家庭关系优化</div>
+      </div>
+      <div class="info-stat">
+        <div class="num">12大</div>
+        <div class="label">服务板块 & 孵化公司</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     8. About Riyuezhou Resort
+     ═══════════════════════════════════════════════════════ -->
+<section class="section fade-in" id="resort">
+  <h2 class="section-title">关于日月洲度假村</h2>
+  <div class="divider"><span class="divider-symbol">◆</span></div>
+
+  <!-- 度假村实景图 -->
+  <div class="resort-gallery">
+    <img src="https://pavo.elongstatic.com/i/tHotel800_600/nw_VuE9wX06go.jpg" alt="日月洲度假村" loading="lazy">
+    <img src="https://pavo.elongstatic.com/i/tHotel800_600/nw_VuE2NGWsqk.jpg" alt="日月洲度假村" loading="lazy">
+    <img src="https://pavo.elongstatic.com/i/tHotel800_600/nw_VuE8dHsjza.jpg" alt="日月洲度假村" loading="lazy">
+    <img src="https://pavo.elongstatic.com/i/tHotel800_600/nw_10rImcG9Z72.jpg" alt="日月洲度假村" loading="lazy">
+  </div>
+
+  <div class="info-card">
+    <h3>国家4A级景区旁的成长道场</h3>
+    <ul class="info-list">
+      <li>地址：淮安经济技术开发区南马厂大道99号</li>
+      <li>隶属淮安西游产业集团（国企）</li>
+      <li>155间客房 + 600个餐位，设施完备</li>
+      <li>携程评分4.6，亲子酒店榜No.1</li>
+      <li>周边：西游乐园、龙宫大白鲸、日月洲生态园（1700亩）</li>
+      <li>远离城市喧嚣，回归自然本真</li>
+    </ul>
+
+    <div class="resort-features">
+      <div class="resort-feature">
+        <div class="num">4.6</div>
+        <div class="label">携程评分</div>
+      </div>
+      <div class="resort-feature">
+        <div class="num">No.1</div>
+        <div class="label">亲子酒店榜</div>
+      </div>
+      <div class="resort-feature">
+        <div class="num">1,700亩</div>
+        <div class="label">日月洲生态园</div>
+      </div>
+      <div class="resort-feature">
+        <div class="num">155间</div>
+        <div class="label">舒适客房</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     9. Footer
+     ═══════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-title">启智归塾 · 2026夏令营</div>
+  <div class="footer-info">
+    淮安日月洲度假村 · 2026年8月<br>
+    咨询电话：请添加微信联系<br>
+    顺势归心 · 自然生长
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-copy">
+    © 2026 启智书院 & 淮安日月洲度假村 联合呈现<br>
+    苏ICP备XXXXXXXX号
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════
+     Toast & Success Modal
+     ═══════════════════════════════════════════════════════ -->
+<div class="toast" id="toast"></div>
+
+<div class="success-modal" id="successModal">
+  <div class="success-modal-content">
+    <div class="success-icon">✅</div>
+    <h3>报名提交成功！</h3>
+    <p>感谢您的信任！<br>我们将尽快通过微信或电话与您联系确认。</p>
+    <button class="btn-outline" onclick="closeSuccess()">返回页面</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     JavaScript
+     ═══════════════════════════════════════════════════════ -->
+<script>
+'use strict';
+
+/* ── 配置 ──────────────────────────────────────────── */
+const API_BASE_URL = '';  // 同源部署留空；分离部署填写后端地址，如 'https://xxx.vercel.app'
+
+const PRODUCT_PRICES = { '7': 2980, '14': 4980, '21': 6980 };
+const PRODUCT_LABELS = { '7': '体验道场（7天）', '14': '进阶道场（14天）', '21': '完整道场（21天）' };
+const ACCOMPANY_RATE = 250; // 元/天
+
+let selectedProduct = '';
+
+/* ── 初始化 ────────────────────────────────────────── */
+
+// 生成年龄选项 (6-18)
+(function initAgeOptions() {
+  const sel = document.getElementById('childAge');
+  for (let i = 6; i <= 18; i++) {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = i + '岁';
+    sel.appendChild(opt);
+  }
+})();
+
+// 滚动动画
+(function initScrollAnimation() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+})();
+
+/* ── 导航 ──────────────────────────────────────────── */
+
+// 移动端菜单
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('open');
+});
+
+// 点击菜单项关闭
+mobileMenu.querySelectorAll('a[data-close]').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('open');
+  });
+});
+
+// 滚动时关闭菜单
+window.addEventListener('scroll', () => {
+  if (mobileMenu.classList.contains('open')) {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('open');
+  }
+});
+
+/* ── 产品选择 ──────────────────────────────────────── */
+
+document.querySelectorAll('.product-card').forEach(card => {
+  card.addEventListener('click', function() {
+    // 切换选中状态
+    document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+    this.classList.add('selected');
+    selectedProduct = this.dataset.product;
+
+    // 同步下拉框
+    document.getElementById('product').value = selectedProduct;
+
+    // 更新陪同天数上限
+    updateAccompanyDaysMax();
+    updatePrice();
+  });
+});
+
+// 下拉框同步卡片
+function onProductChange() {
+  const val = document.getElementById('product').value;
+  if (val) {
+    selectedProduct = val;
+    document.querySelectorAll('.product-card').forEach(c => {
+      c.classList.toggle('selected', c.dataset.product === val);
+    });
+    updateAccompanyDaysMax();
+    updatePrice();
+  }
+}
+
+/* ── 陪同 ──────────────────────────────────────────── */
+
+function onAccompanyChange() {
+  const val = document.getElementById('parentAccompany').value;
+  const group = document.getElementById('accompanyDaysGroup');
+  if (val === 'yes') {
+    group.style.display = 'block';
+    updateAccompanyDaysMax();
+  } else {
+    group.style.display = 'none';
+  }
+  updatePrice();
+}
+
+function updateAccompanyDaysMax() {
+  const input = document.getElementById('accompanyDays');
+  const hint = document.getElementById('accompanyDaysHint');
+  if (selectedProduct) {
+    const max = parseInt(selectedProduct, 10);
+    input.max = max;
+    if (parseInt(input.value, 10) > max) {
+      input.value = max;
+    }
+    hint.textContent = `家长陪同费用：250元/天（含食宿），最多 ${max} 天`;
+  }
+}
+
+/* ── 特殊需求 ──────────────────────────────────────── */
+
+function onSpecialNeedsChange() {
+  const val = document.getElementById('hasSpecialNeeds').value;
+  const group = document.getElementById('specialNeedsGroup');
+  group.style.display = val === 'yes' ? 'block' : 'none';
+}
+
+/* ── 价格计算 ──────────────────────────────────────── */
+
+function updatePrice() {
+  const priceDetails = document.getElementById('priceDetails');
+  const totalPriceEl = document.getElementById('totalPrice');
+
+  if (!selectedProduct) {
+    priceDetails.innerHTML = '<div class="price-row"><span class="label">请选择报名产品</span><span class="value">—</span></div>';
+    totalPriceEl.textContent = '—';
+    return;
+  }
+
+  const basePrice = PRODUCT_PRICES[selectedProduct];
+  const productLabel = PRODUCT_LABELS[selectedProduct];
+
+  // 优惠
+  const earlyBird = document.getElementById('discountEarly').checked;
+  const groupDisc = document.getElementById('discountGroup').checked;
+  const returning = document.getElementById('discountReturning').checked;
+  const liveOrder = document.getElementById('discountLive').checked;
+
+  let discountAmount = 0;
+  const discountItems = [];
+
+  if (earlyBird) { discountAmount += 300; discountItems.push('早鸟优惠 -300元'); }
+  if (groupDisc) { discountAmount += 200; discountItems.push('团报优惠 -200元'); }
+  if (returning)  { discountAmount += 100; discountItems.push('老学员优惠 -100元'); }
+  if (liveOrder)  { discountAmount += 200; discountItems.push('直播下单优惠 -200元'); }
+
+  // 陪同费
+  const accompany = document.getElementById('parentAccompany').value;
+  let accompanyDays = 0;
+  let accompanyFee = 0;
+  if (accompany === 'yes') {
+    accompanyDays = parseInt(document.getElementById('accompanyDays').value, 10) || 0;
+    accompanyFee = accompanyDays * ACCOMPANY_RATE;
+  }
+
+  const totalPrice = basePrice + accompanyFee - discountAmount;
+
+  // 渲染价格明细
+  let html = '';
+
+  html += `<div class="price-row"><span class="label">${productLabel}</span><span class="value">¥${basePrice.toLocaleString()}</span></div>`;
+
+  if (accompanyFee > 0) {
+    html += `<div class="price-row"><span class="label">家长陪同费（${accompanyDays}天 × 250元/天）</span><span class="value">¥${accompanyFee.toLocaleString()}</span></div>`;
+  }
+
+  discountItems.forEach(item => {
+    html += `<div class="price-row"><span class="label">${item}</span><span class="value negative">-¥${item.match(/\d+/)[0]}</span></div>`;
+  });
+
+  priceDetails.innerHTML = html;
+  totalPriceEl.textContent = '¥' + totalPrice.toLocaleString();
+}
+
+// 初始调用
+updatePrice();
+
+// 陪同天数变化时更新价格
+document.getElementById('accompanyDays').addEventListener('input', updatePrice);
+
+/* ── 手风琴折叠 ────────────────────────────────────── */
+
+function toggleAccordion(id) {
+  const header = document.querySelector(`#${id} .accordion-header`);
+  const body = document.getElementById(id + 'Body');
+  const isOpen = body.classList.contains('open');
+
+  if (isOpen) {
+    body.classList.remove('open');
+    header.classList.remove('open');
+  } else {
+    body.classList.add('open');
+    header.classList.add('open');
+  }
+}
+
+/* ── Toast 通知 ────────────────────────────────────── */
+
+let toastTimer;
+
+function showToast(message, type) {
+  const toast = document.getElementById('toast');
+  clearTimeout(toastTimer);
+  toast.textContent = message;
+  toast.className = 'toast ' + type + ' show';
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 4000);
+}
+
+/* ── 成功弹窗 ──────────────────────────────────────── */
+
+function showSuccess() {
+  document.getElementById('successModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSuccess() {
+  document.getElementById('successModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+/* ── 表单校验 ──────────────────────────────────────── */
+
+function clearErrors() {
+  document.querySelectorAll('.form-error').forEach(el => {
+    el.classList.remove('visible');
+    el.textContent = '';
+  });
+  document.querySelectorAll('.form-input.error, .form-select.error').forEach(el => {
+    el.classList.remove('error');
+  });
+}
+
+function showFieldError(fieldId, message) {
+  const errorEl = document.getElementById('error' + fieldId.charAt(0).toUpperCase() + fieldId.slice(1));
+  if (errorEl) {
+    errorEl.textContent = message;
+    errorEl.classList.add('visible');
+  }
+  const input = document.getElementById(fieldId);
+  if (input) input.classList.add('error');
+}
+
+function validateForm() {
+  clearErrors();
+  let isValid = true;
+
+  const parentName = document.getElementById('parentName').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const wechat = document.getElementById('wechat').value.trim();
+  const childName = document.getElementById('childName').value.trim();
+  const childGender = document.getElementById('childGender').value;
+  const childAge = document.getElementById('childAge').value;
+  const productVal = document.getElementById('product').value;
+  const parentAccompany = document.getElementById('parentAccompany').value;
+
+  if (!parentName) { showFieldError('parentName', '请输入家长姓名'); isValid = false; }
+
+  if (!phone || !/^1[3-9]\d{9}$/.test(phone)) {
+    showFieldError('phone', '请输入正确的11位手机号');
+    isValid = false;
+  }
+
+  if (!wechat) { showFieldError('wechat', '请输入微信号'); isValid = false; }
+
+  if (!childName) { showFieldError('childName', '请输入孩子姓名'); isValid = false; }
+
+  if (!childGender) { showFieldError('childGender', '请选择孩子性别'); isValid = false; }
+
+  if (!childAge) { showFieldError('childAge', '请选择孩子年龄'); isValid = false; }
+
+  if (!productVal) { showFieldError('product', '请选择报名产品'); isValid = false; }
+
+  if (!parentAccompany) {
+    showFieldError('parentAccompany', '请选择是否家长陪同');
+    isValid = false;
+  }
+
+  if (parentAccompany === 'yes') {
+    const days = parseInt(document.getElementById('accompanyDays').value, 10);
+    const max = parseInt(productVal, 10);
+    if (isNaN(days) || days < 1 || days > max) {
+      showFieldError('accompanyDays', `陪同天数需在1-${max}天之间`);
+      isValid = false;
+    }
+  }
+
+  // 开放性问题（必填）
+  const qa1 = document.getElementById('qa1').value.trim();
+  const qa2 = document.getElementById('qa2').value.trim();
+  if (!qa1) { showFieldError('qa1', '请填写这个问题'); isValid = false; }
+  if (!qa2) { showFieldError('qa2', '请填写这个问题'); isValid = false; }
+
+  return isValid;
+}
+
+/* ── 表单提交 ──────────────────────────────────────── */
+
+async function handleSubmit(event) {
+  event.preventDefault();
+
+  if (!validateForm()) {
+    showToast('请检查并完善表单信息', 'error');
+    // 滚动到第一个错误字段
+    const firstError = document.querySelector('.form-input.error, .form-select.error');
+    if (firstError) {
+      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    return;
+  }
+
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = '提交中…';
+
+  // 收集数据
+  const earlyBird = document.getElementById('discountEarly').checked;
+  const groupDisc = document.getElementById('discountGroup').checked;
+  const returning = document.getElementById('discountReturning').checked;
+  const liveOrder = document.getElementById('discountLive').checked;
+  const parentAccompany = document.getElementById('parentAccompany').value;
+
+  const basePrice = PRODUCT_PRICES[selectedProduct];
+  let discountAmount = 0;
+  if (earlyBird) discountAmount += 300;
+  if (groupDisc) discountAmount += 200;
+  if (returning)  discountAmount += 100;
+  if (liveOrder)  discountAmount += 200;
+
+  let accompanyDays = 0;
+  let accompanyFee = 0;
+  if (parentAccompany === 'yes') {
+    accompanyDays = parseInt(document.getElementById('accompanyDays').value, 10) || 0;
+    accompanyFee = accompanyDays * ACCOMPANY_RATE;
+  }
+
+  const totalPrice = basePrice + accompanyFee - discountAmount;
+
+  const payload = {
+    parent_name: document.getElementById('parentName').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    wechat: document.getElementById('wechat').value.trim(),
+    child_name: document.getElementById('childName').value.trim(),
+    child_gender: document.getElementById('childGender').value,
+    child_age: parseInt(document.getElementById('childAge').value, 10),
+    product: selectedProduct,
+    parent_accompany: parentAccompany,
+    accompany_days: accompanyDays,
+    child_grade: document.getElementById('childGrade').value,
+    has_special_needs: document.getElementById('hasSpecialNeeds').value,
+    special_needs_detail: document.getElementById('specialNeedsDetail').value.trim(),
+    referrer: document.getElementById('referrer').value.trim(),
+    source: document.getElementById('source').value,
+    qa1: document.getElementById('qa1').value.trim(),
+    qa2: document.getElementById('qa2').value.trim(),
+    notes: document.getElementById('notes').value.trim(),
+    early_bird: earlyBird,
+    group_discount: groupDisc,
+    returning_student: returning,
+    live_order: liveOrder,
+    base_price: basePrice,
+    discount_amount: discountAmount,
+    accompany_fee: accompanyFee,
+    total_price: totalPrice
+  };
+
+  try {
+    const res = await fetch(API_BASE_URL + '/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await res.json();
+
+    if (res.ok && result.success) {
+      showSuccess();
+      document.getElementById('registrationForm').reset();
+      document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+      selectedProduct = '';
+      document.getElementById('accompanyDaysGroup').style.display = 'none';
+      document.getElementById('specialNeedsGroup').style.display = 'none';
+      document.querySelectorAll('.discount-table input[type="checkbox"]').forEach(cb => cb.checked = false);
+      document.getElementById('qa1').value = '';
+      document.getElementById('qa2').value = '';
+      document.getElementById('notes').value = '';
+      updatePrice();
+    } else {
+      const msg = result.errors ? result.errors.join('；') : '提交失败，请稍后重试';
+      showToast(msg, 'error');
+    }
+  } catch (err) {
+    console.error('提交失败:', err);
+    showToast('网络连接失败，请检查网络后重试', 'error');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = '提交报名';
+  }
+}
+
+/* ── 键盘监听 ──────────────────────────────────────── */
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeSuccess();
+    if (mobileMenu.classList.contains('open')) {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('open');
+    }
+  }
+});
+
+console.log('🌿 启智归塾·2026夏令营 — 顺势归心·自然生长');
+console.log('报名系统已就绪');
+</script>
+
+</body>
+</html>
