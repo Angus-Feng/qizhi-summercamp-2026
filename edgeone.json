@@ -2,5 +2,9 @@
   "outputDirectory": ".",
   "installCommand": "npm install",
   "buildCommand": "",
-  "nodeVersion": "20"
+  "nodeVersion": "20",
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/node-functions/express" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
 }
