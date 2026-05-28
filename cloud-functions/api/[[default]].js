@@ -1,6 +1,10 @@
 /**
  * 启智归塾2026夏令营 - 报名后端 v2（EdgeOne Pages 版）
  * 
+ * 函数位置：cloud-functions/api/[[default]].js
+ * EdgeOne 路由映射：/api/* → 此函数
+ * Express 路由同时注册 /api/register 和 /register 两种路径（兼容性保障）
+ * 
  * 支持：多孩子、父母分别陪同、邮件通知、管理密码
  */
 
@@ -39,8 +43,6 @@ function adminAuth(req, res, next) {
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
-
-// 不 serve 静态文件（EdgeOne Pages 自动处理）
 
 // ── 数据存储 ─────────────────────────────────────────
 const DATA_FILE = '/tmp/registrations.json';
@@ -82,9 +84,9 @@ function buildEmailBody(record) {
   return `<h3>📋 新报名通知</h3><p><b>联系人：</b>${record.parent_name} | ${record.phone} | ${record.wechat}</p><p><b>产品：</b>${pLabels[record.product]||record.product} | ${record.child_count}孩</p>${kids}<p><b>父亲：</b>${aLabels[record.father_accompany]||record.father_accompany} | <b>母亲：</b>${aLabels[record.mother_accompany]||record.mother_accompany}</p><p><b>合计：</b>¥${record.total_price.toLocaleString()}</p><p><b>Q1：</b>${record.qa1}</p><p><b>Q2：</b>${record.qa2}</p>`;
 }
 
-// ── 路由 ────────────────────────────────────────────
+// ── 路由处理函数 ─────────────────────────────────────
 
-app.post('/api/register', (req, res) => {
+function handleRegister(req, res) {
   try {
     const data = req.body;
     const errors = validate(data);
@@ -134,17 +136,17 @@ app.post('/api/register', (req, res) => {
   } catch(err) {
     res.status(500).json({ success: false, errors: ['服务器内部错误'] });
   }
-});
+}
 
-app.get('/api/registrations', adminAuth, (req, res) => {
+function handleListRegistrations(req, res) {
   try {
     const records = loadData();
     records.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     res.json({ success: true, data: records });
   } catch(e) { res.status(500).json({ success: false }); }
-});
+}
 
-app.get('/api/export', adminAuth, (req, res) => {
+function handleExport(req, res) {
   try {
     const records = loadData();
     records.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
@@ -164,6 +166,19 @@ app.get('/api/export', adminAuth, (req, res) => {
     res.setHeader('Content-Disposition', `attachment; filename="registrations_${Date.now()}.csv"`);
     res.send('\uFEFF' + lines.join('\n'));
   } catch(e) { res.status(500).json({ success: false }); }
-});
+}
+
+// ── 注册路由（双路径兼容）──────────────────────────────
+// EdgeOne 可能传完整路径 /api/register 或 strip 前缀后传 /register
+// 两种都注册，确保无论哪种都能命中
+
+app.post('/api/register', handleRegister);
+app.post('/register', handleRegister);
+
+app.get('/api/registrations', adminAuth, handleListRegistrations);
+app.get('/registrations', adminAuth, handleListRegistrations);
+
+app.get('/api/export', adminAuth, handleExport);
+app.get('/export', adminAuth, handleExport);
 
 export default app;
