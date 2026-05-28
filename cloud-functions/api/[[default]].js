@@ -20,6 +20,7 @@ const SMTP_PASS = process.env.SMTP_PASS || '';
 const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || SMTP_USER;
 
 let transporter = null;
+let mailError = null;
 try {
   if (SMTP_USER && SMTP_PASS) {
     const nodemailer = require('nodemailer');
@@ -28,7 +29,7 @@ try {
       auth: { user: SMTP_USER, pass: SMTP_PASS }
     });
   }
-} catch(e) {}
+} catch(e) { mailError = e.message; }
 
 // ── 初始化 ──────────────────────────────────────────
 const app = express();
@@ -182,29 +183,28 @@ app.get('/api/export', adminAuth, handleExport);
 app.get('/export', adminAuth, handleExport);
 
 // ── 诊断端点（临时，排查邮件问题后删除）──────────────────
-app.get('/api/debug', adminAuth, (req, res) => {
-  res.json({
+function debugInfo() {
+  let requireTest = null;
+  try {
+    const nm = require('nodemailer');
+    requireTest = 'ok, type: ' + typeof nm;
+  } catch(e) {
+    requireTest = 'fail: ' + e.message;
+  }
+  return {
     smtp_user_set: !!SMTP_USER,
     smtp_pass_set: !!SMTP_PASS,
     notify_email_set: !!NOTIFY_EMAIL,
     notify_email: NOTIFY_EMAIL || '(empty)',
     transporter_ready: !!transporter,
+    mail_error: mailError || null,
+    nodemailer_require: requireTest,
     env_keys: Object.keys(process.env).filter(k => 
       k.includes('SMTP') || k.includes('NOTIFY') || k.includes('ADMIN') || k.includes('MAIL')
     )
-  });
-});
-app.get('/debug', adminAuth, (req, res) => {
-  res.json({
-    smtp_user_set: !!SMTP_USER,
-    smtp_pass_set: !!SMTP_PASS,
-    notify_email_set: !!NOTIFY_EMAIL,
-    notify_email: NOTIFY_EMAIL || '(empty)',
-    transporter_ready: !!transporter,
-    env_keys: Object.keys(process.env).filter(k => 
-      k.includes('SMTP') || k.includes('NOTIFY') || k.includes('ADMIN') || k.includes('MAIL')
-    )
-  });
-});
+  };
+}
+app.get('/api/debug', adminAuth, (req, res) => { res.json(debugInfo()); });
+app.get('/debug', adminAuth, (req, res) => { res.json(debugInfo()); });
 
 export default app;
