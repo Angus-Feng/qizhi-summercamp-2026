@@ -11,8 +11,7 @@
 import express from 'express';
 import cors from 'cors';
 import fs from 'fs';
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+import nodemailer from 'nodemailer';
 
 // ── 邮件配置 ──────────────────────────────────────────
 const SMTP_USER = process.env.SMTP_USER || '';
@@ -23,7 +22,6 @@ let transporter = null;
 let mailError = null;
 try {
   if (SMTP_USER && SMTP_PASS) {
-    const nodemailer = require('nodemailer');
     transporter = nodemailer.createTransport({
       host: 'smtp.qq.com', port: 465, secure: true,
       auth: { user: SMTP_USER, pass: SMTP_PASS }
@@ -184,13 +182,6 @@ app.get('/export', adminAuth, handleExport);
 
 // ── 诊断端点（临时，排查邮件问题后删除）──────────────────
 function debugInfo() {
-  let requireTest = null;
-  try {
-    const nm = require('nodemailer');
-    requireTest = 'ok, type: ' + typeof nm;
-  } catch(e) {
-    requireTest = 'fail: ' + e.message;
-  }
   return {
     smtp_user_set: !!SMTP_USER,
     smtp_pass_set: !!SMTP_PASS,
@@ -198,7 +189,7 @@ function debugInfo() {
     notify_email: NOTIFY_EMAIL || '(empty)',
     transporter_ready: !!transporter,
     mail_error: mailError || null,
-    nodemailer_require: requireTest,
+    nodemailer_import: typeof nodemailer,
     env_keys: Object.keys(process.env).filter(k => 
       k.includes('SMTP') || k.includes('NOTIFY') || k.includes('ADMIN') || k.includes('MAIL')
     )
