@@ -181,4 +181,30 @@ app.get('/registrations', adminAuth, handleListRegistrations);
 app.get('/api/export', adminAuth, handleExport);
 app.get('/export', adminAuth, handleExport);
 
+// ── 诊断端点（临时，排查邮件问题后删除）──────────────────
+app.get('/api/debug', adminAuth, (req, res) => {
+  res.json({
+    smtp_user_set: !!SMTP_USER,
+    smtp_pass_set: !!SMTP_PASS,
+    notify_email_set: !!NOTIFY_EMAIL,
+    notify_email: NOTIFY_EMAIL || '(empty)',
+    transporter_ready: !!transporter,
+    env_keys: Object.keys(process.env).filter(k => 
+      k.includes('SMTP') || k.includes('NOTIFY') || k.includes('ADMIN') || k.includes('MAIL')
+    )
+  });
+});
+app.get('/debug', adminAuth, (req, res) => {
+  res.json({
+    smtp_user_set: !!SMTP_USER,
+    smtp_pass_set: !!SMTP_PASS,
+    notify_email_set: !!NOTIFY_EMAIL,
+    notify_email: NOTIFY_EMAIL || '(empty)',
+    transporter_ready: !!transporter,
+    env_keys: Object.keys(process.env).filter(k => 
+      k.includes('SMTP') || k.includes('NOTIFY') || k.includes('ADMIN') || k.includes('MAIL')
+    )
+  });
+});
+
 export default app;
