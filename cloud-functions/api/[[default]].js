@@ -16,7 +16,7 @@ import nodemailer from 'nodemailer';
 // ── 邮件配置 ──────────────────────────────────────────
 const SMTP_USER = process.env.SMTP_USER || '';
 const SMTP_PASS = process.env.SMTP_PASS || '';
-const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || SMTP_USER;
+const NOTIFY_EMAILS = (process.env.NOTIFY_EMAIL || SMTP_USER).split(',').map(e => e.trim()).filter(Boolean);
 
 let transporter = null;
 try {
@@ -226,12 +226,14 @@ async function handleRegister(req, res) {
     records.push(record);
     await saveData(records);
 
-    if (transporter && NOTIFY_EMAIL) {
-      transporter.sendMail({
-        from: SMTP_USER, to: NOTIFY_EMAIL,
+    if (transporter && NOTIFY_EMAILS.length > 0) {
+      for (const to of NOTIFY_EMAILS) {
+        transporter.sendMail({
+          from: SMTP_USER, to,
         subject: `【夏令营报名】${record.parent_name} - ${record.child_count}孩 ¥${record.total_price}`,
         html: buildEmailBody(record)
       }).catch(() => {});
+      }
     }
 
     res.status(201).json({ success: true, data: { id: record.id }, message: '报名提交成功！我们将尽快与您联系确认。' });

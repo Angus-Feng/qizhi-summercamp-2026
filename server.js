@@ -13,7 +13,7 @@ const path = require('path');
 // 设置环境变量 SMTP_USER / SMTP_PASS 启用邮件通知
 const SMTP_USER = process.env.SMTP_USER || '';
 const SMTP_PASS = process.env.SMTP_PASS || '';
-const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || SMTP_USER;
+const NOTIFY_EMAILS = (process.env.NOTIFY_EMAIL || SMTP_USER).split(',').map(e => e.trim()).filter(Boolean);
 
 let transporter = null;
 try {
@@ -149,12 +149,14 @@ app.post('/api/register', (req, res) => {
     saveData(records);
 
     // 发送邮件通知（非阻塞，不等待）
-    if (transporter && NOTIFY_EMAIL) {
-      transporter.sendMail({
-        from: SMTP_USER, to: NOTIFY_EMAIL,
-        subject: `【夏令营报名】${record.parent_name} - ${record.child_count}孩 ¥${record.total_price}`,
-        html: buildEmailBody(record)
-      }).then(() => console.log('邮件已发送')).catch(e => console.error('邮件失败:', e.message));
+    if (transporter && NOTIFY_EMAILS.length > 0) {
+      for (const to of NOTIFY_EMAILS) {
+        transporter.sendMail({
+          from: SMTP_USER, to,
+          subject: `【夏令营报名】${record.parent_name} - ${record.child_count}孩 ¥${record.total_price}`,
+          html: buildEmailBody(record)
+        }).then(() => console.log('邮件已发送至', to)).catch(e => console.error('邮件失败:', e.message));
+      }
     }
 
     res.status(201).json({ success: true, data: { id: record.id }, message: '报名提交成功！我们将尽快与您联系确认。' });
