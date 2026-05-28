@@ -9,6 +9,8 @@ import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 // ── 邮件配置 ──────────────────────────────────────────
 const SMTP_USER = process.env.SMTP_USER || '';
