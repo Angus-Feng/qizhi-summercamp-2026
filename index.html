@@ -1870,16 +1870,27 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
     var res = await fetch(API_BASE_URL+'/api/register', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
     var data = await res.json();
     if (data.success) {
-      alert('报名提交成功！我们将尽快与您联系确认。');
+      document.getElementById('successModal').classList.add('show');
       document.getElementById('registrationForm').reset();
       document.getElementById('childrenContainer').innerHTML = '';
       childCounter = 0; addChild(); updatePrice();
     } else {
-      alert('提交失败：'+(data.errors||['未知错误']).join('\n'));
+      showToast((data.errors||['未知错误']).join('；'), 'error');
     }
-  } catch(err) { alert('网络错误，请稍后重试'); }
+  } catch(err) { showToast('网络错误，请稍后重试', 'error'); }
   submitBtn.disabled = false; submitBtn.textContent = '提交报名';
 });
+
+function showToast(msg, type) {
+  var toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.className = 'toast show ' + (type || 'error');
+  setTimeout(function(){ toast.classList.remove('show'); }, 4000);
+}
+
+function closeSuccess() {
+  document.getElementById('successModal').classList.remove('show');
+}
 
 /* ── 初始化 ────────────────────────────────── */
 addChild();
