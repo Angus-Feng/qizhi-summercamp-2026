@@ -1,16 +1,16 @@
 /**
- * 启智归塾2026夏令营 - 报名后端 v2（EdgeOne Pages 版）
+ * 启智归塾2026夏令营 - 报名后端 v3（EdgeOne Pages 版）
  * 
  * 函数位置：cloud-functions/api/[[default]].js
  * EdgeOne 路由映射：/api/* → 此函数
  * Express 路由同时注册 /api/register 和 /register 两种路径（兼容性保障）
  * 
+ * 数据持久化：GitHub API（私有仓库 data/registrations.json）
  * 支持：多孩子、父母分别陪同、邮件通知、管理密码
  */
 
 import express from 'express';
 import cors from 'cors';
-import fs from 'fs';
 import nodemailer from 'nodemailer';
 
 // ── 邮件配置 ──────────────────────────────────────────
@@ -42,13 +42,117 @@ function adminAuth(req, res, next) {
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 
-// ── 数据存储 ─────────────────────────────────────────
-const DATA_FILE = '/tmp/registrations.json';
-function loadData() {
-  try { if (fs.existsSync(DATA_FILE)) return JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8')); } catch(e) {}
-  return [];
+// ── GitHub 数据存储 ─────────────────────────────────
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
+const GITHUB_REPO = 'Angus-Feng/qizhi-summercamp-2026';
+const GITHUB_FILE = 'data/registrations.json';
+const GITHUB_API = 'https://api.github.com';
+
+// 内存缓存（减少 API 调用，冷启动时自动失效后重新从 GitHub 读取）
+let cachedData = null;
+let cachedSha = null;
+let cacheTime = 0;
+const CACHE_TTL = 3 * 60 * 1000; // 3 分钟缓存
+
+async function ghFetch(path, opts = {}) {
+  const headers = {
+    'Authorization': `token ${GITHUB_TOKEN}`,
+    'Accept': 'application/vnd.github.v3+json',
+    'User-Agent': 'summercamp-api'
+  };
+  if (opts.body) headers['Content-Type'] = 'application/json';
+  const resp = await fetch(`${GITHUB_API}${path}`, { ...opts, headers });
+  return resp;
 }
-function saveData(data) { fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8'); }
+
+async function loadData() {
+  // 缓存命中
+  if (cachedData && (Date.now() - cacheTime) < CACHE_TTL) {
+    return cachedData;
+  }
+  try {
+    const resp = await ghFetch(`/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`);
+    if (resp.status === 404) {
+      cachedData = [];
+      cachedSha = null;
+      cacheTime = Date.now();
+      return [];
+    }
+    if (!resp.ok) {
+      console.error('GitHub read error:', resp.status, await resp.text());
+      // 降级：返回缓存（可能为空）
+      return cachedData || [];
+    }
+    const json = await resp.json();
+    cachedSha = json.sha;
+    const content = Buffer.from(json.content, 'base64').toString('utf-8');
+    cachedData = JSON.parse(content);
+    cacheTime = Date.now();
+    return cachedData;
+  } catch(e) {
+    console.error('loadData error:', e.message);
+    return cachedData || [];
+  }
+}
+
+async function saveData(data) {
+  const content = Buffer.from(JSON.stringify(data, null, 2)).toString('base64');
+  const body = {
+    message: `报名数据更新 ${new Date().toISOString().slice(0,19)}`,
+    content,
+    ...(cachedSha ? { sha: cachedSha } : {}) // 首次创建无需 sha
+  };
+  try {
+    const resp = await ghFetch(`/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`, {
+      method: 'PUT',
+      body: JSON.stringify(body)
+    });
+    if (!resp.ok) {
+      const errText = await resp.text();
+      // sha 冲突（并发写入），重新拉取后重试一次
+      if (resp.status === 409) {
+        console.warn('GitHub sha conflict, retrying...');
+        const fresh = await ghFetch(`/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`);
+        if (fresh.ok) {
+          const freshJson = await fresh.json();
+          cachedSha = freshJson.sha;
+          // 合并：用最新数据 + 新记录
+          const freshData = JSON.parse(Buffer.from(freshJson.content, 'base64').toString('utf-8'));
+          // 找出本批新增的记录（不在 freshData 中的）
+          const newRecords = data.filter(d => !freshData.some(f => f.id === d.id));
+          const merged = [...freshData, ...newRecords];
+          // 重试保存
+          const retryBody = { message: body.message, content: Buffer.from(JSON.stringify(merged, null, 2)).toString('base64'), sha: cachedSha };
+          const retryResp = await ghFetch(`/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`, {
+            method: 'PUT', body: JSON.stringify(retryBody)
+          });
+          if (retryResp.ok) {
+            const retryJson = await retryResp.json();
+            cachedSha = retryJson.content.sha;
+            cachedData = merged;
+            cacheTime = Date.now();
+            return;
+          }
+          console.error('GitHub retry save error:', retryResp.status, await retryResp.text());
+        }
+      }
+      console.error('GitHub save error:', resp.status, errText);
+      // 即使保存到 GitHub 失败，也更新内存缓存，保证当前请求正常返回
+      cachedData = data;
+      cacheTime = Date.now();
+      return;
+    }
+    const json = await resp.json();
+    cachedSha = json.content.sha;
+    cachedData = data;
+    cacheTime = Date.now();
+  } catch(e) {
+    console.error('saveData error:', e.message);
+    cachedData = data;
+    cacheTime = Date.now();
+  }
+}
+
 function nextId(data) { return data.length === 0 ? 1 : Math.max(...data.map(r => r.id)) + 1; }
 
 // ── 校验 ────────────────────────────────────────────
@@ -58,7 +162,7 @@ function validate(data) {
   const errors = [];
   if (!data.parent_name || !data.parent_name.trim()) errors.push('联系人姓名不能为空');
   if (!data.phone || !isValidPhone(data.phone)) errors.push('请输入正确的11位手机号');
-  if (!data.wechat || !data.wechat.trim()) errors.push('微信号不能为空');
+  // 微信号选填
   if (!data.children || !Array.isArray(data.children) || data.children.length === 0) {
     errors.push('请至少添加一个孩子');
   } else {
@@ -79,18 +183,18 @@ function buildEmailBody(record) {
   const pLabels = { '7': '体验道场(7天)', '14': '进阶道场(14天)', '21': '完整道场(21天)' };
   const aLabels = { 'no': '不参加', 'full': '全程 ¥3580', 'weekly': '按周 ¥980/7天' };
   let kids = record.children.map((c,i) => `<p><b>孩子${i+1}：</b>${c.name} | ${c.gender} | ${c.age}岁 | ${c.grade}${c.has_special_needs==='yes'?' | 特需:'+c.special_needs_detail:''}</p>`).join('');
-  return `<h3>📋 新报名通知</h3><p><b>联系人：</b>${record.parent_name} | ${record.phone} | ${record.wechat}</p><p><b>产品：</b>${pLabels[record.product]||record.product} | ${record.child_count}孩</p>${kids}<p><b>父亲：</b>${aLabels[record.father_accompany]||record.father_accompany} | <b>母亲：</b>${aLabels[record.mother_accompany]||record.mother_accompany}</p><p><b>合计：</b>¥${record.total_price.toLocaleString()}</p><p><b>Q1：</b>${record.qa1}</p><p><b>Q2：</b>${record.qa2}</p>`;
+  return `<h3>📋 新报名通知</h3><p><b>联系人：</b>${record.parent_name} | ${record.phone}${record.wechat ? ' | '+record.wechat : ''}</p><p><b>产品：</b>${pLabels[record.product]||record.product} | ${record.child_count}孩</p>${kids}<p><b>父亲：</b>${aLabels[record.father_accompany]||record.father_accompany} | <b>母亲：</b>${aLabels[record.mother_accompany]||record.mother_accompany}</p><p><b>合计：</b>¥${record.total_price.toLocaleString()}</p><p><b>Q1：</b>${record.qa1}</p><p><b>Q2：</b>${record.qa2}</p>`;
 }
 
-// ── 路由处理函数 ─────────────────────────────────────
+// ── 路由处理函数（async）────────────────────────────
 
-function handleRegister(req, res) {
+async function handleRegister(req, res) {
   try {
     const data = req.body;
     const errors = validate(data);
     if (errors.length > 0) return res.status(400).json({ success: false, errors });
 
-    const records = loadData();
+    const records = await loadData();
     if (records.some(r => r.phone === data.phone)) {
       return res.status(409).json({ success: false, errors: ['该手机号已提交过报名'] });
     }
@@ -99,7 +203,7 @@ function handleRegister(req, res) {
       id: nextId(records),
       parent_name: data.parent_name.trim(),
       phone: data.phone,
-      wechat: data.wechat.trim(),
+      wechat: (data.wechat || '').trim(),
       children: data.children,
       product: data.product,
       father_accompany: data.father_accompany || 'no',
@@ -120,7 +224,7 @@ function handleRegister(req, res) {
     };
 
     records.push(record);
-    saveData(records);
+    await saveData(records);
 
     if (transporter && NOTIFY_EMAIL) {
       transporter.sendMail({
@@ -132,21 +236,22 @@ function handleRegister(req, res) {
 
     res.status(201).json({ success: true, data: { id: record.id }, message: '报名提交成功！我们将尽快与您联系确认。' });
   } catch(err) {
+    console.error('register error:', err);
     res.status(500).json({ success: false, errors: ['服务器内部错误'] });
   }
 }
 
-function handleListRegistrations(req, res) {
+async function handleListRegistrations(req, res) {
   try {
-    const records = loadData();
+    const records = await loadData();
     records.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     res.json({ success: true, data: records });
   } catch(e) { res.status(500).json({ success: false }); }
 }
 
-function handleExport(req, res) {
+async function handleExport(req, res) {
   try {
-    const records = loadData();
+    const records = await loadData();
     records.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     if (records.length === 0) {
       res.setHeader('Content-Type', 'text/plain; charset=utf-8');
@@ -167,9 +272,6 @@ function handleExport(req, res) {
 }
 
 // ── 注册路由（双路径兼容）──────────────────────────────
-// EdgeOne 可能传完整路径 /api/register 或 strip 前缀后传 /register
-// 两种都注册，确保无论哪种都能命中
-
 app.post('/api/register', handleRegister);
 app.post('/register', handleRegister);
 

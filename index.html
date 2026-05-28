@@ -1441,7 +1441,7 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
     </div>
     <div class="form-group">
       <label class="form-label" for="wechat">微信号 <span class="required">*</span></label>
-      <input type="text" class="form-input" id="wechat" placeholder="请输入微信号" required>
+      <input type="text" class="form-input" id="wechat" placeholder="请输入微信号（选填）">
       <span class="error-msg" id="wechatError"></span>
     </div>
 
@@ -1949,7 +1949,7 @@ function validateForm() {
   var product = document.getElementById('product').value;
   if (!document.getElementById('parentName').value.trim()) { showFieldError('parentName','请输入联系人姓名'); valid = false; if (!firstErrorEl) firstErrorEl = document.getElementById('parentName'); }
   if (!/^1[3-9]\d{9}$/.test(document.getElementById('phone').value.trim())) { showFieldError('phone','请输入正确的11位手机号'); valid = false; if (!firstErrorEl) firstErrorEl = document.getElementById('phone'); }
-  if (!document.getElementById('wechat').value.trim()) { showFieldError('wechat','请输入微信号'); valid = false; if (!firstErrorEl) firstErrorEl = document.getElementById('wechat'); }
+  // 微信号选填，不验证
   var children = getChildrenData();
   if (children.length === 0) { showToast('请至少添加一个孩子', 'error'); valid = false; }
   children.forEach(function(ch, i) {

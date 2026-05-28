@@ -2,7 +2,7 @@ node_modules/
 registrations.db
 registrations.db-shm
 registrations.db-wal
-registrations.json
+/registrations.json
 .env
 static-wechat.html
 *.log
