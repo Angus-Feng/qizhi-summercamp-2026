@@ -1875,9 +1875,6 @@ function toggleAccordion(id) {
   if (isOpen) { body.classList.remove('open'); header.classList.remove('open'); }
   else { body.classList.add('open'); header.classList.add('open'); }
 }
-document.querySelectorAll('.accordion-header').forEach(function(h) {
-  h.addEventListener('click', function(){ toggleAccordion(this.closest('.accordion').id); });
-});
 
 /* ── 导航 ──────────────────────────────────── */
 var hamburger = document.getElementById('hamburger');
