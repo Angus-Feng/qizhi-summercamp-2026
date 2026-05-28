@@ -1166,6 +1166,449 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
 <body>
 
 <!-- ═══════════════════════════════════════════════════════
+     Navigation
+     ═══════════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">启智归塾·夏令营</a>
+    <ul class="nav-links">
+      <li><a href="#why">特色</a></li>
+      <li><a href="#products">产品</a></li>
+      <li><a href="#schedule">作息</a></li>
+      <li><a href="#register">报名</a></li>
+      <li><a href="#about">关于</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="#why" data-close>特色亮点</a>
+  <a href="#products" data-close>产品选型</a>
+  <a href="#schedule" data-close>每日作息</a>
+  <a href="#register" data-close>在线报名</a>
+  <a href="#about" data-close>关于我们</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ⚠️ 测试版提示
+     ═══════════════════════════════════════════════════════ -->
+<div class="beta-banner">
+  ⚠️ 测试版，仅供内部讨论使用
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     1. Hero Section
+     ═══════════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-sun"></div>
+    <div class="hero-mountain-2"></div>
+    <div class="hero-mountain-1"></div>
+    <div class="hero-mist"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-tag">2026 暑期 · 家庭生命成长道场</div>
+    <h1 class="hero-title">
+      启智归塾<br><span class="accent">2026夏令营</span>
+    </h1>
+    <p class="hero-subtitle">顺势归心 · 自然生长</p>
+    <p class="hero-desc">
+      告别内卷，活出本真。<br>
+      孩子独立修学 · 家长独立觉醒 · 亲子共修<br>
+      一个家庭，完整看见成长。
+    </p>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="label">时间</div>
+        <div class="value">2026年8月1日-8月21日</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">地点</div>
+        <div class="value">淮安·日月洲度假村</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">可选</div>
+        <div class="value">7 / 14 / 21天</div>
+      </div>
+    </div>
+
+    <a href="#register" class="btn-primary">立即报名</a>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span>向下探索</span>
+    <div class="hero-scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     2. Why Us
+     ═══════════════════════════════════════════════════════ -->
+<section class="section why-section fade-in" id="why">
+  <h2 class="section-title">为什么选择启智归塾</h2>
+  <div class="divider"><span class="divider-symbol">◆</span></div>
+
+  <div class="feature-cards">
+    <!-- Card 1 -->
+    <div class="feature-card">
+      <div class="feature-card-icon">🌱</div>
+      <span class="badge">核心理念</span>
+      <h3>不是培训，是修复家庭生长节奏</h3>
+      <p>21天，让孩子褪去浮躁、家长告别焦虑、家庭同频共振。回归自然节奏，找回生命的本真状态。</p>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="feature-card">
+      <div class="feature-card-icon">💡</div>
+      <span class="badge">核心特色</span>
+      <h3>每日案例拆解专场</h3>
+      <p>现场家庭提问 → 老师深度拆解 → 针对性破局指导。不套模板，每个家庭都是独特的个案。</p>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="feature-card">
+      <div class="feature-card-icon">🤝</div>
+      <span class="badge">独家模式</span>
+      <h3>独家家庭共修模式</h3>
+      <p>孩子独立修学 + 家长独立觉醒 + 亲子共修，三位一体。一个家庭，完整看见彼此的成长轨迹。</p>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="feature-card">
+      <div class="feature-card-icon">🏞️</div>
+      <span class="badge">实景道场</span>
+      <h3>日月洲度假村实景道场</h3>
+      <p>淮安4A景区旁，庭院劳作、静定修身、晚间观星。全年365天道场，远离城市喧嚣的成长空间。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     3. Product Selection
+     ═══════════════════════════════════════════════════════ -->
+<section class="section fade-in" id="products">
+  <h2 class="section-title">选择适合您的道场</h2>
+  <div class="divider"><span class="divider-symbol">◆</span></div>
+
+  <div class="product-cards" id="productCards">
+    <div class="product-card" data-product="7">
+      <div class="check-badge">✓</div>
+      <div class="product-icon">🌿</div>
+      <div class="product-name">体验道场</div>
+      <div class="product-duration">7天沉浸体验</div>
+      <div class="product-price">2,980 <small>元/人</small></div>
+    </div>
+    <div class="product-card" data-product="14">
+      <div class="check-badge">✓</div>
+      <div class="product-icon">🌳</div>
+      <div class="product-name">进阶道场</div>
+      <div class="product-duration">14天深度修学</div>
+      <div class="product-price">4,980 <small>元/人</small></div>
+    </div>
+    <div class="product-card" data-product="21">
+      <div class="check-badge">✓</div>
+      <div class="product-icon">🏔️</div>
+      <div class="product-name">完整道场</div>
+      <div class="product-duration">21天完整蜕变</div>
+      <div class="product-price">6,980 <small>元/人</small></div>
+    </div>
+  </div>
+
+  <table class="accompany-info" style="width:100%;margin-top:20px;border-collapse:collapse;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+    <tr><td style="padding:10px 12px;background:var(--green);color:#fff;font-size:0.75rem;font-weight:700;text-align:center" colspan="2">家长陪同费用说明</td></tr>
+    <tr><td style="padding:10px 12px;background:var(--bg);border-bottom:1px solid var(--border);font-size:0.78rem;font-weight:700;color:var(--text);width:45%">全程参与</td><td style="padding:10px 12px;background:var(--bg);border-bottom:1px solid var(--border);font-size:0.78rem;color:var(--text)">21天含食宿（住宿舍） <b style="color:var(--green)">¥3,580</b>/人</td></tr>
+    <tr><td style="padding:10px 12px;background:var(--white);border-bottom:1px solid var(--border);font-size:0.78rem;font-weight:700;color:var(--text)">按周参与</td><td style="padding:10px 12px;background:var(--white);border-bottom:1px solid var(--border);font-size:0.78rem;color:var(--text)">包三餐 <b style="color:var(--green)">¥980</b>/7天/人</td></tr>
+    <tr><td style="padding:10px 12px;background:var(--bg);font-size:0.78rem;font-weight:700;color:var(--text)">酒店住宿</td><td style="padding:10px 12px;background:var(--bg);font-size:0.78rem;color:var(--text)">升级双床房（协议价） <b style="color:var(--green)">¥358</b>/天</td></tr>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     5. Daily Schedule & Phases
+     ═══════════════════════════════════════════════════════ -->
+<section class="section fade-in" id="schedule">
+  <h2 class="section-title">每日作息 & 三阶段成长体系</h2>
+  <div class="divider"><span class="divider-symbol">◆</span></div>
+
+  <!-- Daily Schedule Accordion -->
+  <div class="accordion" id="accordionSchedule">
+    <div class="accordion-header" onclick="toggleAccordion('accordionSchedule')">
+      📋 每日作息时间表
+      <span class="accordion-arrow">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionScheduleBody">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>时间</th><th>内容</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>06:30</td><td>起床</td><td>伴随自然晨光醒来</td></tr>
+          <tr><td>07:00-07:30</td><td>晨练</td><td>太极 / 八段锦，唤醒身心</td></tr>
+          <tr><td>07:30-08:00</td><td>早餐</td><td>健康膳食，感恩进食</td></tr>
+          <tr><td>08:00-11:30</td><td>主题修学</td><td>生命教育主课+小组研讨</td></tr>
+          <tr><td>11:30-12:30</td><td>午餐 & 午休</td><td>静心休息，蓄养精力</td></tr>
+          <tr><td>12:30-14:00</td><td>午休</td><td>深度午睡，恢复能量</td></tr>
+          <tr><td>14:00-17:30</td><td>实践活动</td><td>庭院劳作 / 手工 / 自然探索</td></tr>
+          <tr><td>17:30-18:30</td><td>晚餐</td><td>田园晚餐，分享收获</td></tr>
+          <tr><td>18:30-20:00</td><td>晚间分享</td><td>案例拆解 / 家庭对话</td></tr>
+          <tr><td>20:00-21:00</td><td>静定修身</td><td>冥想 / 观星 / 日记</td></tr>
+          <tr><td>21:30</td><td>熄灯</td><td>安宁入眠，蓄力明日</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Three Phases Accordion -->
+  <div class="accordion" id="accordionPhases">
+    <div class="accordion-header" onclick="toggleAccordion('accordionPhases')">
+      🌱 三阶段成长主题
+      <span class="accordion-arrow">▼</span>
+    </div>
+    <div class="accordion-body" id="accordionPhasesBody">
+      <div class="phase-cards">
+        <div class="phase-card">
+          <div class="phase-num">第一阶段</div>
+          <h4>归本溯源</h4>
+          <p>回归自然节奏，放下手机，建立与自我、与他人、与自然的深度联结</p>
+          <div class="phase-days">第 1-7 天</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">第二阶段</div>
+          <h4>观照自省</h4>
+          <p>深度觉察自我模式，照见惯性反应，唤醒内在力量与觉知</p>
+          <div class="phase-days">第 8-14 天</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">第三阶段</div>
+          <h4>修己共进</h4>
+          <p>知行合一，家庭共修。将所学内化为日常，带着觉知回归生活</p>
+          <div class="phase-days">第 15-21 天</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     6. Registration Form
+     ═══════════════════════════════════════════════════════ -->
+<section class="section form-section fade-in" id="register">
+  <h2 class="section-title">在线报名</h2>
+  <div class="divider"><span class="divider-symbol">◆</span></div>
+
+  <!-- Price Summary -->
+  <div class="price-summary" id="priceSummary">
+    <div class="price-row"><span>孩子费用</span><span id="summaryChildren">¥0</span></div>
+    <div class="price-row"><span>家长费用</span><span id="summaryAccompany">¥0</span></div>
+    <div class="price-total"><span>合计</span><span id="summaryTotal">¥0</span></div>
+  </div>
+
+  <form id="registrationForm" novalidate>
+
+    <!-- 联系人信息 -->
+    <div class="form-divider"><span>联系人信息（必填）</span></div>
+    <div class="form-row-2">
+      <div class="form-group">
+        <label class="form-label" for="parentName">联系人姓名 <span class="required">*</span></label>
+        <input type="text" class="form-input" id="parentName" placeholder="您的姓名" required>
+        <span class="error-msg" id="parentNameError"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="phone">手机号 <span class="required">*</span></label>
+        <input type="tel" class="form-input" id="phone" placeholder="11位手机号" required>
+        <span class="error-msg" id="phoneError"></span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="wechat">微信号 <span class="required">*</span></label>
+      <input type="text" class="form-input" id="wechat" placeholder="请输入微信号" required>
+      <span class="error-msg" id="wechatError"></span>
+    </div>
+
+    <!-- 孩子信息（动态添加）-->
+    <div class="form-divider"><span>孩子信息（必填）</span></div>
+    <div id="childrenContainer"></div>
+    <button type="button" class="btn-add-child" onclick="addChild()">+ 添加孩子</button>
+
+    <!-- 报名产品 -->
+    <div class="form-divider"><span>报名选型（必填）</span></div>
+    <div class="form-group">
+      <label class="form-label" for="product">报名产品 <span class="required">*</span></label>
+      <select class="form-select" id="product" required onchange="updatePrice()">
+        <option value="">请选择夏令营产品</option>
+        <option value="7">体验道场 · 7天 · 2,980元/人</option>
+        <option value="14">进阶道场 · 14天 · 4,980元/人</option>
+        <option value="21">完整道场 · 21天 · 6,980元/人</option>
+      </select>
+      <span class="error-msg" id="productError"></span>
+    </div>
+
+    <!-- 家长陪同 -->
+    <div class="form-divider"><span>家长陪同（选填）</span></div>
+
+    <div class="parent-accompany-row">
+      <div class="parent-accompany-item">
+        <label class="form-label">父亲</label>
+        <select class="form-select" id="fatherAccompany" onchange="updatePrice()">
+          <option value="no">不参加</option>
+          <option value="full">全程 ¥3,580</option>
+          <option value="weekly">按周 ¥980/7天</option>
+        </select>
+        <div id="fatherWeeksGroup" style="display:none;margin-top:6px">
+          <input type="number" class="form-input" id="fatherWeeks" placeholder="周数" min="1" max="3" value="1" onchange="updatePrice()" style="font-size:0.82rem">
+        </div>
+      </div>
+      <div class="parent-accompany-item">
+        <label class="form-label">母亲</label>
+        <select class="form-select" id="motherAccompany" onchange="updatePrice()">
+          <option value="no">不参加</option>
+          <option value="full">全程 ¥3,580</option>
+          <option value="weekly">按周 ¥980/7天</option>
+        </select>
+        <div id="motherWeeksGroup" style="display:none;margin-top:6px">
+          <input type="number" class="form-input" id="motherWeeks" placeholder="周数" min="1" max="3" value="1" onchange="updatePrice()" style="font-size:0.82rem">
+        </div>
+      </div>
+    </div>
+    <p class="form-hint" style="margin-top:8px">全程含食宿（住宿舍）¥3,580/人 · 按周包三餐 ¥980/7天/人（升级双床房 ¥358/天另计）</p>
+
+    <!-- 开放性问题（必填）-->
+    <div class="form-divider"><span>开放性问题（必填）</span></div>
+    <div class="form-group">
+      <label class="form-label" for="qa1">1. 孩子最近一次让你意外或触动的事是什么？<span class="required">*</span></label>
+      <p class="form-hint">没有标准答案，只是了解——你能不能看见孩子真实的样子。</p>
+      <textarea class="form-textarea" id="qa1" placeholder="请分享一个具体的小故事……" required></textarea>
+      <span class="error-msg" id="qa1Error"></span>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="qa2">2. 你对本次夏令营的收获有什么期待？<span class="required">*</span></label>
+      <p class="form-hint">期待越具体，我们越能对准你的需要。</p>
+      <textarea class="form-textarea" id="qa2" placeholder="请写下你的真实期待……" required></textarea>
+      <span class="error-msg" id="qa2Error"></span>
+    </div>
+
+    <!-- 补充信息（选填）-->
+    <div class="form-divider"><span>补充信息（选填）</span></div>
+    <div class="form-row-2">
+      <div class="form-group">
+        <label class="form-label" for="referrer">推荐人</label>
+        <input type="text" class="form-input" id="referrer" placeholder="如有推荐人请填写">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="source">渠道来源</label>
+        <select class="form-select" id="source">
+          <option value="">请选择</option>
+          <option value="朋友圈">朋友圈</option>
+          <option value="公众号">公众号</option>
+          <option value="抖音">抖音</option>
+          <option value="朋友推荐">朋友推荐</option>
+          <option value="线下活动">线下活动</option>
+          <option value="其他">其他</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="notes">备注</label>
+      <textarea class="form-textarea" id="notes" placeholder="如有其他需要说明的情况，请在此填写（选填）"></textarea>
+    </div>
+
+    <button type="submit" class="form-submit" id="submitBtn">提交报名</button>
+  </form>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     7. About Qizhi Academy</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     7. About Qizhi Academy
+     ═══════════════════════════════════════════════════════ -->
+<section class="section fade-in" id="about">
+  <h2 class="section-title">关于启智书院</h2>
+  <div class="divider"><span class="divider-symbol">◆</span></div>
+
+  <div class="info-card">
+    <h3>十三载深耕，只为生命教育</h3>
+    <ul class="info-list">
+      <li>成立于2013年，13年深耕全生命周期生命教育</li>
+      <li>使命：传道授业解惑与生命成长</li>
+      <li>12大服务板块 + 12大孵化公司，构建完整生命教育生态</li>
+      <li>服务55,000+中小学生，优化4,000+家庭关系</li>
+      <li>十六字方针：古今贯通 · 中西融汇 · 胸怀天下 · 有道有术</li>
+    </ul>
+
+    <div class="info-stats">
+      <div class="info-stat">
+        <div class="num">13年</div>
+        <div class="label">深耕生命教育</div>
+      </div>
+      <div class="info-stat">
+        <div class="num">55,000+</div>
+        <div class="label">中小学生服务</div>
+      </div>
+      <div class="info-stat">
+        <div class="num">4,000+</div>
+        <div class="label">家庭关系优化</div>
+      </div>
+      <div class="info-stat">
+        <div class="num">12大</div>
+        <div class="label">服务板块 & 孵化公司</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     8. About Riyuezhou Resort
+     ═══════════════════════════════════════════════════════ -->
+<section class="section fade-in" id="resort">
+  <h2 class="section-title">关于日月洲度假村</h2>
+  <div class="divider"><span class="divider-symbol">◆</span></div>
+
+  <!-- 度假村实景图 -->
+  <div class="resort-gallery">
+    <img src="https://pavo.elongstatic.com/i/tHotel800_600/nw_VuE9wX06go.jpg" alt="日月洲度假村" loading="lazy">
+    <img src="https://pavo.elongstatic.com/i/tHotel800_600/nw_VuE2NGWsqk.jpg" alt="日月洲度假村" loading="lazy">
+    <img src="https://pavo.elongstatic.com/i/tHotel800_600/nw_VuE8dHsjza.jpg" alt="日月洲度假村" loading="lazy">
+    <img src="https://pavo.elongstatic.com/i/tHotel800_600/nw_10rImcG9Z72.jpg" alt="日月洲度假村" loading="lazy">
+  </div>
+
+  <div class="info-card">
+    <h3>国家4A级景区旁的成长道场</h3>
+    <ul class="info-list">
+      <li>地址：淮安经济技术开发区南马厂大道99号</li>
+      <li>隶属淮安西游产业集团（国企）</li>
+      <li>155间客房 + 600个餐位，设施完备</li>
+      <li>携程评分4.6，亲子酒店榜No.1</li>
+      <li>周边：西游乐园、龙宫大白鲸、日月洲生态园（1700亩）</li>
+      <li>远离城市喧嚣，回归自然本真</li>
+    </ul>
+
+    <div class="resort-features">
+      <div class="resort-feature">
+        <div class="num">4.6</div>
+        <div class="label">携程评分</div>
+      </div>
+      <div class="resort-feature">
+        <div class="num">No.1</div>
+        <div class="label">亲子酒店榜</div>
+      </div>
+      <div class="resort-feature">
+        <div class="num">1,700亩</div>
+        <div class="label">日月洲生态园</div>
+      </div>
+      <div class="resort-feature">
+        <div class="num">155间</div>
+        <div class="label">舒适客房</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
      9. About Jianghuai Academy
      ═══════════════════════════════════════════════════════ -->
 <section class="section fade-in" id="jianghuai">
@@ -1198,7 +1641,7 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
       </div>
     </div>
   </div>
-</section>
+</section></section>
 
 <!-- ═══════════════════════════════════════════════════════
      10. Footer
