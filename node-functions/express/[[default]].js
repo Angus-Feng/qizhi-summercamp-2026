@@ -7,8 +7,6 @@
 import express from 'express';
 import cors from 'cors';
 import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
@@ -42,10 +40,7 @@ function adminAuth(req, res, next) {
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const projectRoot = path.join(__dirname, '../../..');
-app.use(express.static(projectRoot));
+// 不 serve 静态文件（EdgeOne Pages 自动处理）
 
 // ── 数据存储 ─────────────────────────────────────────
 const DATA_FILE = '/tmp/registrations.json';
