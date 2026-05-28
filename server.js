@@ -11,29 +11,35 @@ const path = require('path');
 
 // ── 邮件配置 ──────────────────────────────────────────
 // 设置环境变量 SMTP_USER / SMTP_PASS 启用邮件通知
-// QQ邮箱示例：SMTP_USER=your@qq.com SMTP_PASS=授权码
 const SMTP_USER = process.env.SMTP_USER || '';
 const SMTP_PASS = process.env.SMTP_PASS || '';
-const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || SMTP_USER; // 通知发送到哪个邮箱
+const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || SMTP_USER;
 
-let nodemailer = null;
 let transporter = null;
-if (SMTP_USER && SMTP_PASS) {
-  try {
-    nodemailer = require('nodemailer');
+try {
+  if (SMTP_USER && SMTP_PASS) {
+    const nodemailer = require('nodemailer');
     transporter = nodemailer.createTransport({
-      host: 'smtp.qq.com',
-      port: 465,
-      secure: true,
+      host: 'smtp.qq.com', port: 465, secure: true,
       auth: { user: SMTP_USER, pass: SMTP_PASS }
     });
-    console.log('邮件通知已启用');
-  } catch(e) { console.log('邮件模块加载失败:', e.message); }
-}
+    console.log('✅ 邮件通知已启用');
+  }
+} catch(e) { console.log('⚠ 邮件未配置:', e.message); }
 
 // ── 初始化 ──────────────────────────────────────────
 const app = express();
 const PORT = process.env.PORT || 3000;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
+
+// ── 管理端密码中间件 ─────────────────────────────────
+function adminAuth(req, res, next) {
+  if (!ADMIN_PASSWORD) return next(); // 未设密码则允许
+  const pw = req.query.password || (req.headers['x-admin-password']);
+  if (pw === ADMIN_PASSWORD) return next();
+  res.status(401).json({ success: false, errors: ['管理密码错误'] });
+}
+
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.static(path.join(__dirname)));
@@ -104,7 +110,7 @@ function buildEmailBody(record) {
 
 // ── 路由 ────────────────────────────────────────────
 
-app.post('/api/register', async (req, res) => {
+app.post('/api/register', (req, res) => {
   try {
     const data = req.body;
     const errors = validate(data);
@@ -142,17 +148,13 @@ app.post('/api/register', async (req, res) => {
     records.push(record);
     saveData(records);
 
-    // 发送邮件通知
+    // 发送邮件通知（非阻塞，不等待）
     if (transporter && NOTIFY_EMAIL) {
-      try {
-        await transporter.sendMail({
-          from: SMTP_USER,
-          to: NOTIFY_EMAIL,
-          subject: `【夏令营报名】${record.parent_name} - ${record.child_count}孩 ¥${record.total_price}`,
-          html: buildEmailBody(record)
-        });
-        console.log('邮件通知已发送');
-      } catch(e) { console.error('邮件发送失败:', e.message); }
+      transporter.sendMail({
+        from: SMTP_USER, to: NOTIFY_EMAIL,
+        subject: `【夏令营报名】${record.parent_name} - ${record.child_count}孩 ¥${record.total_price}`,
+        html: buildEmailBody(record)
+      }).then(() => console.log('邮件已发送')).catch(e => console.error('邮件失败:', e.message));
     }
 
     res.status(201).json({ success: true, data: { id: record.id }, message: '报名提交成功！我们将尽快与您联系确认。' });
@@ -162,7 +164,7 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-app.get('/api/registrations', (req, res) => {
+app.get('/api/registrations', adminAuth, (req, res) => {
   try {
     const page = Math.max(1, parseInt(req.query.page, 10) || 1);
     const pageSize = Math.min(100, Math.max(1, parseInt(req.query.page_size, 10) || 20));
@@ -175,7 +177,7 @@ app.get('/api/registrations', (req, res) => {
   } catch(e) { res.status(500).json({ success: false }); }
 });
 
-app.get('/api/export', (req, res) => {
+app.get('/api/export', adminAuth, (req, res) => {
   try {
     const records = loadData();
     records.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
