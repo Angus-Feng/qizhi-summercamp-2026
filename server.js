@@ -1,12 +1,7 @@
 /**
- * 启智归塾2026夏令营 - 报名后端服务
- *
- * Vercel 兼容版 —— JSON 文件存储（替代 better-sqlite3）
- *
- * API：
- *   POST /api/register     - 提交报名数据
- *   GET  /api/registrations - 查看报名列表（?page=1&page_size=20）
- *   GET  /api/export        - 导出CSV
+ * 启智归塾2026夏令营 - 报名后端 v2
+ * 
+ * 支持：多孩子、父母分别陪同、邮件通知
  */
 
 const express = require('express');
@@ -14,120 +9,110 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 
-// ── 初始化 ──────────────────────────────────────────────
+// ── 邮件配置 ──────────────────────────────────────────
+// 设置环境变量 SMTP_USER / SMTP_PASS 启用邮件通知
+// QQ邮箱示例：SMTP_USER=your@qq.com SMTP_PASS=授权码
+const SMTP_USER = process.env.SMTP_USER || '';
+const SMTP_PASS = process.env.SMTP_PASS || '';
+const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || SMTP_USER; // 通知发送到哪个邮箱
+
+let nodemailer = null;
+let transporter = null;
+if (SMTP_USER && SMTP_PASS) {
+  try {
+    nodemailer = require('nodemailer');
+    transporter = nodemailer.createTransport({
+      host: 'smtp.qq.com',
+      port: 465,
+      secure: true,
+      auth: { user: SMTP_USER, pass: SMTP_PASS }
+    });
+    console.log('邮件通知已启用');
+  } catch(e) { console.log('邮件模块加载失败:', e.message); }
+}
+
+// ── 初始化 ──────────────────────────────────────────
 const app = express();
 const PORT = process.env.PORT || 3000;
-
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
-
-// 生产环境托管前端静态文件
 app.use(express.static(path.join(__dirname)));
 
-// ── 数据存储 ─────────────────────────────────────────────
-
-// Vercel 用 /tmp，本地用 __dirname
+// ── 数据存储 ─────────────────────────────────────────
 const DATA_FILE = process.env.VERCEL
   ? '/tmp/registrations.json'
   : path.join(__dirname, 'registrations.json');
 
-/** 读取所有报名数据 */
 function loadData() {
   try {
-    if (fs.existsSync(DATA_FILE)) {
-      const raw = fs.readFileSync(DATA_FILE, 'utf-8');
-      return JSON.parse(raw);
-    }
-  } catch (e) { /* ignore corrupt file */ }
+    if (fs.existsSync(DATA_FILE)) return JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
+  } catch(e) {}
   return [];
 }
+function saveData(data) { fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8'); }
+function nextId(data) { return data.length === 0 ? 1 : Math.max(...data.map(r => r.id)) + 1; }
 
-/** 保存数据到文件 */
-function saveData(data) {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8');
-}
-
-/** 生成自增ID */
-function nextId(data) {
-  if (data.length === 0) return 1;
-  return Math.max(...data.map(r => r.id)) + 1;
-}
-
-// ── 校验工具 ────────────────────────────────────────────
-
-function isValidPhone(phone) {
-  return /^1[3-9]\d{9}$/.test(phone);
-}
+// ── 校验 ────────────────────────────────────────────
+function isValidPhone(phone) { return /^1[3-9]\d{9}$/.test(phone); }
 
 function validate(data) {
   const errors = [];
+  if (!data.parent_name || !data.parent_name.trim()) errors.push('联系人姓名不能为空');
+  if (!data.phone || !isValidPhone(data.phone)) errors.push('请输入正确的11位手机号');
+  if (!data.wechat || !data.wechat.trim()) errors.push('微信号不能为空');
 
-  if (!data.parent_name || data.parent_name.trim().length === 0) {
-    errors.push('家长姓名不能为空');
+  // 孩子校验
+  if (!data.children || !Array.isArray(data.children) || data.children.length === 0) {
+    errors.push('请至少添加一个孩子');
+  } else {
+    data.children.forEach((ch, i) => {
+      if (!ch.name || !ch.name.trim()) errors.push(`孩子${i+1}姓名不能为空`);
+      if (!ch.gender || !['男','女'].includes(ch.gender)) errors.push(`请选择孩子${i+1}的性别`);
+      if (!ch.age || ch.age < 6 || ch.age > 18) errors.push(`孩子${i+1}年龄需在6-18岁之间`);
+    });
   }
-  if (!data.phone || !isValidPhone(data.phone)) {
-    errors.push('请输入正确的11位手机号');
-  }
-  if (!data.wechat || data.wechat.trim().length === 0) {
-    errors.push('微信号不能为空');
-  }
-  if (!data.child_name || data.child_name.trim().length === 0) {
-    errors.push('孩子姓名不能为空');
-  }
-  if (!data.child_gender || !['男', '女'].includes(data.child_gender)) {
-    errors.push('请选择孩子性别');
-  }
-  if (data.child_age === undefined || data.child_age === null ||
-      data.child_age < 6 || data.child_age > 18) {
-    errors.push('孩子年龄需在6-18岁之间');
-  }
-  if (!data.product || !['7', '14', '21'].includes(data.product)) {
-    errors.push('请选择报名产品');
-  }
-  if (!data.parent_accompany || !['yes', 'no'].includes(data.parent_accompany)) {
-    errors.push('请选择是否家长陪同');
-  }
-  if (data.parent_accompany === 'yes') {
-    const days = parseInt(data.accompany_days, 10);
-    if (isNaN(days) || days < 1 || days > parseInt(data.product, 10)) {
-      errors.push('陪同天数需在1到所选产品天数之间');
-    }
-  }
-  if (data.total_price === undefined || data.total_price < 0) {
-    errors.push('价格计算异常，请刷新页面后重试');
-  }
-  if (!data.qa1 || data.qa1.trim().length === 0) {
-    errors.push('请填写：孩子最近一次让你意外或触动的事');
-  }
-  if (!data.qa2 || data.qa2.trim().length === 0) {
-    errors.push('请填写：对本次夏令营的收获期待');
-  }
+
+  if (!data.product || !['7','14','21'].includes(data.product)) errors.push('请选择报名产品');
+  if (!data.qa1 || !data.qa1.trim()) errors.push('请填写开放性问题1');
+  if (!data.qa2 || !data.qa2.trim()) errors.push('请填写开放性问题2');
+  if (data.total_price === undefined || data.total_price < 0) errors.push('价格计算异常');
 
   return errors;
 }
 
-// ── 路由 ────────────────────────────────────────────────
+// ── 构建邮件内容 ─────────────────────────────────────
+function buildEmailBody(record) {
+  const productLabels = { '7': '体验道场(7天)', '14': '进阶道场(14天)', '21': '完整道场(21天)' };
+  const accompanyLabels = { 'no': '不参加', 'full': '全程 ¥3,580', 'weekly': '按周 ¥980/7天' };
+  
+  let childrenHtml = record.children.map((ch, i) => 
+    `<p><b>孩子${i+1}：</b>${ch.name} | ${ch.gender} | ${ch.age}岁 | ${ch.grade}${ch.has_special_needs === 'yes' ? ' | 特殊需求：'+ch.special_needs_detail : ''}</p>`
+  ).join('');
 
-/**
- * POST /api/register
- */
-app.post('/api/register', (req, res) => {
+  return `
+    <h3>📋 新报名通知</h3>
+    <p><b>联系人：</b>${record.parent_name} | ${record.phone} | ${record.wechat}</p>
+    <p><b>报名产品：</b>${productLabels[record.product] || record.product} | ${record.child_count}个孩子</p>
+    ${childrenHtml}
+    <p><b>父亲：</b>${accompanyLabels[record.father_accompany] || record.father_accompany}</p>
+    <p><b>母亲：</b>${accompanyLabels[record.mother_accompany] || record.mother_accompany}</p>
+    <p><b>合计：</b>¥${record.total_price.toLocaleString()}</p>
+    <p><b>Q1：</b>${record.qa1}</p>
+    <p><b>Q2：</b>${record.qa2}</p>
+  `;
+}
+
+// ── 路由 ────────────────────────────────────────────
+
+app.post('/api/register', async (req, res) => {
   try {
     const data = req.body;
-
     const errors = validate(data);
-    if (errors.length > 0) {
-      return res.status(400).json({ success: false, errors });
-    }
+    if (errors.length > 0) return res.status(400).json({ success: false, errors });
 
     const records = loadData();
-
-    // 号码去重
     if (records.some(r => r.phone === data.phone)) {
-      return res.status(409).json({
-        success: false,
-        errors: ['该手机号已提交过报名，如需修改请联系工作人员']
-      });
+      return res.status(409).json({ success: false, errors: ['该手机号已提交过报名'] });
     }
 
     const record = {
@@ -135,26 +120,20 @@ app.post('/api/register', (req, res) => {
       parent_name: data.parent_name.trim(),
       phone: data.phone,
       wechat: data.wechat.trim(),
-      child_name: data.child_name.trim(),
-      child_gender: data.child_gender,
-      child_age: parseInt(data.child_age, 10),
+      children: data.children,
       product: data.product,
-      parent_accompany: data.parent_accompany || 'no',
-      accompany_days: data.parent_accompany === 'yes' ? parseInt(data.accompany_days, 10) || 0 : 0,
-      child_grade: data.child_grade || '',
-      has_special_needs: data.has_special_needs || 'no',
-      special_needs_detail: data.has_special_needs === 'yes' ? (data.special_needs_detail || '').trim() : '',
-      referrer: (data.referrer || '').trim(),
-      source: data.source || '',
+      father_accompany: data.father_accompany || 'no',
+      mother_accompany: data.mother_accompany || 'no',
+      father_weeks: data.father_weeks || 0,
+      mother_weeks: data.mother_weeks || 0,
+      child_count: data.child_count || data.children.length,
       qa1: (data.qa1 || '').trim(),
       qa2: (data.qa2 || '').trim(),
+      referrer: (data.referrer || '').trim(),
+      source: data.source || '',
       notes: (data.notes || '').trim(),
-      early_bird: data.early_bird ? 1 : 0,
-      group_discount: data.group_discount ? 1 : 0,
-      returning_student: data.returning_student ? 1 : 0,
-      live_order: data.live_order ? 1 : 0,
       base_price: parseInt(data.base_price, 10),
-      discount_amount: parseInt(data.discount_amount, 10),
+      children_total: parseInt(data.children_total, 10),
       accompany_fee: parseInt(data.accompany_fee, 10),
       total_price: parseInt(data.total_price, 10),
       created_at: new Date().toISOString()
@@ -163,122 +142,79 @@ app.post('/api/register', (req, res) => {
     records.push(record);
     saveData(records);
 
-    res.status(201).json({
-      success: true,
-      data: { id: record.id },
-      message: '报名提交成功！我们将尽快与您联系确认。'
-    });
-  } catch (err) {
-    console.error('报名提交失败:', err);
-    res.status(500).json({
-      success: false,
-      errors: ['服务器内部错误，请稍后重试']
-    });
+    // 发送邮件通知
+    if (transporter && NOTIFY_EMAIL) {
+      try {
+        await transporter.sendMail({
+          from: SMTP_USER,
+          to: NOTIFY_EMAIL,
+          subject: `【夏令营报名】${record.parent_name} - ${record.child_count}孩 ¥${record.total_price}`,
+          html: buildEmailBody(record)
+        });
+        console.log('邮件通知已发送');
+      } catch(e) { console.error('邮件发送失败:', e.message); }
+    }
+
+    res.status(201).json({ success: true, data: { id: record.id }, message: '报名提交成功！我们将尽快与您联系确认。' });
+  } catch(err) {
+    console.error('提交失败:', err);
+    res.status(500).json({ success: false, errors: ['服务器内部错误'] });
   }
 });
 
-/**
- * GET /api/registrations
- */
 app.get('/api/registrations', (req, res) => {
   try {
     const page = Math.max(1, parseInt(req.query.page, 10) || 1);
     const pageSize = Math.min(100, Math.max(1, parseInt(req.query.page_size, 10) || 20));
-
     const records = loadData();
-    // 按创建时间倒序
     records.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-
     const total = records.length;
     const offset = (page - 1) * pageSize;
-    const rows = records.slice(offset, offset + pageSize);
-
-    res.json({
-      success: true,
-      data: rows,
-      pagination: { page, page_size: pageSize, total, total_pages: Math.ceil(total / pageSize) }
-    });
-  } catch (err) {
-    console.error('查询失败:', err);
-    res.status(500).json({ success: false, errors: ['查询失败'] });
-  }
+    res.json({ success: true, data: records.slice(offset, offset + pageSize),
+      pagination: { page, page_size: pageSize, total, total_pages: Math.ceil(total / pageSize) } });
+  } catch(e) { res.status(500).json({ success: false }); }
 });
 
-/**
- * GET /api/export
- */
 app.get('/api/export', (req, res) => {
   try {
     const records = loadData();
     records.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-
     if (records.length === 0) {
       res.setHeader('Content-Type', 'text/plain; charset=utf-8');
       return res.send('暂无报名数据');
     }
 
-    const esc = (val) => {
-      if (val === null || val === undefined) return '';
-      const s = String(val);
-      if (s.includes(',') || s.includes('"') || s.includes('\n')) {
-        return '"' + s.replace(/"/g, '""') + '"';
-      }
-      return s;
-    };
+    const esc = v => { if (v == null) return ''; const s = String(v); return (s.includes(',')||s.includes('"')||s.includes('\n')) ? '"'+s.replace(/"/g,'""')+'"' : s; };
+    const pLabels = { '7':'体验道场(7天)','14':'进阶道场(14天)','21':'完整道场(21天)' };
 
-    const headers = [
-      'ID', '家长姓名', '手机号', '微信号', '孩子姓名', '孩子性别', '孩子年龄',
-      '报名产品', '家长陪同', '陪同天数', '孩子年级', '特殊需求', '特殊需求说明',
-      '推荐人', '渠道来源', '问答题1', '问答题2', '备注',
-      '早鸟优惠', '团报优惠', '老学员优惠', '直播下单优惠',
-      '原价', '优惠金额', '陪同费', '总价', '报名时间'
-    ];
-
-    const productLabels = { '7': '体验道场(7天)', '14': '进阶道场(14天)', '21': '完整道场(21天)' };
-
-    const csvLines = [headers.map(esc).join(',')];
+    const headers = ['ID','联系人','手机号','微信号','孩子数','孩子详情','报名产品',
+      '父亲陪同','母亲陪同','Q1','Q2','推荐人','渠道','备注','原价','陪同费','总价','报名时间'];
+    const lines = [headers.map(esc).join(',')];
 
     for (const row of records) {
-      const line = [
-        row.id, row.parent_name, row.phone, row.wechat,
-        row.child_name, row.child_gender, row.child_age,
-        productLabels[row.product] || row.product,
-        row.parent_accompany === 'yes' ? '是' : '否',
-        row.accompany_days, row.child_grade,
-        row.has_special_needs === 'yes' ? '是' : '否',
-        row.special_needs_detail, row.referrer, row.source,
-        row.qa1, row.qa2, row.notes,
-        row.early_bird ? '是' : '否',
-        row.group_discount ? '是' : '否',
-        row.returning_student ? '是' : '否',
-        row.live_order ? '是' : '否',
-        row.base_price, row.discount_amount, row.accompany_fee,
-        row.total_price, row.created_at
-      ].map(esc);
-      csvLines.push(line.join(','));
+      const kids = row.children.map((c,i) => `${i+1}.${c.name}(${c.gender}${c.age}岁${c.grade})${c.has_special_needs==='yes'?'[特需]':''}`).join('; ');
+      lines.push([
+        row.id, row.parent_name, row.phone, row.wechat, row.child_count, kids,
+        pLabels[row.product]||row.product, row.father_accompany, row.mother_accompany,
+        row.qa1, row.qa2, row.referrer, row.source, row.notes,
+        row.base_price, row.accompany_fee, row.total_price, row.created_at
+      ].map(esc).join(','));
     }
-
-    const bom = '\uFEFF';
-    const csv = bom + csvLines.join('\n');
 
     res.setHeader('Content-Type', 'text/csv; charset=utf-8');
     res.setHeader('Content-Disposition', `attachment; filename="registrations_${Date.now()}.csv"`);
-    res.send(csv);
-  } catch (err) {
-    console.error('导出失败:', err);
-    res.status(500).json({ success: false, errors: ['导出失败'] });
-  }
+    res.send('\uFEFF' + lines.join('\n'));
+  } catch(e) { res.status(500).json({ success: false }); }
 });
 
-// ── 启动服务器 / 导出 for Vercel ────────────────────────
+// ── 启动 ────────────────────────────────────────────
 if (process.env.VERCEL) {
-  // Vercel Serverless: 导出 app
   module.exports = app;
 } else {
-  // 本地开发: 启动 HTTP 服务
   app.listen(PORT, () => {
-    console.log(`启智归塾夏令营报名服务已启动: http://localhost:${PORT}`);
-    console.log(`管理页面: http://localhost:${PORT}/api/registrations`);
-    console.log(`导出CSV: http://localhost:${PORT}/api/export`);
+    console.log(`夏令营报名服务: http://localhost:${PORT}`);
+    console.log(`管理: http://localhost:${PORT}/api/registrations`);
+    console.log(`导出: http://localhost:${PORT}/api/export`);
+    if (!SMTP_USER) console.log('⚠ 邮件通知未配置（设置SMTP_USER/SMTP_PASS环境变量启用）');
   });
 }

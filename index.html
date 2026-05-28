@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="description" content="启智归塾2026夏令营·顺势归心自然生长——淮安日月洲度假村，家庭生命成长道场">
+<meta name="description" content="启智归塾2026夏令营·顺势归心自然生长——启智书院×日月洲度假村×江淮书院联合主办">
 <title>启智归塾·2026夏令营 - 顺势归心·自然生长</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -745,6 +745,65 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
   padding-right: 36px;
 }
 
+/* ── Parent Accompany Row ──────────────────────────── */
+.parent-accompany-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.parent-accompany-item {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+}
+/* ── Add Child Button ─────────────────────────────── */
+.btn-add-child {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: none;
+  border: 1.5px dashed var(--border);
+  border-radius: 10px;
+  color: var(--green);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-add-child:hover {
+  background: var(--green-lt);
+  border-color: var(--green);
+}
+/* ── Child Entry Card ─────────────────────────────── */
+.child-entry {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.child-entry .child-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--green);
+}
+.child-entry .btn-remove-child {
+  background: none;
+  border: none;
+  color: #c0392b;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 2px 8px;
+}
+.child-entry:only-of-type .btn-remove-child { display: none; }
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1095,6 +1154,13 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
   .info-stats { grid-template-columns: 1fr; }
   .resort-features { grid-template-columns: 1fr; }
 }
+
+
+/* ═══ Floating QR ═══ */
+.floating-qr{position:fixed;bottom:20px;right:16px;z-index:999;width:110px;text-align:center}
+.floating-qr img{width:100px;height:100px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.2);background:#fff;padding:4px}
+.floating-qr .qr-label{display:block;margin-top:4px;font-size:.7rem;color:var(--green);font-weight:600;background:rgba(255,255,255,.9);border-radius:12px;padding:2px 8px}
+@media(max-width:768px){.floating-qr{width:90px;bottom:12px;right:8px}.floating-qr img{width:80px;height:80px}.floating-qr .qr-label{font-size:.62rem}}
 </style>
 </head>
 <body>
@@ -1121,7 +1187,6 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
 <div class="nav-mobile-menu" id="mobileMenu">
   <a href="#why" data-close>特色亮点</a>
   <a href="#products" data-close>产品选型</a>
-  <a href="#discounts" data-close>优惠规则</a>
   <a href="#schedule" data-close>每日作息</a>
   <a href="#register" data-close>在线报名</a>
   <a href="#about" data-close>关于我们</a>
@@ -1160,7 +1225,7 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
     <div class="hero-meta">
       <div class="hero-meta-item">
         <div class="label">时间</div>
-        <div class="value">2026年8月</div>
+        <div class="value">2026年8月1日-8月21日</div>
       </div>
       <div class="hero-meta-item">
         <div class="label">地点</div>
@@ -1254,64 +1319,12 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
     </div>
   </div>
 
-  <div class="accompany-info">
-    💛 家长陪同：200-300元/天，按天计费（含食宿），与孩子共同成长
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     4. Discount Rules
-     ═══════════════════════════════════════════════════════ -->
-<section class="section fade-in" id="discounts">
-  <h2 class="section-title">优惠规则</h2>
-  <div class="divider"><span class="divider-symbol">◆</span></div>
-
-  <table class="discount-table">
-    <thead>
-      <tr>
-        <th>优惠类型</th>
-        <th>减免金额</th>
-        <th>适用条件</th>
-        <th>选择</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>🌅 <strong>早鸟价</strong></td>
-        <td class="discount-amount">-300元</td>
-        <td class="highlight">6月30日前报名</td>
-        <td class="discount-checkbox">
-          <input type="checkbox" id="discountEarly" onchange="updatePrice()">
-        </td>
-      </tr>
-      <tr>
-        <td>👥 <strong>团报价</strong></td>
-        <td class="discount-amount">-200元/人</td>
-        <td class="highlight">两组家庭同行</td>
-        <td class="discount-checkbox">
-          <input type="checkbox" id="discountGroup" onchange="updatePrice()">
-        </td>
-      </tr>
-      <tr>
-        <td>⭐ <strong>老学员专属</strong></td>
-        <td class="discount-amount">-100元</td>
-        <td class="highlight">启智书院老学员</td>
-        <td class="discount-checkbox">
-          <input type="checkbox" id="discountReturning" onchange="updatePrice()">
-        </td>
-      </tr>
-      <tr>
-        <td>📺 <strong>直播下单</strong></td>
-        <td class="discount-amount">-200元</td>
-        <td class="highlight">参加线上说明会直播下单</td>
-        <td class="discount-checkbox">
-          <input type="checkbox" id="discountLive" onchange="updatePrice()">
-        </td>
-      </tr>
-    </tbody>
+  <table class="accompany-info" style="width:100%;margin-top:20px;border-collapse:collapse;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+    <tr><td style="padding:10px 12px;background:var(--green);color:#fff;font-size:0.75rem;font-weight:700;text-align:center" colspan="2">家长陪同费用说明</td></tr>
+    <tr><td style="padding:10px 12px;background:var(--bg);border-bottom:1px solid var(--border);font-size:0.78rem;font-weight:700;color:var(--text);width:45%">全程参与</td><td style="padding:10px 12px;background:var(--bg);border-bottom:1px solid var(--border);font-size:0.78rem;color:var(--text)">21天含食宿（住宿舍） <b style="color:var(--green)">¥3,580</b>/人</td></tr>
+    <tr><td style="padding:10px 12px;background:var(--white);border-bottom:1px solid var(--border);font-size:0.78rem;font-weight:700;color:var(--text)">按周参与</td><td style="padding:10px 12px;background:var(--white);border-bottom:1px solid var(--border);font-size:0.78rem;color:var(--text)">包三餐 <b style="color:var(--green)">¥980</b>/7天/人</td></tr>
+    <tr><td style="padding:10px 12px;background:var(--bg);font-size:0.78rem;font-weight:700;color:var(--text)">酒店住宿</td><td style="padding:10px 12px;background:var(--bg);font-size:0.78rem;color:var(--text)">升级双床房（协议价） <b style="color:var(--green)">¥358</b>/天</td></tr>
   </table>
-
-  <p class="discount-note">以上优惠可叠加使用，报名时勾选即可</p>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -1387,123 +1400,108 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
   <h2 class="section-title">在线报名</h2>
   <div class="divider"><span class="divider-symbol">◆</span></div>
 
-  <form id="registrationForm" onsubmit="handleSubmit(event)" novalidate>
-    <!-- 家长信息 -->
-    <div class="form-row">
+  <!-- Price Summary -->
+  <div class="price-summary" id="priceSummary">
+    <div class="price-row"><span>孩子费用</span><span id="summaryChildren">¥0</span></div>
+    <div class="price-row"><span>家长费用</span><span id="summaryAccompany">¥0</span></div>
+    <div class="price-total"><span>合计</span><span id="summaryTotal">¥0</span></div>
+  </div>
+
+  <form id="registrationForm" novalidate>
+
+    <!-- 联系人信息 -->
+    <div class="form-divider"><span>联系人信息（必填）</span></div>
+    <div class="form-row-2">
       <div class="form-group">
-        <label class="form-label" for="parentName">家长姓名<span class="required">*</span></label>
-        <input type="text" class="form-input" id="parentName" placeholder="请输入您的姓名" required>
-        <div class="form-error" id="errorParentName"></div>
+        <label class="form-label" for="parentName">联系人姓名 <span class="required">*</span></label>
+        <input type="text" class="form-input" id="parentName" placeholder="您的姓名" required>
+        <span class="error-msg" id="parentNameError"></span>
       </div>
       <div class="form-group">
-        <label class="form-label" for="phone">手机号<span class="required">*</span></label>
-        <input type="tel" class="form-input" id="phone" placeholder="请输入11位手机号" required maxlength="11">
-        <div class="form-error" id="errorPhone"></div>
+        <label class="form-label" for="phone">手机号 <span class="required">*</span></label>
+        <input type="tel" class="form-input" id="phone" placeholder="11位手机号" required>
+        <span class="error-msg" id="phoneError"></span>
       </div>
     </div>
-
     <div class="form-group">
-      <label class="form-label" for="wechat">微信号<span class="required">*</span></label>
-      <input type="text" class="form-input" id="wechat" placeholder="请输入微信号，方便我们联系您" required>
-      <div class="form-error" id="errorWechat"></div>
+      <label class="form-label" for="wechat">微信号 <span class="required">*</span></label>
+      <input type="text" class="form-input" id="wechat" placeholder="请输入微信号" required>
+      <span class="error-msg" id="wechatError"></span>
     </div>
 
-    <!-- 孩子信息 -->
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label" for="childName">孩子姓名<span class="required">*</span></label>
-        <input type="text" class="form-input" id="childName" placeholder="请输入孩子姓名" required>
-        <div class="form-error" id="errorChildName"></div>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="childGender">孩子性别<span class="required">*</span></label>
-        <select class="form-select" id="childGender" required>
-          <option value="">请选择</option>
-          <option value="男">男</option>
-          <option value="女">女</option>
-        </select>
-        <div class="form-error" id="errorChildGender"></div>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label" for="childAge">孩子年龄<span class="required">*</span></label>
-        <select class="form-select" id="childAge" required>
-          <option value="">请选择</option>
-        </select>
-        <div class="form-hint">6-18岁</div>
-        <div class="form-error" id="errorChildAge"></div>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="childGrade">孩子年级</label>
-        <select class="form-select" id="childGrade">
-          <option value="">请选择（选填）</option>
-          <option value="学前">学前</option>
-          <option value="小1-3">小学1-3年级</option>
-          <option value="小4-6">小学4-6年级</option>
-          <option value="初中">初中</option>
-          <option value="高中">高中</option>
-        </select>
-      </div>
-    </div>
+    <!-- 孩子信息（动态添加）-->
+    <div class="form-divider"><span>孩子信息（必填）</span></div>
+    <div id="childrenContainer"></div>
+    <button type="button" class="btn-add-child" onclick="addChild()">+ 添加孩子</button>
 
     <!-- 报名产品 -->
+    <div class="form-divider"><span>报名选型（必填）</span></div>
     <div class="form-group">
-      <label class="form-label" for="product">报名产品<span class="required">*</span></label>
-      <select class="form-select" id="product" required onchange="onProductChange()">
-        <option value="">请选择报名产品</option>
-        <option value="7">体验道场（7天）- 2,980元/人</option>
-        <option value="14">进阶道场（14天）- 4,980元/人</option>
-        <option value="21">完整道场（21天）- 6,980元/人</option>
+      <label class="form-label" for="product">报名产品 <span class="required">*</span></label>
+      <select class="form-select" id="product" required onchange="updatePrice()">
+        <option value="">请选择夏令营产品</option>
+        <option value="7">体验道场 · 7天 · 2,980元/人</option>
+        <option value="14">进阶道场 · 14天 · 4,980元/人</option>
+        <option value="21">完整道场 · 21天 · 6,980元/人</option>
       </select>
-      <div class="form-error" id="errorProduct"></div>
+      <span class="error-msg" id="productError"></span>
     </div>
 
     <!-- 家长陪同 -->
+    <div class="form-divider"><span>家长陪同（选填）</span></div>
+
+    <div class="parent-accompany-row">
+      <div class="parent-accompany-item">
+        <label class="form-label">父亲</label>
+        <select class="form-select" id="fatherAccompany" onchange="updatePrice()">
+          <option value="no">不参加</option>
+          <option value="full">全程 ¥3,580</option>
+          <option value="weekly">按周 ¥980/7天</option>
+        </select>
+        <div id="fatherWeeksGroup" style="display:none;margin-top:6px">
+          <input type="number" class="form-input" id="fatherWeeks" placeholder="周数" min="1" max="3" value="1" onchange="updatePrice()" style="font-size:0.82rem">
+        </div>
+      </div>
+      <div class="parent-accompany-item">
+        <label class="form-label">母亲</label>
+        <select class="form-select" id="motherAccompany" onchange="updatePrice()">
+          <option value="no">不参加</option>
+          <option value="full">全程 ¥3,580</option>
+          <option value="weekly">按周 ¥980/7天</option>
+        </select>
+        <div id="motherWeeksGroup" style="display:none;margin-top:6px">
+          <input type="number" class="form-input" id="motherWeeks" placeholder="周数" min="1" max="3" value="1" onchange="updatePrice()" style="font-size:0.82rem">
+        </div>
+      </div>
+    </div>
+    <p class="form-hint" style="margin-top:8px">全程含食宿（住宿舍）¥3,580/人 · 按周包三餐 ¥980/7天/人（升级双床房 ¥358/天另计）</p>
+
+    <!-- 开放性问题（必填）-->
+    <div class="form-divider"><span>开放性问题（必填）</span></div>
     <div class="form-group">
-      <label class="form-label" for="parentAccompany">是否家长陪同<span class="required">*</span></label>
-      <select class="form-select" id="parentAccompany" required onchange="onAccompanyChange()">
-        <option value="">请选择</option>
-        <option value="no">否，孩子独立参加</option>
-        <option value="yes">是，家长陪同（250元/天）</option>
-      </select>
-      <div class="form-error" id="errorParentAccompany"></div>
+      <label class="form-label" for="qa1">1. 孩子最近一次让你意外或触动的事是什么？<span class="required">*</span></label>
+      <p class="form-hint">没有标准答案，只是了解——你能不能看见孩子真实的样子。</p>
+      <textarea class="form-textarea" id="qa1" placeholder="请分享一个具体的小故事……" required></textarea>
+      <span class="error-msg" id="qa1Error"></span>
     </div>
-
-    <div class="form-group" id="accompanyDaysGroup" style="display:none;">
-      <label class="form-label" for="accompanyDays">家长陪同天数</label>
-      <input type="number" class="form-input" id="accompanyDays"
-             placeholder="请输入陪同天数" min="1" value="7" onchange="updatePrice()">
-      <div class="form-hint" id="accompanyDaysHint">家长陪同费用：250元/天（含食宿）</div>
-      <div class="form-error" id="errorAccompanyDays"></div>
-    </div>
-
-    <!-- 特殊需求 -->
     <div class="form-group">
-      <label class="form-label" for="hasSpecialNeeds">有无特殊需求</label>
-      <select class="form-select" id="hasSpecialNeeds" onchange="onSpecialNeedsChange()">
-        <option value="no">无</option>
-        <option value="yes">有</option>
-      </select>
+      <label class="form-label" for="qa2">2. 你对本次夏令营的收获有什么期待？<span class="required">*</span></label>
+      <p class="form-hint">期待越具体，我们越能对准你的需要。</p>
+      <textarea class="form-textarea" id="qa2" placeholder="请写下你的真实期待……" required></textarea>
+      <span class="error-msg" id="qa2Error"></span>
     </div>
 
-    <div class="form-group" id="specialNeedsGroup" style="display:none;">
-      <label class="form-label" for="specialNeedsDetail">特殊需求说明</label>
-      <textarea class="form-textarea" id="specialNeedsDetail"
-                placeholder="请说明具体情况（过敏/药物/饮食禁忌/其他）"></textarea>
-    </div>
-
-    <!-- 推荐人与渠道 -->
-    <div class="form-row">
+    <!-- 补充信息（选填）-->
+    <div class="form-divider"><span>补充信息（选填）</span></div>
+    <div class="form-row-2">
       <div class="form-group">
         <label class="form-label" for="referrer">推荐人</label>
-        <input type="text" class="form-input" id="referrer" placeholder="选填">
+        <input type="text" class="form-input" id="referrer" placeholder="如有推荐人请填写">
       </div>
       <div class="form-group">
         <label class="form-label" for="source">渠道来源</label>
         <select class="form-select" id="source">
-          <option value="">请选择（选填）</option>
+          <option value="">请选择</option>
           <option value="朋友圈">朋友圈</option>
           <option value="公众号">公众号</option>
           <option value="抖音">抖音</option>
@@ -1513,55 +1511,17 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
         </select>
       </div>
     </div>
-
-    <!-- 开放性问题（必填） -->
-    <div class="form-divider">
-      <span>开放性问题（必填）</span>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label" for="qa1">
-        1. 孩子最近一次让你意外或触动的事是什么？
-        <span class="required">*</span>
-      </label>
-      <p class="form-hint">这道题没有标准答案，只是帮助我们了解——你能不能看见孩子真实的样子。</p>
-      <textarea class="form-textarea" id="qa1" placeholder="请分享一个具体的小故事或瞬间……" required></textarea>
-      <span class="error-msg" id="qa1Error"></span>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label" for="qa2">
-        2. 你对本次夏令营的收获有什么期待？
-        <span class="required">*</span>
-      </label>
-      <p class="form-hint">写你心里真正想的就好。期待越具体，我们越能对准你的需要；没有期待也没关系，说明你愿意放手。</p>
-      <textarea class="form-textarea" id="qa2" placeholder="请写下你的真实期待……" required></textarea>
-      <span class="error-msg" id="qa2Error"></span>
-    </div>
-
     <div class="form-group">
       <label class="form-label" for="notes">备注</label>
       <textarea class="form-textarea" id="notes" placeholder="如有其他需要说明的情况，请在此填写（选填）"></textarea>
     </div>
 
-    <!-- 价格明细 -->
-    <div class="price-calc" id="priceCalc">
-      <h4>价格明细</h4>
-      <div id="priceDetails">
-        <div class="price-row">
-          <span class="label">请选择报名产品</span>
-          <span class="value">—</span>
-        </div>
-      </div>
-      <div class="price-total">
-        <span class="label">预估总价</span>
-        <span class="value" id="totalPrice">—</span>
-      </div>
-    </div>
-
     <button type="submit" class="form-submit" id="submitBtn">提交报名</button>
   </form>
 </section>
+
+<!-- ═══════════════════════════════════════════════════════
+     7. About Qizhi Academy</section>
 
 <!-- ═══════════════════════════════════════════════════════
      7. About Qizhi Academy
@@ -1571,9 +1531,9 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
   <div class="divider"><span class="divider-symbol">◆</span></div>
 
   <div class="info-card">
-    <h3>十二载深耕，只为生命教育</h3>
+    <h3>十三载深耕，只为生命教育</h3>
     <ul class="info-list">
-      <li>成立于2013年，12年深耕全生命周期生命教育</li>
+      <li>成立于2013年，13年深耕全生命周期生命教育</li>
       <li>使命：传道授业解惑与生命成长</li>
       <li>12大服务板块 + 12大孵化公司，构建完整生命教育生态</li>
       <li>服务55,000+中小学生，优化4,000+家庭关系</li>
@@ -1582,7 +1542,7 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
 
     <div class="info-stats">
       <div class="info-stat">
-        <div class="num">12年</div>
+        <div class="num">13年</div>
         <div class="label">深耕生命教育</div>
       </div>
       <div class="info-stat">
@@ -1649,19 +1609,35 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     9. Footer
+     9. About Jianghuai Academy
+     ═══════════════════════════════════════════════════════ -->
+<section class="section fade-in" id="jianghuai">
+  <h2 class="section-title">关于江淮书院</h2>
+  <div class="divider"><span class="divider-symbol">◆</span></div>
+  <div class="info-card">
+    <h3>蒙以养正，圣功也</h3>
+    <p style="font-size:0.88rem;color:var(--text-light);line-height:1.9;margin-bottom:16px">
+      江淮书院成立于2016年，自创立之初，书院便以「蒙以养正，圣功也」为使命，抓住0-13岁的教育关键期，深耕儿童经典诵读领域，以经典为根、本草为养、农耕为行，在无数孩子心中播下了智慧的种子，滋养了深厚的文化底蕴。
+    </p>
+    <p style="font-size:0.88rem;color:var(--text-light);line-height:1.9">
+      历经十载积淀，书院形成了独具特色的「经典+养成」教育模式，耕读传家，建立智慧父母课堂，从博古通今到古为今用，多维拓展，让书写在古籍里的文字「活」起来，让沉淀在历史中的礼仪「走」进现代生活，为青少年儿童点亮文化自信。
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     10. Footer
      ═══════════════════════════════════════════════════════ -->
 <footer class="footer">
   <div class="footer-title">启智归塾 · 2026夏令营</div>
   <div class="footer-info">
-    淮安日月洲度假村 · 2026年8月<br>
+    联合主办：启智书院 · 日月洲度假村 · 江淮书院<br>
     咨询电话：请添加微信联系<br>
     顺势归心 · 自然生长
   </div>
   <div class="footer-divider"></div>
   <div class="footer-copy">
-    © 2026 启智书院 & 淮安日月洲度假村 联合呈现<br>
-    苏ICP备XXXXXXXX号
+    © 2026 启智书院 · 日月洲度假村 · 江淮书院 联合主办<br>
   </div>
 </footer>
 
@@ -1685,433 +1661,246 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
 <script>
 'use strict';
 
-/* ── 配置 ──────────────────────────────────────────── */
-const API_BASE_URL = '';  // 同源部署留空；分离部署填写后端地址，如 'https://xxx.vercel.app'
+var API_BASE_URL = '';
+var PRODUCT_PRICES = { '7': 2980, '14': 4980, '21': 6980 };
+var PRODUCT_LABELS = { '7': '体验道场（7天）', '14': '进阶道场（14天）', '21': '完整道场（21天）' };
+var ACCOMPANY_RATE_7DAY = 980;
+var ACCOMPANY_RATE_FULL = 3580;
+var childCounter = 0;
 
-const PRODUCT_PRICES = { '7': 2980, '14': 4980, '21': 6980 };
-const PRODUCT_LABELS = { '7': '体验道场（7天）', '14': '进阶道场（14天）', '21': '完整道场（21天）' };
-const ACCOMPANY_RATE = 250; // 元/天
+/* ── 孩子管理 ──────────────────────────────── */
+function createChildHTML(idx) {
+  var n = idx + 1;
+  var h = '<div class="child-entry" data-child="'+idx+'">';
+  h += '<div class="child-header"><span>孩子 '+n+'</span><button type="button" class="btn-remove-child" onclick="removeChild('+idx+')">移除</button></div>';
+  h += '<div class="form-row-2">';
+  h += '<div class="form-group"><label class="form-label">姓名<span class="required">*</span></label><input type="text" class="form-input child-name" placeholder="孩子姓名" required></div>';
+  h += '<div class="form-group"><label class="form-label">性别<span class="required">*</span></label><select class="form-select child-gender" required><option value="">请选择</option><option value="男">男</option><option value="女">女</option></select></div>';
+  h += '</div>';
+  h += '<div class="form-row-2">';
+  h += '<div class="form-group"><label class="form-label">年龄(6-18)<span class="required">*</span></label><input type="number" class="form-input child-age" placeholder="年龄" min="6" max="18" required></div>';
+  h += '<div class="form-group"><label class="form-label">年级</label><select class="form-select child-grade"><option value="">请选择</option><option value="学前">学前</option><option value="小1-3">小学1-3年级</option><option value="小4-6">小学4-6年级</option><option value="初中">初中</option><option value="高中">高中</option></select></div>';
+  h += '</div>';
+  h += '<div class="form-row-2">';
+  h += '<div class="form-group"><label class="form-label">特殊需求</label><select class="form-select child-special" onchange="this.parentNode.parentNode.querySelector('+"'"+'.child-special-detail'+"'"+').style.display=this.value==='+"'"+'yes'+"'"+'?'+"'"+'block'+"'"+':'+"'"+'none'+"'"+'"><option value="no">无</option><option value="yes">有</option></select></div>';
+  h += '<div class="form-group child-special-detail" style="display:none"><label class="form-label">说明</label><input type="text" class="form-input child-special-text" placeholder="如：食物过敏、药物等"></div>';
+  h += '</div>';
+  h += '</div>';
+  return h;
+}
 
-let selectedProduct = '';
+function addChild() {
+  var container = document.getElementById('childrenContainer');
+  var div = document.createElement('div');
+  div.innerHTML = createChildHTML(childCounter);
+  container.appendChild(div.firstElementChild);
+  childCounter++;
+  updateRemoveButtons();
+}
 
-/* ── 初始化 ────────────────────────────────────────── */
-
-// 生成年龄选项 (6-18)
-(function initAgeOptions() {
-  const sel = document.getElementById('childAge');
-  for (let i = 6; i <= 18; i++) {
-    const opt = document.createElement('option');
-    opt.value = i;
-    opt.textContent = i + '岁';
-    sel.appendChild(opt);
-  }
-})();
-
-// 滚动动画
-(function initScrollAnimation() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-})();
-
-/* ── 导航 ──────────────────────────────────────────── */
-
-// 移动端菜单
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  mobileMenu.classList.toggle('open');
-});
-
-// 点击菜单项关闭
-mobileMenu.querySelectorAll('a[data-close]').forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    mobileMenu.classList.remove('open');
-  });
-});
-
-// 滚动时关闭菜单
-window.addEventListener('scroll', () => {
-  if (mobileMenu.classList.contains('open')) {
-    hamburger.classList.remove('active');
-    mobileMenu.classList.remove('open');
-  }
-});
-
-/* ── 产品选择 ──────────────────────────────────────── */
-
-document.querySelectorAll('.product-card').forEach(card => {
-  card.addEventListener('click', function() {
-    // 切换选中状态
-    document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
-    this.classList.add('selected');
-    selectedProduct = this.dataset.product;
-
-    // 同步下拉框
-    document.getElementById('product').value = selectedProduct;
-
-    // 更新陪同天数上限
-    updateAccompanyDaysMax();
-    updatePrice();
-  });
-});
-
-// 下拉框同步卡片
-function onProductChange() {
-  const val = document.getElementById('product').value;
-  if (val) {
-    selectedProduct = val;
-    document.querySelectorAll('.product-card').forEach(c => {
-      c.classList.toggle('selected', c.dataset.product === val);
-    });
-    updateAccompanyDaysMax();
+function removeChild(idx) {
+  var el = document.querySelector('.child-entry[data-child="'+idx+'"]');
+  if (el && document.querySelectorAll('.child-entry').length > 1) {
+    el.remove();
+    updateRemoveButtons();
     updatePrice();
   }
 }
 
-/* ── 陪同 ──────────────────────────────────────────── */
+function updateRemoveButtons() {
+  var entries = document.querySelectorAll('.child-entry');
+  entries.forEach(function(e) {
+    var btn = e.querySelector('.btn-remove-child');
+    if (btn) btn.style.display = entries.length === 1 ? 'none' : '';
+  });
+}
 
-function onAccompanyChange() {
-  const val = document.getElementById('parentAccompany').value;
-  const group = document.getElementById('accompanyDaysGroup');
-  if (val === 'yes') {
-    group.style.display = 'block';
-    updateAccompanyDaysMax();
-  } else {
-    group.style.display = 'none';
-  }
+function getChildrenData() {
+  var children = [];
+  document.querySelectorAll('.child-entry').forEach(function(entry) {
+    var nameEl = entry.querySelector('.child-name');
+    var genderEl = entry.querySelector('.child-gender');
+    var ageEl = entry.querySelector('.child-age');
+    var gradeEl = entry.querySelector('.child-grade');
+    var specialEl = entry.querySelector('.child-special');
+    var detailEl = entry.querySelector('.child-special-text');
+    children.push({
+      name: nameEl ? nameEl.value : '',
+      gender: genderEl ? genderEl.value : '',
+      age: ageEl ? parseInt(ageEl.value,10)||0 : 0,
+      grade: gradeEl ? gradeEl.value : '',
+      has_special_needs: specialEl ? specialEl.value : 'no',
+      special_needs_detail: detailEl ? detailEl.value : ''
+    });
+  });
+  return children;
+}
+
+/* ── 家长陪同 ──────────────────────────────── */
+function onParentAccompanyChange(parent) {
+  var weeksGroup = document.getElementById(parent+'WeeksGroup');
+  var select = document.getElementById(parent+'Accompany');
+  weeksGroup.style.display = select.value === 'weekly' ? 'block' : 'none';
   updatePrice();
 }
 
-function updateAccompanyDaysMax() {
-  const input = document.getElementById('accompanyDays');
-  const hint = document.getElementById('accompanyDaysHint');
-  if (selectedProduct) {
-    const max = parseInt(selectedProduct, 10);
-    input.max = max;
-    if (parseInt(input.value, 10) > max) {
-      input.value = max;
-    }
-    hint.textContent = `家长陪同费用：250元/天（含食宿），最多 ${max} 天`;
+document.getElementById('fatherAccompany').addEventListener('change', function(){ onParentAccompanyChange('father'); });
+document.getElementById('motherAccompany').addEventListener('change', function(){ onParentAccompanyChange('mother'); });
+document.getElementById('fatherWeeks').addEventListener('input', updatePrice);
+document.getElementById('motherWeeks').addEventListener('input', updatePrice);
+
+function getParentFee(parent) {
+  var select = document.getElementById(parent+'Accompany');
+  if (!select) return 0;
+  var val = select.value;
+  if (val === 'full') return ACCOMPANY_RATE_FULL;
+  if (val === 'weekly') {
+    var weeks = parseInt(document.getElementById(parent+'Weeks').value,10)||1;
+    return weeks * ACCOMPANY_RATE_7DAY;
   }
+  return 0;
 }
 
-/* ── 特殊需求 ──────────────────────────────────────── */
-
-function onSpecialNeedsChange() {
-  const val = document.getElementById('hasSpecialNeeds').value;
-  const group = document.getElementById('specialNeedsGroup');
-  group.style.display = val === 'yes' ? 'block' : 'none';
-}
-
-/* ── 价格计算 ──────────────────────────────────────── */
-
+/* ── 价格计算 ──────────────────────────────── */
 function updatePrice() {
-  const priceDetails = document.getElementById('priceDetails');
-  const totalPriceEl = document.getElementById('totalPrice');
-
-  if (!selectedProduct) {
-    priceDetails.innerHTML = '<div class="price-row"><span class="label">请选择报名产品</span><span class="value">—</span></div>';
-    totalPriceEl.textContent = '—';
+  var product = document.getElementById('product').value;
+  if (!product) {
+    document.getElementById('summaryChildren').textContent = '请选择产品';
+    document.getElementById('summaryAccompany').textContent = '—';
+    document.getElementById('summaryTotal').textContent = '—';
     return;
   }
-
-  const basePrice = PRODUCT_PRICES[selectedProduct];
-  const productLabel = PRODUCT_LABELS[selectedProduct];
-
-  // 优惠
-  const earlyBird = document.getElementById('discountEarly').checked;
-  const groupDisc = document.getElementById('discountGroup').checked;
-  const returning = document.getElementById('discountReturning').checked;
-  const liveOrder = document.getElementById('discountLive').checked;
-
-  let discountAmount = 0;
-  const discountItems = [];
-
-  if (earlyBird) { discountAmount += 300; discountItems.push('早鸟优惠 -300元'); }
-  if (groupDisc) { discountAmount += 200; discountItems.push('团报优惠 -200元'); }
-  if (returning)  { discountAmount += 100; discountItems.push('老学员优惠 -100元'); }
-  if (liveOrder)  { discountAmount += 200; discountItems.push('直播下单优惠 -200元'); }
-
-  // 陪同费
-  const accompany = document.getElementById('parentAccompany').value;
-  let accompanyDays = 0;
-  let accompanyFee = 0;
-  if (accompany === 'yes') {
-    accompanyDays = parseInt(document.getElementById('accompanyDays').value, 10) || 0;
-    accompanyFee = accompanyDays * ACCOMPANY_RATE;
-  }
-
-  const totalPrice = basePrice + accompanyFee - discountAmount;
-
-  // 渲染价格明细
-  let html = '';
-
-  html += `<div class="price-row"><span class="label">${productLabel}</span><span class="value">¥${basePrice.toLocaleString()}</span></div>`;
-
-  if (accompanyFee > 0) {
-    html += `<div class="price-row"><span class="label">家长陪同费（${accompanyDays}天 × 250元/天）</span><span class="value">¥${accompanyFee.toLocaleString()}</span></div>`;
-  }
-
-  discountItems.forEach(item => {
-    html += `<div class="price-row"><span class="label">${item}</span><span class="value negative">-¥${item.match(/\d+/)[0]}</span></div>`;
-  });
-
-  priceDetails.innerHTML = html;
-  totalPriceEl.textContent = '¥' + totalPrice.toLocaleString();
+  var childCount = document.querySelectorAll('.child-entry').length;
+  var basePrice = PRODUCT_PRICES[product];
+  var childrenTotal = childCount * basePrice;
+  var fatherFee = getParentFee('father');
+  var motherFee = getParentFee('mother');
+  var accompanyTotal = fatherFee + motherFee;
+  document.getElementById('summaryChildren').textContent = '¥'+childrenTotal.toLocaleString()+'（'+childCount+'孩×¥'+basePrice.toLocaleString()+'）';
+  document.getElementById('summaryAccompany').textContent = accompanyTotal > 0 ? '¥'+accompanyTotal.toLocaleString() : '—';
+  document.getElementById('summaryTotal').textContent = '¥'+(childrenTotal+accompanyTotal).toLocaleString();
 }
 
-// 初始调用
-updatePrice();
-
-// 陪同天数变化时更新价格
-document.getElementById('accompanyDays').addEventListener('input', updatePrice);
-
-/* ── 手风琴折叠 ────────────────────────────────────── */
-
-function toggleAccordion(id) {
-  const header = document.querySelector(`#${id} .accordion-header`);
-  const body = document.getElementById(id + 'Body');
-  const isOpen = body.classList.contains('open');
-
-  if (isOpen) {
-    body.classList.remove('open');
-    header.classList.remove('open');
-  } else {
-    body.classList.add('open');
-    header.classList.add('open');
-  }
+/* ── 表单验证 ──────────────────────────────── */
+function showFieldError(id, msg) {
+  var el = document.getElementById(id+'Error');
+  var input = document.getElementById(id);
+  if (el) { el.textContent = msg; el.style.display = 'block'; }
+  if (input) input.classList.add('error');
 }
-
-/* ── Toast 通知 ────────────────────────────────────── */
-
-let toastTimer;
-
-function showToast(message, type) {
-  const toast = document.getElementById('toast');
-  clearTimeout(toastTimer);
-  toast.textContent = message;
-  toast.className = 'toast ' + type + ' show';
-  toastTimer = setTimeout(() => {
-    toast.classList.remove('show');
-  }, 4000);
-}
-
-/* ── 成功弹窗 ──────────────────────────────────────── */
-
-function showSuccess() {
-  document.getElementById('successModal').classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeSuccess() {
-  document.getElementById('successModal').classList.remove('show');
-  document.body.style.overflow = '';
-}
-
-/* ── 表单校验 ──────────────────────────────────────── */
 
 function clearErrors() {
-  document.querySelectorAll('.form-error').forEach(el => {
-    el.classList.remove('visible');
-    el.textContent = '';
-  });
-  document.querySelectorAll('.form-input.error, .form-select.error').forEach(el => {
-    el.classList.remove('error');
-  });
-}
-
-function showFieldError(fieldId, message) {
-  const errorEl = document.getElementById('error' + fieldId.charAt(0).toUpperCase() + fieldId.slice(1));
-  if (errorEl) {
-    errorEl.textContent = message;
-    errorEl.classList.add('visible');
-  }
-  const input = document.getElementById(fieldId);
-  if (input) input.classList.add('error');
+  document.querySelectorAll('.error-msg').forEach(function(e){ e.textContent=''; e.style.display='none'; });
+  document.querySelectorAll('.form-input.error,.form-select.error').forEach(function(e){ e.classList.remove('error'); });
 }
 
 function validateForm() {
   clearErrors();
-  let isValid = true;
-
-  const parentName = document.getElementById('parentName').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const wechat = document.getElementById('wechat').value.trim();
-  const childName = document.getElementById('childName').value.trim();
-  const childGender = document.getElementById('childGender').value;
-  const childAge = document.getElementById('childAge').value;
-  const productVal = document.getElementById('product').value;
-  const parentAccompany = document.getElementById('parentAccompany').value;
-
-  if (!parentName) { showFieldError('parentName', '请输入家长姓名'); isValid = false; }
-
-  if (!phone || !/^1[3-9]\d{9}$/.test(phone)) {
-    showFieldError('phone', '请输入正确的11位手机号');
-    isValid = false;
-  }
-
-  if (!wechat) { showFieldError('wechat', '请输入微信号'); isValid = false; }
-
-  if (!childName) { showFieldError('childName', '请输入孩子姓名'); isValid = false; }
-
-  if (!childGender) { showFieldError('childGender', '请选择孩子性别'); isValid = false; }
-
-  if (!childAge) { showFieldError('childAge', '请选择孩子年龄'); isValid = false; }
-
-  if (!productVal) { showFieldError('product', '请选择报名产品'); isValid = false; }
-
-  if (!parentAccompany) {
-    showFieldError('parentAccompany', '请选择是否家长陪同');
-    isValid = false;
-  }
-
-  if (parentAccompany === 'yes') {
-    const days = parseInt(document.getElementById('accompanyDays').value, 10);
-    const max = parseInt(productVal, 10);
-    if (isNaN(days) || days < 1 || days > max) {
-      showFieldError('accompanyDays', `陪同天数需在1-${max}天之间`);
-      isValid = false;
-    }
-  }
-
-  // 开放性问题（必填）
-  const qa1 = document.getElementById('qa1').value.trim();
-  const qa2 = document.getElementById('qa2').value.trim();
-  if (!qa1) { showFieldError('qa1', '请填写这个问题'); isValid = false; }
-  if (!qa2) { showFieldError('qa2', '请填写这个问题'); isValid = false; }
-
-  return isValid;
+  var valid = true;
+  var product = document.getElementById('product').value;
+  if (!document.getElementById('parentName').value.trim()) { showFieldError('parentName','请输入联系人姓名'); valid = false; }
+  if (!/^1[3-9]\d{9}$/.test(document.getElementById('phone').value.trim())) { showFieldError('phone','请输入正确的11位手机号'); valid = false; }
+  if (!document.getElementById('wechat').value.trim()) { showFieldError('wechat','请输入微信号'); valid = false; }
+  var children = getChildrenData();
+  if (children.length === 0) { alert('请至少添加一个孩子'); valid = false; }
+  children.forEach(function(ch, i) {
+    var entry = document.querySelectorAll('.child-entry')[i];
+    if (!ch.name) { entry.querySelector('.child-name').classList.add('error'); valid = false; }
+    if (!ch.gender) { entry.querySelector('.child-gender').classList.add('error'); valid = false; }
+    if (!ch.age || ch.age < 6 || ch.age > 18) { entry.querySelector('.child-age').classList.add('error'); valid = false; }
+  });
+  if (!product) { showFieldError('product','请选择报名产品'); valid = false; }
+  if (!document.getElementById('qa1').value.trim()) { showFieldError('qa1','请填写这个问题'); valid = false; }
+  if (!document.getElementById('qa2').value.trim()) { showFieldError('qa2','请填写这个问题'); valid = false; }
+  return valid;
 }
 
-/* ── 表单提交 ──────────────────────────────────────── */
-
-async function handleSubmit(event) {
-  event.preventDefault();
-
-  if (!validateForm()) {
-    showToast('请检查并完善表单信息', 'error');
-    // 滚动到第一个错误字段
-    const firstError = document.querySelector('.form-input.error, .form-select.error');
-    if (firstError) {
-      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    return;
-  }
-
-  const submitBtn = document.getElementById('submitBtn');
-  submitBtn.disabled = true;
-  submitBtn.textContent = '提交中…';
-
-  // 收集数据
-  const earlyBird = document.getElementById('discountEarly').checked;
-  const groupDisc = document.getElementById('discountGroup').checked;
-  const returning = document.getElementById('discountReturning').checked;
-  const liveOrder = document.getElementById('discountLive').checked;
-  const parentAccompany = document.getElementById('parentAccompany').value;
-
-  const basePrice = PRODUCT_PRICES[selectedProduct];
-  let discountAmount = 0;
-  if (earlyBird) discountAmount += 300;
-  if (groupDisc) discountAmount += 200;
-  if (returning)  discountAmount += 100;
-  if (liveOrder)  discountAmount += 200;
-
-  let accompanyDays = 0;
-  let accompanyFee = 0;
-  if (parentAccompany === 'yes') {
-    accompanyDays = parseInt(document.getElementById('accompanyDays').value, 10) || 0;
-    accompanyFee = accompanyDays * ACCOMPANY_RATE;
-  }
-
-  const totalPrice = basePrice + accompanyFee - discountAmount;
-
-  const payload = {
+/* ── 提交 ──────────────────────────────────── */
+document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  if (!validateForm()) return;
+  var submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true; submitBtn.textContent = '提交中...';
+  var product = document.getElementById('product').value;
+  var basePrice = PRODUCT_PRICES[product];
+  var children = getChildrenData();
+  var childrenTotal = children.length * basePrice;
+  var fatherFee = getParentFee('father');
+  var motherFee = getParentFee('mother');
+  var body = {
     parent_name: document.getElementById('parentName').value.trim(),
     phone: document.getElementById('phone').value.trim(),
     wechat: document.getElementById('wechat').value.trim(),
-    child_name: document.getElementById('childName').value.trim(),
-    child_gender: document.getElementById('childGender').value,
-    child_age: parseInt(document.getElementById('childAge').value, 10),
-    product: selectedProduct,
-    parent_accompany: parentAccompany,
-    accompany_days: accompanyDays,
-    child_grade: document.getElementById('childGrade').value,
-    has_special_needs: document.getElementById('hasSpecialNeeds').value,
-    special_needs_detail: document.getElementById('specialNeedsDetail').value.trim(),
-    referrer: document.getElementById('referrer').value.trim(),
-    source: document.getElementById('source').value,
+    children: children,
+    product: product,
+    father_accompany: document.getElementById('fatherAccompany').value,
+    mother_accompany: document.getElementById('motherAccompany').value,
+    father_weeks: parseInt(document.getElementById('fatherWeeks').value,10)||0,
+    mother_weeks: parseInt(document.getElementById('motherWeeks').value,10)||0,
     qa1: document.getElementById('qa1').value.trim(),
     qa2: document.getElementById('qa2').value.trim(),
+    referrer: document.getElementById('referrer').value.trim(),
+    source: document.getElementById('source').value,
     notes: document.getElementById('notes').value.trim(),
-    early_bird: earlyBird,
-    group_discount: groupDisc,
-    returning_student: returning,
-    live_order: liveOrder,
+    child_count: children.length,
     base_price: basePrice,
-    discount_amount: discountAmount,
-    accompany_fee: accompanyFee,
-    total_price: totalPrice
+    children_total: childrenTotal,
+    accompany_fee: fatherFee + motherFee,
+    total_price: childrenTotal + fatherFee + motherFee
   };
-
   try {
-    const res = await fetch(API_BASE_URL + '/api/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    const result = await res.json();
-
-    if (res.ok && result.success) {
-      showSuccess();
+    var res = await fetch(API_BASE_URL+'/api/register', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    var data = await res.json();
+    if (data.success) {
+      alert('报名提交成功！我们将尽快与您联系确认。');
       document.getElementById('registrationForm').reset();
-      document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
-      selectedProduct = '';
-      document.getElementById('accompanyDaysGroup').style.display = 'none';
-      document.getElementById('specialNeedsGroup').style.display = 'none';
-      document.querySelectorAll('.discount-table input[type="checkbox"]').forEach(cb => cb.checked = false);
-      document.getElementById('qa1').value = '';
-      document.getElementById('qa2').value = '';
-      document.getElementById('notes').value = '';
-      updatePrice();
+      document.getElementById('childrenContainer').innerHTML = '';
+      childCounter = 0; addChild(); updatePrice();
     } else {
-      const msg = result.errors ? result.errors.join('；') : '提交失败，请稍后重试';
-      showToast(msg, 'error');
+      alert('提交失败：'+(data.errors||['未知错误']).join('\n'));
     }
-  } catch (err) {
-    console.error('提交失败:', err);
-    showToast('网络连接失败，请检查网络后重试', 'error');
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = '提交报名';
-  }
-}
-
-/* ── 键盘监听 ──────────────────────────────────────── */
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    closeSuccess();
-    if (mobileMenu.classList.contains('open')) {
-      hamburger.classList.remove('active');
-      mobileMenu.classList.remove('open');
-    }
-  }
+  } catch(err) { alert('网络错误，请稍后重试'); }
+  submitBtn.disabled = false; submitBtn.textContent = '提交报名';
 });
 
-console.log('🌿 启智归塾·2026夏令营 — 顺势归心·自然生长');
-console.log('报名系统已就绪');
+/* ── 初始化 ────────────────────────────────── */
+addChild();
+updatePrice();
+
+/* ── 手风琴 ────────────────────────────────── */
+function toggleAccordion(id) {
+  var header = document.querySelector('#'+id+' .accordion-header');
+  var body = document.getElementById(id+'Body');
+  var isOpen = body.classList.contains('open');
+  if (isOpen) { body.classList.remove('open'); header.classList.remove('open'); }
+  else { body.classList.add('open'); header.classList.add('open'); }
+}
+document.querySelectorAll('.accordion-header').forEach(function(h) {
+  h.addEventListener('click', function(){ toggleAccordion(this.closest('.accordion').id); });
+});
+
+/* ── 导航 ──────────────────────────────────── */
+var hamburger = document.getElementById('hamburger');
+var mobileMenu = document.getElementById('mobileMenu');
+if (hamburger) hamburger.addEventListener('click', function() {
+  this.classList.toggle('open'); mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+mobileMenu.querySelectorAll('[data-close]').forEach(function(l) {
+  l.addEventListener('click', function() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); document.body.style.overflow = ''; });
+});
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) { var t=document.querySelector(this.getAttribute('href')); if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});} });
+});
+
+/* ── 动画 ──────────────────────────────────── */
+var observer = new IntersectionObserver(function(es) { es.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);} }); }, {threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(function(e){ observer.observe(e); });
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 50); });
 </script>
 
+
+<div class="floating-qr"><img src="data:image/png;base64,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" alt="微信咨询"><span class="qr-label">扫码咨询</span></div>
 </body>
 </html>

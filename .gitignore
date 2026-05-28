@@ -3,5 +3,7 @@ registrations.db
 registrations.db-shm
 registrations.db-wal
 registrations.json
+.env
+static-wechat.html
 *.log
 .DS_Store
