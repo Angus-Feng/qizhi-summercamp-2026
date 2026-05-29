@@ -169,7 +169,7 @@ function validate(data) {
     data.children.forEach((ch, i) => {
       if (!ch.name || !ch.name.trim()) errors.push(`孩子${i+1}姓名不能为空`);
       if (!ch.gender || !['男','女'].includes(ch.gender)) errors.push(`请选择孩子${i+1}的性别`);
-      if (!ch.age || ch.age < 6 || ch.age > 18) errors.push(`孩子${i+1}年龄需在6-18岁`);
+      if (!ch.age || ch.age < 5 || ch.age > 18) errors.push(`孩子${i+1}年龄需在5-18岁`);
     });
   }
   if (!data.product || !['7','14','21'].includes(data.product)) errors.push('请选择报名产品');
