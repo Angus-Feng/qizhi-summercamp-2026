@@ -89,9 +89,10 @@ def extract_form_data(doc):
         if len(vals) >= 3:
             try: child['age'] = int(re.sub(r'[^\d]', '', vals[2]))
             except: child['age'] = 0
-        if len(vals) >= 4: child['grade'] = vals[3] if vals[3] not in ('请选择', '') else ''
-        if len(vals) >= 5: child['has_special_needs'] = 'yes' if vals[4] == '有' else 'no'
-        if len(vals) >= 6: child['special_needs_detail'] = vals[5]
+        if len(vals) >= 4: child['id_number'] = vals[3]
+        if len(vals) >= 5: child['grade'] = vals[4] if vals[4] not in ('请选择', '') else ''
+        if len(vals) >= 6: child['has_special_needs'] = 'yes' if vals[5] == '有' else 'no'
+        if len(vals) >= 7: child['special_needs_detail'] = vals[6]
         children.append(child)
     data['children'] = children
     
@@ -132,6 +133,16 @@ def extract_form_data(doc):
             if '全程' in a: data['father_accompany'] = 'full'
             elif '按周' in a: data['father_accompany'] = 'weekly'
             else: data['father_accompany'] = 'no'
+
+    # 其它亲属 (table 6, 2 rows: relation, accompany)
+    if len(tables) >= 7:
+        vals = cell_values(6)
+        if len(vals) >= 1: data['other_relation'] = vals[0]
+        if len(vals) >= 2:
+            a = vals[1]
+            if '全程' in a: data['other_accompany'] = 'full'
+            elif '按周' in a: data['other_accompany'] = 'weekly'
+            else: data['other_accompany'] = 'no'
     
     # 周次解析：从段落中查找复选框标记
     def parse_weeks_from_paragraphs(prefix):
@@ -153,14 +164,19 @@ def extract_form_data(doc):
     # 从文档段落中检查周次
     mother_weeks = []
     father_weeks = []
+    other_weeks = []
     in_father = False
+    in_other = False
     for para in doc.paragraphs:
         text = para.text.strip()
-        if '母亲' in text and '按周' in text and '周次' in text:
-            in_father = False
+        if '母亲' in text and ('按周' in text or '周次' in text):
+            in_father = False; in_other = False
             continue
-        if '父亲' in text and '按周' in text and '周次' in text:
-            in_father = True
+        if '父亲' in text and ('按周' in text or '周次' in text):
+            in_father = True; in_other = False
+            continue
+        if '其它亲属' in text and ('按周' in text or '周次' in text):
+            in_father = False; in_other = True
             continue
         if '第一周' in text and '(8月1日' in text:
             checked = any(m in text for m in ['☑', '✓', '✔', '[x]', '[X]', '√', '●', '■'])
@@ -168,37 +184,39 @@ def extract_form_data(doc):
             if '□第一周' not in text and '□ 第一周' not in text:
                 checked = True
             if checked:
-                if in_father:
-                    father_weeks.append(1)
-                else:
-                    mother_weeks.append(1)
+                if in_other: other_weeks.append(1)
+                elif in_father: father_weeks.append(1)
+                else: mother_weeks.append(1)
         elif '第二周' in text and '(8月8日' in text:
             checked = any(m in text for m in ['☑', '✓', '✔', '[x]', '[X]', '√', '●', '■'])
             if '□第二周' not in text and '□ 第二周' not in text:
                 checked = True
             if checked:
-                if in_father: father_weeks.append(2)
+                if in_other: other_weeks.append(2)
+                elif in_father: father_weeks.append(2)
                 else: mother_weeks.append(2)
         elif '第三周' in text and '(8月15日' in text:
             checked = any(m in text for m in ['☑', '✓', '✔', '[x]', '[X]', '√', '●', '■'])
             if '□第三周' not in text and '□ 第三周' not in text:
                 checked = True
             if checked:
-                if in_father: father_weeks.append(3)
+                if in_other: other_weeks.append(3)
+                elif in_father: father_weeks.append(3)
                 else: mother_weeks.append(3)
     
     data['mother_weeks'] = mother_weeks if data.get('mother_accompany') == 'weekly' else []
     data['father_weeks'] = father_weeks if data.get('father_accompany') == 'weekly' else []
+    data['other_weeks'] = other_weeks if data.get('other_accompany') == 'weekly' else []
     
-    # QAs (table 6)
-    if len(tables) >= 7:
-        vals = cell_values(6)
+    # QAs (table 7)
+    if len(tables) >= 8:
+        vals = cell_values(7)
         if len(vals) >= 1: data['qa1'] = vals[0]
         if len(vals) >= 2: data['qa2'] = vals[1]
     
-    # 其他 (table 7)
-    if len(tables) >= 8:
-        vals = cell_values(7)
+    # 其他 (table 8)
+    if len(tables) >= 9:
+        vals = cell_values(8)
         if len(vals) >= 1: data['referrer'] = vals[0] if vals[0] not in ('如有人推荐请填写',) else ''
         if len(vals) >= 2: data['source'] = vals[1] if vals[1] not in ('请选择', '') else ''
         if len(vals) >= 3: data['notes'] = vals[2] if vals[2] not in ('如有特殊要求请说明',) else ''
@@ -210,6 +228,8 @@ def extract_form_data(doc):
     data.setdefault('product', '')
     data.setdefault('father_accompany', 'no')
     data.setdefault('mother_accompany', 'no')
+    data.setdefault('other_accompany', 'no')
+    data.setdefault('other_relation', '')
     data.setdefault('qa1', '')
     data.setdefault('qa2', '')
     data.setdefault('referrer', '')
@@ -228,6 +248,8 @@ def extract_form_data(doc):
     elif data.get('father_accompany') == 'weekly': accompany_fee += len(father_weeks) * ACCOMPANY_RATE_7DAY
     if data.get('mother_accompany') == 'full': accompany_fee += ACCOMPANY_RATE_FULL
     elif data.get('mother_accompany') == 'weekly': accompany_fee += len(mother_weeks) * ACCOMPANY_RATE_7DAY
+    if data.get('other_accompany') == 'full': accompany_fee += ACCOMPANY_RATE_FULL
+    elif data.get('other_accompany') == 'weekly': accompany_fee += len(other_weeks) * ACCOMPANY_RATE_7DAY
     data['accompany_fee'] = accompany_fee
     data['total_price'] = data['children_total'] + accompany_fee
     
@@ -246,6 +268,7 @@ def validate_data(data):
             if not ch.get('name'): errors.append(f'孩子{i+1}姓名不能为空')
             if not ch.get('gender') or ch['gender'] not in ('男', '女'): errors.append(f'孩子{i+1}性别无效')
             if not ch.get('age') or ch['age'] < 5 or ch['age'] > 18: errors.append(f'孩子{i+1}年龄需在5-18岁')
+            if not ch.get('id_number') or not re.match(r'^\d{17}[\dXx]$', ch.get('id_number', '')): errors.append(f'孩子{i+1}身份证号格式错误')
     if not data.get('product') or data['product'] not in ('7', '14', '21'): errors.append('请选择报名产品')
     if not data.get('qa1'): errors.append('请填写开放性问题1')
     if not data.get('qa2'): errors.append('请填写开放性问题2')

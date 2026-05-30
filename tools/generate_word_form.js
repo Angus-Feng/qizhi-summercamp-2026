@@ -136,6 +136,7 @@ async function main() {
         fieldRow('  姓名', `child${i}_name`, `孩子${i}姓名`, i === 1),
         dropdownRow('  性别', `child${i}_gender`, ['男', '女'], i === 1),
         fieldRow('  年龄(5-18)', `child${i}_age`, '如：10', i === 1),
+        fieldRow('  身份证号', `child${i}_idnum`, '18位身份证号，必填', i === 1),
         dropdownRow('  年级', `child${i}_grade`, ['学前', '小1-3', '小4-6', '初中', '高中'], false),
         dropdownRow('  特殊需求', `child${i}_special`, ['无', '有'], false),
         fieldRow('  特殊需求说明', `child${i}_special_detail`, '如：食物过敏、药物等', false),
@@ -202,6 +203,26 @@ async function main() {
   }));
   children.push(new Paragraph({
     children: [new TextRun({ text: '按周时勾选以下周次（父亲）：', size: 20, color: GRAY })]
+  }));
+  children.push(new Paragraph({
+    children: [new TextRun({ text: '□ 第一周（8月1日-7日）    □ 第二周（8月8日-14日）    □ 第三周（8月15日-21日）', size: 20, color: GRAY })]
+  }));
+  children.push(spacer());
+
+  // ── 其它亲属 ──
+  children.push(new Paragraph({
+    children: [new TextRun({ text: '其它亲属（选填）', bold: true, size: 22, font: '微软雅黑' })]
+  }));
+  children.push(new Table({
+    width: { size: TABLE_WIDTH, type: WidthType.DXA },
+    columnWidths: [2400, 6626],
+    rows: [
+      fieldRow('与孩子关系', 'other_relation', '请注明身份（如：爷爷、舅舅等）', false),
+      dropdownRow('参与方式', 'other_accompany', ['不参加', '全程 ¥3,580', '按周 ¥980/7天'], false),
+    ]
+  }));
+  children.push(new Paragraph({
+    children: [new TextRun({ text: '按周时勾选以下周次（其它亲属）：', size: 20, color: GRAY })]
   }));
   children.push(new Paragraph({
     children: [new TextRun({ text: '□ 第一周（8月1日-7日）    □ 第二周（8月8日-14日）    □ 第三周（8月15日-21日）', size: 20, color: GRAY })]
