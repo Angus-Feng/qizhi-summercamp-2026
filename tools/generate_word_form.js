@@ -137,8 +137,28 @@ async function main() {
         dropdownRow('  性别', `child${i}_gender`, ['男', '女'], i === 1),
         fieldRow('  年龄(5-18)', `child${i}_age`, '如：10', i === 1),
         fieldRow('  身份证号', `child${i}_idnum`, '18位身份证号，必填', i === 1),
-        dropdownRow('  年级', `child${i}_grade`, ['学前', '小1-3', '小4-6', '初中', '高中'], false),
-        dropdownRow('  特殊需求', `child${i}_special`, ['无', '有'], false),
+      ]
+    }));
+    // 年级勾选
+    children.push(new Paragraph({
+      spacing: { before: 60 },
+      children: [new TextRun({ text: '  年级（请勾选一项）：', size: 20, color: GRAY })]
+    }));
+    children.push(new Paragraph({
+      children: [new TextRun({ text: '    □ 学前    □ 小1-3    □ 小4-6    □ 初中    □ 高中', size: 22, font: '微软雅黑' })]
+    }));
+    // 特殊需求勾选
+    children.push(new Paragraph({
+      spacing: { before: 40 },
+      children: [new TextRun({ text: '  特殊需求（请勾选）：', size: 20, color: GRAY })]
+    }));
+    children.push(new Paragraph({
+      children: [new TextRun({ text: '    □ 无    □ 有（如有请在下行填写说明）', size: 22, font: '微软雅黑' })]
+    }));
+    children.push(new Table({
+      width: { size: TABLE_WIDTH, type: WidthType.DXA },
+      columnWidths: [2400, 6626],
+      rows: [
         fieldRow('  特殊需求说明', `child${i}_special_detail`, '如：食物过敏、药物等', false),
       ]
     }));
@@ -173,42 +193,30 @@ async function main() {
 
   // ══ Section 4: 家长陪同 ══
   children.push(sectionTitle('四、家长陪同（选填）'));
-  children.push(new Paragraph({
-    children: [new TextRun({ text: '母亲陪同', bold: true, size: 22, font: '微软雅黑' })]
-  }));
-  children.push(new Table({
-    width: { size: TABLE_WIDTH, type: WidthType.DXA },
-    columnWidths: [2400, 6626],
-    rows: [
-      dropdownRow('参与方式', 'mother_accompany', ['不参加', '全程 ¥3,580', '按周 ¥980/7天'], false),
-    ]
-  }));
-  children.push(new Paragraph({
-    children: [new TextRun({ text: '按周时勾选以下周次（母亲）：', size: 20, color: GRAY })]
-  }));
-  children.push(new Paragraph({
-    children: [new TextRun({ text: '□ 第一周（8月1日-7日）    □ 第二周（8月8日-14日）    □ 第三周（8月15日-21日）', size: 20, color: GRAY })]
-  }));
-  children.push(spacer());
-
-  children.push(new Paragraph({
-    children: [new TextRun({ text: '父亲陪同', bold: true, size: 22, font: '微软雅黑' })]
-  }));
-  children.push(new Table({
-    width: { size: TABLE_WIDTH, type: WidthType.DXA },
-    columnWidths: [2400, 6626],
-    rows: [
-      dropdownRow('参与方式', 'father_accompany', ['不参加', '全程 ¥3,580', '按周 ¥980/7天'], false),
-    ]
-  }));
-  children.push(new Paragraph({
-    children: [new TextRun({ text: '按周时勾选以下周次（父亲）：', size: 20, color: GRAY })]
-  }));
-  children.push(new Paragraph({
-    children: [new TextRun({ text: '□ 第一周（8月1日-7日）    □ 第二周（8月8日-14日）    □ 第三周（8月15日-21日）', size: 20, color: GRAY })]
-  }));
-  children.push(spacer());
-
+  
+  function parentCheckboxes(title, prefix) {
+    children.push(new Paragraph({
+      spacing: { before: 60 },
+      children: [new TextRun({ text: title, bold: true, size: 22, font: '微软雅黑' })]
+    }));
+    children.push(new Paragraph({
+      children: [new TextRun({ text: '参与方式（请勾选一项）：', size: 20, color: GRAY })]
+    }));
+    children.push(new Paragraph({
+      children: [new TextRun({ text: '□ 不参加    □ 全程 ¥3,580    □ 按周 ¥980/7天', size: 22, font: '微软雅黑' })]
+    }));
+    children.push(new Paragraph({
+      children: [new TextRun({ text: '按周时勾选以下周次：', size: 20, color: GRAY })]
+    }));
+    children.push(new Paragraph({
+      children: [new TextRun({ text: '□ 第一周（8月1日-7日）    □ 第二周（8月8日-14日）    □ 第三周（8月15日-21日）', size: 22, font: '微软雅黑' })]
+    }));
+    children.push(spacer());
+  }
+  
+  parentCheckboxes('母亲陪同', 'mother');
+  parentCheckboxes('父亲陪同', 'father');
+  
   // ── 其它亲属 ──
   children.push(new Paragraph({
     children: [new TextRun({ text: '其它亲属（选填）', bold: true, size: 22, font: '微软雅黑' })]
@@ -218,9 +226,21 @@ async function main() {
     columnWidths: [2400, 6626],
     rows: [
       fieldRow('与孩子关系', 'other_relation', '请注明身份（如：爷爷、舅舅等）', false),
-      dropdownRow('参与方式', 'other_accompany', ['不参加', '全程 ¥3,580', '按周 ¥980/7天'], false),
     ]
   }));
+  children.push(new Paragraph({
+    children: [new TextRun({ text: '参与方式（请勾选一项）：', size: 20, color: GRAY })]
+  }));
+  children.push(new Paragraph({
+    children: [new TextRun({ text: '□ 不参加    □ 全程 ¥3,580    □ 按周 ¥980/7天', size: 22, font: '微软雅黑' })]
+  }));
+  children.push(new Paragraph({
+    children: [new TextRun({ text: '按周时勾选以下周次（其它亲属）：', size: 20, color: GRAY })]
+  }));
+  children.push(new Paragraph({
+    children: [new TextRun({ text: '□ 第一周（8月1日-7日）    □ 第二周（8月8日-14日）    □ 第三周（8月15日-21日）', size: 22, font: '微软雅黑' })]
+  }));
+  children.push(spacer());
   children.push(new Paragraph({
     children: [new TextRun({ text: '按周时勾选以下周次（其它亲属）：', size: 20, color: GRAY })]
   }));
@@ -248,9 +268,15 @@ async function main() {
     columnWidths: [2400, 6626],
     rows: [
       fieldRow('推荐人', 'referrer', '如有人推荐请填写', false),
-      dropdownRow('获知渠道', 'source', ['微信朋友圈', '公众号', '朋友推荐', '抖音/视频号', '其他'], false),
       fieldRow('备注', 'notes', '如有特殊要求请说明', false),
     ]
+  }));
+  children.push(new Paragraph({
+    spacing: { before: 60 },
+    children: [new TextRun({ text: '获知渠道（请勾选）：', size: 20, color: GRAY })]
+  }));
+  children.push(new Paragraph({
+    children: [new TextRun({ text: '□ 微信朋友圈    □ 公众号    □ 朋友推荐    □ 抖音/视频号    □ 其他', size: 22, font: '微软雅黑' })]
   }));
 
   const doc = new Document({

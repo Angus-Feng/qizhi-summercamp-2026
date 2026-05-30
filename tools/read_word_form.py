@@ -38,221 +38,180 @@ def extract_table_data(doc):
     return result
 
 def extract_form_data(doc):
-    """根据表单结构提取字段"""
+    """根据表单结构提取字段（勾选版）"""
     data = {}
     tables = extract_table_data(doc)
-    
-    # 辅助：从特定表格的行中取"值"列（第二列），过滤占位符
-    def cell_values(table_idx, skip_header=False):
-        rows = tables[table_idx]
-        start = 1 if skip_header else 0
+
+    def cell_vals(tidx):
+        rows = tables[tidx] if tidx < len(tables) else []
         vals = []
-        for row in rows[start:]:
+        for row in rows:
             if len(row) > 1:
-                val = row[1].strip()
-                # 过滤占位符文本
-                if val and val not in ('None', '') and '请选择' not in val and '请输入' not in val:
-                    vals.append(val)
-                elif val:
-                    vals.append('')  # 占位符视为空
+                v = row[1].strip()
+                if v and v != 'None' and '请选择' not in v and '请输入' not in v:
+                    vals.append(v)
+                else:
+                    vals.append('')
         return vals
 
-    # Table indices in the generated form:
-    # 0: 联系人信息 (parent_name, phone, wechat)
-    # 1: 孩子1
-    # 2: 孩子2
-    # 3: 孩子3
-    # 4: 报名选型 (product)
-    # 5: 母亲陪同 (mother_accompany)
-    # 6: 父亲陪同 (father_accompany)
-    # 7: 开放性问题 (qa1, qa2)
-    # 8: 其他信息 (referrer, source, notes)
-    
+    def is_checked(para_text, opt):
+        """检查段落文本中某选项是否被勾选"""
+        idx = para_text.find(opt)
+        if idx < 0: return False
+        pre = para_text[max(0,idx-3):idx]
+        if any(c in pre for c in ['☑','✓','✔','●','■']): return True
+        if '□'+opt in para_text or '□ '+opt in para_text: return False
+        return True  # □被删 = 视为已选
+
+    def find_para_after(keyword, start=0):
+        """在段落中查找包含某关键词的第一个段落索引"""
+        for i, p in enumerate(doc.paragraphs):
+            if i < start: continue
+            if keyword in p.text:
+                return i, p.text
+        return -1, ''
+
+    def parse_accompany(text):
+        if is_checked(text, '按周'): return 'weekly'
+        if is_checked(text, '全程'): return 'full'
+        return 'no'
+
+    # ── 表0: 联系人 ──
     if len(tables) >= 1:
-        vals = cell_values(0)
-        if len(vals) >= 1: data['parent_name'] = vals[0]
-        if len(vals) >= 2: data['phone'] = vals[1]
-        if len(vals) >= 3: data['wechat'] = vals[2] if vals[2] not in ('请输入微信号（选填）',) else ''
-    
-    # 孩子信息
+        v = cell_vals(0)
+        if len(v)>=1: data['parent_name'] = v[0]
+        if len(v)>=2: data['phone'] = v[1]
+        if len(v)>=3: data['wechat'] = v[2]
+
+    # ── 孩子(表1/3/5=基本信息, 表2/4/6=特殊说明) + 段落勾选 ──
     children = []
-    for child_idx in range(3):
-        tidx = 1 + child_idx
-        if tidx >= len(tables):
-            break
-        vals = cell_values(tidx)
-        if len(vals) < 1 or not vals[0] or '孩子' in vals[0]:
-            continue
+    for ci in range(3):
+        base_tbl = 1 + ci*2  # 1, 3, 5
+        detail_tbl = 2 + ci*2  # 2, 4, 6
+        if base_tbl >= len(tables): break
+        v = cell_vals(base_tbl)
+        if len(v)<1 or not v[0] or '孩子' in v[0]: continue
         child = {}
-        if len(vals) >= 1: child['name'] = vals[0]
-        if len(vals) >= 2: child['gender'] = vals[1] if vals[1] in ('男', '女') else ''
-        if len(vals) >= 3:
-            try: child['age'] = int(re.sub(r'[^\d]', '', vals[2]))
+        if len(v)>=1: child['name'] = v[0]
+        if len(v)>=2: child['gender'] = v[1] if v[1] in ('男','女') else ''
+        if len(v)>=3:
+            try: child['age'] = int(re.sub(r'[^\d]','',v[2]))
             except: child['age'] = 0
-        if len(vals) >= 4: child['id_number'] = vals[3]
-        if len(vals) >= 5: child['grade'] = vals[4] if vals[4] not in ('请选择', '') else ''
-        if len(vals) >= 6: child['has_special_needs'] = 'yes' if vals[5] == '有' else 'no'
-        if len(vals) >= 7: child['special_needs_detail'] = vals[6]
+        if len(v)>=4: child['id_number'] = v[3]
+        child['has_special_needs'] = 'no'
+        child['grade'] = ''
+        if detail_tbl < len(tables):
+            dv = cell_vals(detail_tbl)
+            if len(dv)>=1: child['special_needs_detail'] = dv[0]
         children.append(child)
+
+    # ── 段落勾选：年级 ──
+    GRADE_OPTS = ['学前','小1-3','小4-6','初中','高中']
+    ci = 0
+    for p in doc.paragraphs:
+        t = p.text.strip()
+        if '年级' in t and '勾选' in t:
+            if ci < len(children):
+                for g in GRADE_OPTS:
+                    if is_checked(t, g):
+                        children[ci]['grade'] = g
+                        break
+                ci += 1
+
+    # ── 段落勾选：特殊需求 ──
+    ci = 0
+    for p in doc.paragraphs:
+        t = p.text.strip()
+        if '特殊需求' in t and '勾选' in t:
+            if ci < len(children):
+                if is_checked(t, '有') and not is_checked(t, '如有'):
+                    children[ci]['has_special_needs'] = 'yes'
+                ci += 1
+
     data['children'] = children
-    
-    # 产品（从勾选段落中解析）
+
+    # ── 产品勾选 ──
     data['product'] = ''
-    for para in doc.paragraphs:
-        text = para.text
-        # 检查勾选标记：☑ ✓ ✔ [x] [X] √ ● ■ 或 □ 被替换为非□字符
-        checked = any(m in text for m in ['☑', '✓', '✔', '[x]', '[X]', '√', '●', '■'])
-        if not checked:
-            # □ 可能被改成了非□字符（如用户在□后写了内容，或替换了□）
-            # 只要不是以□开头就视为已选
-            pass  # 太不准确，跳过
-        if ('体验版' in text or '7天' in text) and '体验版' not in text.replace('□','').strip()[:4]:
-            # 非□开头 → 可能是 ✓体验版 或 用户删掉了□
-            pass
-        # 更可靠的判断：如果整行不是以"□ "开头，且包含版本关键词
-        stripped = text.strip()
-        is_checked = not stripped.startswith('□')
-        if '体验版' in text and is_checked: data['product'] = '7'
-        elif '进阶版' in text and is_checked: data['product'] = '14'
-        elif '完整版' in text and is_checked: data['product'] = '21'
+    for p in doc.paragraphs:
+        t = p.text.strip()
+        if is_checked(t, '体验版'): data['product'] = '7'; break
+        if is_checked(t, '进阶版'): data['product'] = '14'; break
+        if is_checked(t, '完整版'): data['product'] = '21'; break
 
-    # 母亲陪同 (table 4)
-    if len(tables) >= 5:
-        vals = cell_values(4)
-        if len(vals) >= 1:
-            a = vals[0]
-            if '全程' in a: data['mother_accompany'] = 'full'
-            elif '按周' in a: data['mother_accompany'] = 'weekly'
-            else: data['mother_accompany'] = 'no'
-    
-    # 父亲陪同 (table 5)
-    if len(tables) >= 6:
-        vals = cell_values(5)
-        if len(vals) >= 1:
-            a = vals[0]
-            if '全程' in a: data['father_accompany'] = 'full'
-            elif '按周' in a: data['father_accompany'] = 'weekly'
-            else: data['father_accompany'] = 'no'
+    # ── 家长陪同 + 周次（段落勾选） ──
+    accomp_state = {'mother':'no','father':'no','other':'no'}
+    weeks_state = {'mother':[],'father':[],'other':[]}
+    current = None
+    for p in doc.paragraphs:
+        t = p.text.strip()
+        if '母亲陪同' in t: current = 'mother'
+        elif '父亲陪同' in t: current = 'father'
+        elif '其它亲属' in t: current = 'other'
+        elif current and '参与方式' in t:
+            accomp_state[current] = parse_accompany(t)
+        elif current and '第一周' in t:
+            if is_checked(t, '第一周'): weeks_state[current].append(1)
+        elif current and '第二周' in t:
+            if is_checked(t, '第二周'): weeks_state[current].append(2)
+        elif current and '第三周' in t:
+            if is_checked(t, '第三周'): weeks_state[current].append(3)
+        elif current and ('母亲' in t or '父亲' in t or '其它亲属' in t) and current not in t:
+            current = None
 
-    # 其它亲属 (table 6, 2 rows: relation, accompany)
-    if len(tables) >= 7:
-        vals = cell_values(6)
-        if len(vals) >= 1: data['other_relation'] = vals[0]
-        if len(vals) >= 2:
-            a = vals[1]
-            if '全程' in a: data['other_accompany'] = 'full'
-            elif '按周' in a: data['other_accompany'] = 'weekly'
-            else: data['other_accompany'] = 'no'
-    
-    # 周次解析：从段落中查找复选框标记
-    def parse_weeks_from_paragraphs(prefix):
-        """从文档段落中查找周次勾选"""
-        weeks = []
-        for para in doc.paragraphs:
-            text = para.text
-            if prefix in text:
-                # 查找常见的勾选标记：☑ ✓ ✔ [x] [X] √ ● 或替换后的□变了
-                if '第一周' in text and any(m in text for m in ['☑', '✓', '✔', '[x]', '[X]', '√', '●']):
-                    weeks.append(1)
-                elif '第一周' in text and not ('□ 第一周' in text):
-                    # 可能被标记了，需要更精确判断
-                    # 如果能找到非默认的标记就加入
-                    pass
-        # 回退：也检查表格后的段落
-        return weeks
+    data['mother_accompany'] = accomp_state['mother']
+    data['father_accompany'] = accomp_state['father']
+    data['mother_weeks'] = weeks_state['mother'] if accomp_state['mother']=='weekly' else []
+    data['father_weeks'] = weeks_state['father'] if accomp_state['father']=='weekly' else []
 
-    # 从文档段落中检查周次
-    mother_weeks = []
-    father_weeks = []
-    other_weeks = []
-    in_father = False
-    in_other = False
-    for para in doc.paragraphs:
-        text = para.text.strip()
-        if '母亲' in text and ('按周' in text or '周次' in text):
-            in_father = False; in_other = False
-            continue
-        if '父亲' in text and ('按周' in text or '周次' in text):
-            in_father = True; in_other = False
-            continue
-        if '其它亲属' in text and ('按周' in text or '周次' in text):
-            in_father = False; in_other = True
-            continue
-        if '第一周' in text and '(8月1日' in text:
-            checked = any(m in text for m in ['☑', '✓', '✔', '[x]', '[X]', '√', '●', '■'])
-            # 也检查□是否被改成了其他字符
-            if '□第一周' not in text and '□ 第一周' not in text:
-                checked = True
-            if checked:
-                if in_other: other_weeks.append(1)
-                elif in_father: father_weeks.append(1)
-                else: mother_weeks.append(1)
-        elif '第二周' in text and '(8月8日' in text:
-            checked = any(m in text for m in ['☑', '✓', '✔', '[x]', '[X]', '√', '●', '■'])
-            if '□第二周' not in text and '□ 第二周' not in text:
-                checked = True
-            if checked:
-                if in_other: other_weeks.append(2)
-                elif in_father: father_weeks.append(2)
-                else: mother_weeks.append(2)
-        elif '第三周' in text and '(8月15日' in text:
-            checked = any(m in text for m in ['☑', '✓', '✔', '[x]', '[X]', '√', '●', '■'])
-            if '□第三周' not in text and '□ 第三周' not in text:
-                checked = True
-            if checked:
-                if in_other: other_weeks.append(3)
-                elif in_father: father_weeks.append(3)
-                else: mother_weeks.append(3)
-    
-    data['mother_weeks'] = mother_weeks if data.get('mother_accompany') == 'weekly' else []
-    data['father_weeks'] = father_weeks if data.get('father_accompany') == 'weekly' else []
-    data['other_weeks'] = other_weeks if data.get('other_accompany') == 'weekly' else []
-    
-    # QAs (table 7)
+    # ── 其它亲属 表7: 关系 ──
+    data['other_accompany'] = accomp_state['other']
+    data['other_relation'] = ''
+    data['other_weeks'] = weeks_state['other'] if accomp_state['other']=='weekly' else []
     if len(tables) >= 8:
-        vals = cell_values(7)
-        if len(vals) >= 1: data['qa1'] = vals[0]
-        if len(vals) >= 2: data['qa2'] = vals[1]
-    
-    # 其他 (table 8)
+        v = cell_vals(7)
+        if len(v)>=1: data['other_relation'] = v[0]
+
+    # ── QAs 表8 ──
     if len(tables) >= 9:
-        vals = cell_values(8)
-        if len(vals) >= 1: data['referrer'] = vals[0] if vals[0] not in ('如有人推荐请填写',) else ''
-        if len(vals) >= 2: data['source'] = vals[1] if vals[1] not in ('请选择', '') else ''
-        if len(vals) >= 3: data['notes'] = vals[2] if vals[2] not in ('如有特殊要求请说明',) else ''
-    
+        v = cell_vals(8)
+        if len(v)>=1: data['qa1'] = v[0]
+        if len(v)>=2: data['qa2'] = v[1]
+
+    # ── 其他 表9: referrer, notes ──
+    if len(tables) >= 10:
+        v = cell_vals(9)
+        if len(v)>=1: data['referrer'] = v[0] if '推荐' not in v[0] else ''
+        if len(v)>=2: data['notes'] = v[1] if '特殊' not in v[1] else ''
+
+    # ── 获知渠道 段落勾选 ──
+    data['source'] = ''
+    for p in doc.paragraphs:
+        t = p.text.strip()
+        if '获知渠道' in t:
+            if is_checked(t, '公众号'): data['source'] = '公众号'; break
+            if is_checked(t, '朋友推荐'): data['source'] = '朋友推荐'; break
+            if is_checked(t, '抖音'): data['source'] = '抖音/视频号'; break
+            if is_checked(t, '微信朋友圈'): data['source'] = '微信朋友圈'; break
+            if is_checked(t, '其他'): data['source'] = '其他'; break
+
     # 默认值
-    data.setdefault('parent_name', '')
-    data.setdefault('phone', '')
-    data.setdefault('wechat', '')
-    data.setdefault('product', '')
-    data.setdefault('father_accompany', 'no')
-    data.setdefault('mother_accompany', 'no')
-    data.setdefault('other_accompany', 'no')
-    data.setdefault('other_relation', '')
-    data.setdefault('qa1', '')
-    data.setdefault('qa2', '')
-    data.setdefault('referrer', '')
-    data.setdefault('source', '')
-    data.setdefault('notes', '')
-    
-    # 计算价格
+    for k in ['parent_name','phone','wechat','product','qa1','qa2','referrer','source','notes']:
+        data.setdefault(k,'')
+    for k in ['father_accompany','mother_accompany','other_accompany']:
+        data.setdefault(k,'no')
+
+    # 价格计算
     product = data['product']
     base_price = PRODUCT_PRICES.get(product, 0)
     data['child_count'] = len(data['children'])
     data['base_price'] = base_price
     data['children_total'] = data['child_count'] * base_price
-    
     accompany_fee = 0
-    if data.get('father_accompany') == 'full': accompany_fee += ACCOMPANY_RATE_FULL
-    elif data.get('father_accompany') == 'weekly': accompany_fee += len(father_weeks) * ACCOMPANY_RATE_7DAY
-    if data.get('mother_accompany') == 'full': accompany_fee += ACCOMPANY_RATE_FULL
-    elif data.get('mother_accompany') == 'weekly': accompany_fee += len(mother_weeks) * ACCOMPANY_RATE_7DAY
-    if data.get('other_accompany') == 'full': accompany_fee += ACCOMPANY_RATE_FULL
-    elif data.get('other_accompany') == 'weekly': accompany_fee += len(other_weeks) * ACCOMPANY_RATE_7DAY
+    for pfx in ['father','mother','other']:
+        if data.get(f'{pfx}_accompany') == 'full': accompany_fee += ACCOMPANY_RATE_FULL
+        elif data.get(f'{pfx}_accompany') == 'weekly': accompany_fee += len(data.get(f'{pfx}_weeks',[])) * ACCOMPANY_RATE_7DAY
     data['accompany_fee'] = accompany_fee
     data['total_price'] = data['children_total'] + accompany_fee
-    
     return data
 
 def validate_data(data):
