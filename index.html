@@ -1339,28 +1339,28 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
      3. Product Selection
      ═══════════════════════════════════════════════════════ -->
 <section class="section fade-in" id="products">
-  <h2 class="section-title">选择适合您的道场</h2>
+  <h2 class="section-title">选择适合您的夏令营道场</h2>
   <div class="divider"><span class="divider-symbol">◆</span></div>
 
   <div class="product-cards" id="productCards">
     <div class="product-card" data-product="7">
       <div class="check-badge">✓</div>
       <div class="product-icon">🌿</div>
-      <div class="product-name">体验道场</div>
+      <div class="product-name">体验版</div>
       <div class="product-duration">7天沉浸体验</div>
       <div class="product-price">2,980 <small>元/人</small></div>
     </div>
     <div class="product-card" data-product="14">
       <div class="check-badge">✓</div>
       <div class="product-icon">🌳</div>
-      <div class="product-name">进阶道场</div>
+      <div class="product-name">进阶版</div>
       <div class="product-duration">14天深度修学</div>
       <div class="product-price">4,980 <small>元/人</small></div>
     </div>
     <div class="product-card" data-product="21">
       <div class="check-badge">✓</div>
       <div class="product-icon">🏔️</div>
-      <div class="product-name">完整道场</div>
+      <div class="product-name">完整版</div>
       <div class="product-duration">21天完整蜕变</div>
       <div class="product-price">6,980 <small>元/人</small></div>
     </div>
@@ -1384,7 +1384,7 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
   <!-- Daily Schedule Accordion -->
   <div class="accordion" id="accordionSchedule">
     <div class="accordion-header" onclick="toggleAccordion('accordionSchedule')">
-      📋 每日固定道场作息 <span style="color:#B8860B;font-size:12px;font-weight:400;margin-left:8px">（暂定）</span>
+      📋 每日作息安排 <span style="color:#B8860B;font-size:12px;font-weight:400;margin-left:8px">（暂定）</span>
       <span class="accordion-arrow">▼</span>
     </div>
     <div class="accordion-body" id="accordionScheduleBody">
@@ -1471,9 +1471,9 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
       <label class="form-label" for="product">报名产品 <span class="required">*</span></label>
       <select class="form-select" id="product" required onchange="updatePrice()">
         <option value="">请选择夏令营产品</option>
-        <option value="7">体验道场 · 7天 · 2,980元/人</option>
-        <option value="14">进阶道场 · 14天 · 4,980元/人</option>
-        <option value="21">完整道场 · 21天 · 6,980元/人</option>
+        <option value="7">体验版 · 7天 · 2,980元/人</option>
+        <option value="14">进阶版 · 14天 · 4,980元/人</option>
+        <option value="21">完整版 · 21天 · 6,980元/人</option>
       </select>
       <span class="error-msg" id="productError"></span>
     </div>
@@ -1727,7 +1727,7 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
 
 var API_BASE_URL = '';
 var PRODUCT_PRICES = { '7': 2980, '14': 4980, '21': 6980 };
-var PRODUCT_LABELS = { '7': '体验道场（7天）', '14': '进阶道场（14天）', '21': '完整道场（21天）' };
+var PRODUCT_LABELS = { '7': '体验版（7天）', '14': '进阶版（14天）', '21': '完整版（21天）' };
 var ACCOMPANY_RATE_7DAY = 980;
 var ACCOMPANY_RATE_FULL = 3580;
 var childCounter = 0;
