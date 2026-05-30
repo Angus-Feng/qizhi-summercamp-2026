@@ -145,13 +145,28 @@ async function main() {
   }
 
   // ══ Section 3: 产品 ══
-  children.push(sectionTitle('三、报名选型'));
-  children.push(new Table({
-    width: { size: TABLE_WIDTH, type: WidthType.DXA },
-    columnWidths: [2400, 6626],
-    rows: [
-      dropdownRow('选择产品', 'product', ['体验版(7天) ¥2,980', '进阶版(14天) ¥4,980', '完整版(21天) ¥6,980'], true),
-    ]
+  children.push(sectionTitle('三、报名选型（请勾选一项）'));
+  children.push(new Paragraph({
+    spacing: { before: 80 },
+    children: [new TextRun({ text: '□ 体验版（7天）¥2,980/人', size: 24, font: '微软雅黑' })]
+  }));
+  children.push(new Paragraph({
+    children: [new TextRun({ text: '    适合初次体验，7天道场启蒙', size: 18, color: GRAY })]
+  }));
+  children.push(new Paragraph({
+    spacing: { before: 40 },
+    children: [new TextRun({ text: '□ 进阶版（14天）¥4,980/人', size: 24, font: '微软雅黑' })]
+  }));
+  children.push(new Paragraph({
+    children: [new TextRun({ text: '    14天深度体验，心性扎根', size: 18, color: GRAY })]
+  }));
+  children.push(new Paragraph({
+    spacing: { before: 40 },
+    children: [new TextRun({ text: '□ 完整版（21天）¥6,980/人', size: 24, font: '微软雅黑' })]
+  }));
+  children.push(new Paragraph({
+    spacing: { after: 120 },
+    children: [new TextRun({ text: '    完整21天道场，完整蜕变', size: 18, color: GRAY })]
   }));
   children.push(spacer());
 

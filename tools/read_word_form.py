@@ -95,28 +95,38 @@ def extract_form_data(doc):
         children.append(child)
     data['children'] = children
     
-    # 产品
+    # 产品（从勾选段落中解析）
+    data['product'] = ''
+    for para in doc.paragraphs:
+        text = para.text
+        # 检查勾选标记：☑ ✓ ✔ [x] [X] √ ● ■ 或 □ 被替换为非□字符
+        checked = any(m in text for m in ['☑', '✓', '✔', '[x]', '[X]', '√', '●', '■'])
+        if not checked:
+            # □ 可能被改成了非□字符（如用户在□后写了内容，或替换了□）
+            # 只要不是以□开头就视为已选
+            pass  # 太不准确，跳过
+        if ('体验版' in text or '7天' in text) and '体验版' not in text.replace('□','').strip()[:4]:
+            # 非□开头 → 可能是 ✓体验版 或 用户删掉了□
+            pass
+        # 更可靠的判断：如果整行不是以"□ "开头，且包含版本关键词
+        stripped = text.strip()
+        is_checked = not stripped.startswith('□')
+        if '体验版' in text and is_checked: data['product'] = '7'
+        elif '进阶版' in text and is_checked: data['product'] = '14'
+        elif '完整版' in text and is_checked: data['product'] = '21'
+
+    # 母亲陪同 (table 4)
     if len(tables) >= 5:
         vals = cell_values(4)
-        if len(vals) >= 1:
-            p = vals[0]
-            if '体验' in p or '7天' in p: data['product'] = '7'
-            elif '进阶' in p or '14天' in p: data['product'] = '14'
-            elif '完整' in p or '21天' in p: data['product'] = '21'
-            else: data['product'] = ''
-    
-    # 母亲陪同
-    if len(tables) >= 6:
-        vals = cell_values(5)
         if len(vals) >= 1:
             a = vals[0]
             if '全程' in a: data['mother_accompany'] = 'full'
             elif '按周' in a: data['mother_accompany'] = 'weekly'
             else: data['mother_accompany'] = 'no'
     
-    # 父亲陪同
-    if len(tables) >= 7:
-        vals = cell_values(6)
+    # 父亲陪同 (table 5)
+    if len(tables) >= 6:
+        vals = cell_values(5)
         if len(vals) >= 1:
             a = vals[0]
             if '全程' in a: data['father_accompany'] = 'full'
@@ -180,15 +190,15 @@ def extract_form_data(doc):
     data['mother_weeks'] = mother_weeks if data.get('mother_accompany') == 'weekly' else []
     data['father_weeks'] = father_weeks if data.get('father_accompany') == 'weekly' else []
     
-    # QAs
-    if len(tables) >= 8:
-        vals = cell_values(7)
+    # QAs (table 6)
+    if len(tables) >= 7:
+        vals = cell_values(6)
         if len(vals) >= 1: data['qa1'] = vals[0]
         if len(vals) >= 2: data['qa2'] = vals[1]
     
-    # 其他
-    if len(tables) >= 9:
-        vals = cell_values(8)
+    # 其他 (table 7)
+    if len(tables) >= 8:
+        vals = cell_values(7)
         if len(vals) >= 1: data['referrer'] = vals[0] if vals[0] not in ('如有人推荐请填写',) else ''
         if len(vals) >= 2: data['source'] = vals[1] if vals[1] not in ('请选择', '') else ''
         if len(vals) >= 3: data['notes'] = vals[2] if vals[2] not in ('如有特殊要求请说明',) else ''
