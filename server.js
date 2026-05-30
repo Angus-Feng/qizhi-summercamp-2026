@@ -88,20 +88,25 @@ function validate(data) {
 
 // ── 构建邮件内容 ─────────────────────────────────────
 function buildEmailBody(record) {
-  const productLabels = { '7': '体验道场(7天)', '14': '进阶道场(14天)', '21': '完整道场(21天)' };
-  const accompanyLabels = { 'no': '不参加', 'full': '全程 ¥3,580', 'weekly': '按周 ¥980/7天' };
-  
+  const productLabels = { '7': '体验版(7天)', '14': '进阶版(14天)', '21': '完整版(21天)' };
+  const weekNames = { 1: '第一周(8/1-7)', 2: '第二周(8/8-14)', 3: '第三周(8/15-21)' };
+  function fmtWeeks(arr) { return arr && arr.length > 0 ? arr.map(w => weekNames[w]||('第'+w+'周')).join('、') : '—'; }
+  function fmtParent(p, label) {
+    const acc = record[p+'_accompany'] || 'no';
+    if (acc === 'no') return label+'：不参加';
+    if (acc === 'full') return label+'：全程 ¥3,580';
+    return label+'：按周('+fmtWeeks(record[p+'_weeks'])+')';
+  }
   let childrenHtml = record.children.map((ch, i) => 
     `<p><b>孩子${i+1}：</b>${ch.name} | ${ch.gender} | ${ch.age}岁 | ${ch.grade}${ch.has_special_needs === 'yes' ? ' | 特殊需求：'+ch.special_needs_detail : ''}</p>`
   ).join('');
-
   return `
     <h3>📋 新报名通知</h3>
     <p><b>联系人：</b>${record.parent_name} | ${record.phone} | ${record.wechat}</p>
     <p><b>报名产品：</b>${productLabels[record.product] || record.product} | ${record.child_count}个孩子</p>
     ${childrenHtml}
-    <p><b>父亲：</b>${accompanyLabels[record.father_accompany] || record.father_accompany}</p>
-    <p><b>母亲：</b>${accompanyLabels[record.mother_accompany] || record.mother_accompany}</p>
+    <p><b>${fmtParent('father','父亲')}</b></p>
+    <p><b>${fmtParent('mother','母亲')}</b></p>
     <p><b>合计：</b>¥${record.total_price.toLocaleString()}</p>
     <p><b>Q1：</b>${record.qa1}</p>
     <p><b>Q2：</b>${record.qa2}</p>
@@ -130,8 +135,8 @@ app.post('/api/register', (req, res) => {
       product: data.product,
       father_accompany: data.father_accompany || 'no',
       mother_accompany: data.mother_accompany || 'no',
-      father_weeks: data.father_weeks || 0,
-      mother_weeks: data.mother_weeks || 0,
+      father_weeks: Array.isArray(data.father_weeks) ? data.father_weeks : [],
+      mother_weeks: Array.isArray(data.mother_weeks) ? data.mother_weeks : [],
       child_count: data.child_count || data.children.length,
       qa1: (data.qa1 || '').trim(),
       qa2: (data.qa2 || '').trim(),
@@ -189,7 +194,10 @@ app.get('/api/export', adminAuth, (req, res) => {
     }
 
     const esc = v => { if (v == null) return ''; const s = String(v); return (s.includes(',')||s.includes('"')||s.includes('\n')) ? '"'+s.replace(/"/g,'""')+'"' : s; };
-    const pLabels = { '7':'体验道场(7天)','14':'进阶道场(14天)','21':'完整道场(21天)' };
+    const pLabels = { '7':'体验版(7天)','14':'进阶版(14天)','21':'完整版(21天)' };
+    const weekNames = { 1:'第一周(8/1-7)', 2:'第二周(8/8-14)', 3:'第三周(8/15-21)' };
+    function fmtWeeks(arr) { return Array.isArray(arr) && arr.length > 0 ? arr.map(w => weekNames[w]||w).join('、') : ''; }
+    function fmtParent(row, p) { const acc = row[p+'_accompany']||'no'; if (acc==='full') return '全程'; if (acc==='weekly') return '按周:'+fmtWeeks(row[p+'_weeks']); return '不参加'; }
 
     const headers = ['ID','联系人','手机号','微信号','孩子数','孩子详情','报名产品',
       '父亲陪同','母亲陪同','Q1','Q2','推荐人','渠道','备注','原价','陪同费','总价','报名时间'];
@@ -199,7 +207,7 @@ app.get('/api/export', adminAuth, (req, res) => {
       const kids = row.children.map((c,i) => `${i+1}.${c.name}(${c.gender}${c.age}岁${c.grade})${c.has_special_needs==='yes'?'[特需]':''}`).join('; ');
       lines.push([
         row.id, row.parent_name, row.phone, row.wechat, row.child_count, kids,
-        pLabels[row.product]||row.product, row.father_accompany, row.mother_accompany,
+        pLabels[row.product]||row.product, fmtParent(row,'father'), fmtParent(row,'mother'),
         row.qa1, row.qa2, row.referrer, row.source, row.notes,
         row.base_price, row.accompany_fee, row.total_price, row.created_at
       ].map(esc).join(','));

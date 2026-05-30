@@ -1489,8 +1489,10 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
           <option value="full">全程 ¥3,580</option>
           <option value="weekly">按周 ¥980/7天</option>
         </select>
-        <div id="motherWeeksGroup" style="display:none;margin-top:6px">
-          <input type="number" class="form-input" id="motherWeeks" placeholder="周数" min="1" max="3" value="1" onchange="updatePrice()" style="font-size:0.82rem">
+        <div id="motherWeeksGroup" style="display:none;margin-top:8px">
+          <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.82rem;cursor:pointer"><input type="checkbox" value="1" onchange="updatePrice()"> 第一周（8月1日-7日）</label>
+          <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.82rem;cursor:pointer"><input type="checkbox" value="2" onchange="updatePrice()"> 第二周（8月8日-14日）</label>
+          <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.82rem;cursor:pointer"><input type="checkbox" value="3" onchange="updatePrice()"> 第三周（8月15日-21日）</label>
         </div>
       </div>
       <div class="parent-accompany-item">
@@ -1500,8 +1502,10 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
           <option value="full">全程 ¥3,580</option>
           <option value="weekly">按周 ¥980/7天</option>
         </select>
-        <div id="fatherWeeksGroup" style="display:none;margin-top:6px">
-          <input type="number" class="form-input" id="fatherWeeks" placeholder="周数" min="1" max="3" value="1" onchange="updatePrice()" style="font-size:0.82rem">
+        <div id="fatherWeeksGroup" style="display:none;margin-top:8px">
+          <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.82rem;cursor:pointer"><input type="checkbox" value="1" onchange="updatePrice()"> 第一周（8月1日-7日）</label>
+          <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.82rem;cursor:pointer"><input type="checkbox" value="2" onchange="updatePrice()"> 第二周（8月8日-14日）</label>
+          <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.82rem;cursor:pointer"><input type="checkbox" value="3" onchange="updatePrice()"> 第三周（8月15日-21日）</label>
         </div>
       </div>
     </div>
@@ -1743,9 +1747,9 @@ function saveFormData() {
       wechat: document.getElementById('wechat').value,
       product: document.getElementById('product').value,
       fatherAccompany: document.getElementById('fatherAccompany').value,
-      fatherWeeks: document.getElementById('fatherWeeks').value,
+      fatherWeeks: getParentWeeks('father'),
       motherAccompany: document.getElementById('motherAccompany').value,
-      motherWeeks: document.getElementById('motherWeeks').value,
+      motherWeeks: getParentWeeks('mother'),
       qa1: document.getElementById('qa1').value,
       qa2: document.getElementById('qa2').value,
       referrer: document.getElementById('referrer').value,
@@ -1779,13 +1783,23 @@ function restoreFormData() {
     if (data.fatherAccompany) {
       document.getElementById('fatherAccompany').value = data.fatherAccompany;
       onParentAccompanyChange('father');
+      if (data.fatherWeeks && Array.isArray(data.fatherWeeks)) {
+        data.fatherWeeks.forEach(function(w) {
+          var cb = document.querySelector('#fatherWeeksGroup input[value="'+w+'"]');
+          if (cb) cb.checked = true;
+        });
+      }
     }
-    if (data.fatherWeeks) document.getElementById('fatherWeeks').value = data.fatherWeeks;
     if (data.motherAccompany) {
       document.getElementById('motherAccompany').value = data.motherAccompany;
       onParentAccompanyChange('mother');
+      if (data.motherWeeks && Array.isArray(data.motherWeeks)) {
+        data.motherWeeks.forEach(function(w) {
+          var cb = document.querySelector('#motherWeeksGroup input[value="'+w+'"]');
+          if (cb) cb.checked = true;
+        });
+      }
     }
-    if (data.motherWeeks) document.getElementById('motherWeeks').value = data.motherWeeks;
     if (data.qa1) document.getElementById('qa1').value = data.qa1;
     if (data.qa2) document.getElementById('qa2').value = data.qa2;
     if (data.referrer) document.getElementById('referrer').value = data.referrer;
@@ -1916,8 +1930,13 @@ function onParentAccompanyChange(parent) {
 
 document.getElementById('fatherAccompany').addEventListener('change', function(){ onParentAccompanyChange('father'); });
 document.getElementById('motherAccompany').addEventListener('change', function(){ onParentAccompanyChange('mother'); });
-document.getElementById('fatherWeeks').addEventListener('input', updatePrice);
-document.getElementById('motherWeeks').addEventListener('input', updatePrice);
+
+function getParentWeeks(parent) {
+  var select = document.getElementById(parent+'Accompany');
+  if (!select || select.value !== 'weekly') return [];
+  var checks = document.querySelectorAll('#'+parent+'WeeksGroup input[type=checkbox]:checked');
+  return Array.from(checks).map(function(c){ return parseInt(c.value); });
+}
 
 function getParentFee(parent) {
   var select = document.getElementById(parent+'Accompany');
@@ -1925,8 +1944,7 @@ function getParentFee(parent) {
   var val = select.value;
   if (val === 'full') return ACCOMPANY_RATE_FULL;
   if (val === 'weekly') {
-    var weeks = parseInt(document.getElementById(parent+'Weeks').value,10)||1;
-    return weeks * ACCOMPANY_RATE_7DAY;
+    return getParentWeeks(parent).length * ACCOMPANY_RATE_7DAY;
   }
   return 0;
 }
@@ -2011,8 +2029,8 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
     product: product,
     father_accompany: document.getElementById('fatherAccompany').value,
     mother_accompany: document.getElementById('motherAccompany').value,
-    father_weeks: parseInt(document.getElementById('fatherWeeks').value,10)||0,
-    mother_weeks: parseInt(document.getElementById('motherWeeks').value,10)||0,
+    father_weeks: getParentWeeks('father'),
+    mother_weeks: getParentWeeks('mother'),
     qa1: document.getElementById('qa1').value.trim(),
     qa2: document.getElementById('qa2').value.trim(),
     referrer: document.getElementById('referrer').value.trim(),
