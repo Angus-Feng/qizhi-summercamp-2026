@@ -75,6 +75,7 @@ function validate(data) {
       if (!ch.name || !ch.name.trim()) errors.push(`孩子${i+1}姓名不能为空`);
       if (!ch.gender || !['男','女'].includes(ch.gender)) errors.push(`请选择孩子${i+1}的性别`);
       if (!ch.age || ch.age < 5 || ch.age > 18) errors.push(`孩子${i+1}年龄需在5-18岁之间`);
+      if (!ch.id_number || !/^\d{17}[\dXx]$/.test(ch.id_number)) errors.push(`孩子${i+1}身份证号格式错误`);
     });
   }
 
@@ -98,8 +99,14 @@ function buildEmailBody(record) {
     return label+'：按周('+fmtWeeks(record[p+'_weeks'])+')';
   }
   let childrenHtml = record.children.map((ch, i) => 
-    `<p><b>孩子${i+1}：</b>${ch.name} | ${ch.gender} | ${ch.age}岁 | ${ch.grade}${ch.has_special_needs === 'yes' ? ' | 特殊需求：'+ch.special_needs_detail : ''}</p>`
+    `<p><b>孩子${i+1}：</b>${ch.name} | ${ch.gender} | ${ch.age}岁 | ${ch.grade} | 身份证：${ch.id_number||'—'}${ch.has_special_needs === 'yes' ? ' | 特殊需求：'+ch.special_needs_detail : ''}</p>`
   ).join('');
+  let extraHtml = '';
+  if (record.other_accompany && record.other_accompany !== 'no') {
+    const otherLabel = record.other_relation || '其它亲属';
+    const accLabel = record.other_accompany === 'full' ? '全程 ¥3,580' : '按周('+fmtWeeks(record.other_weeks)+')';
+    extraHtml = `<p><b>${otherLabel}：</b>${accLabel}</p>`;
+  }
   return `
     <h3>📋 新报名通知</h3>
     <p><b>联系人：</b>${record.parent_name} | ${record.phone} | ${record.wechat}</p>
@@ -107,6 +114,7 @@ function buildEmailBody(record) {
     ${childrenHtml}
     <p><b>${fmtParent('father','父亲')}</b></p>
     <p><b>${fmtParent('mother','母亲')}</b></p>
+    ${extraHtml}
     <p><b>合计：</b>¥${record.total_price.toLocaleString()}</p>
     <p><b>Q1：</b>${record.qa1}</p>
     <p><b>Q2：</b>${record.qa2}</p>
@@ -136,6 +144,10 @@ app.post('/api/register', (req, res) => {
       father_accompany: data.father_accompany || 'no',
       mother_accompany: data.mother_accompany || 'no',
       father_weeks: Array.isArray(data.father_weeks) ? data.father_weeks : [],
+      mother_weeks: Array.isArray(data.mother_weeks) ? data.mother_weeks : [],
+      other_accompany: data.other_accompany || 'no',
+      other_relation: (data.other_relation || '').trim(),
+      other_weeks: Array.isArray(data.other_weeks) ? data.other_weeks : [],
       mother_weeks: Array.isArray(data.mother_weeks) ? data.mother_weeks : [],
       child_count: data.child_count || data.children.length,
       qa1: (data.qa1 || '').trim(),
@@ -198,16 +210,17 @@ app.get('/api/export', adminAuth, (req, res) => {
     const weekNames = { 1:'第一周(8/1-7)', 2:'第二周(8/8-14)', 3:'第三周(8/15-21)' };
     function fmtWeeks(arr) { return Array.isArray(arr) && arr.length > 0 ? arr.map(w => weekNames[w]||w).join('、') : ''; }
     function fmtParent(row, p) { const acc = row[p+'_accompany']||'no'; if (acc==='full') return '全程'; if (acc==='weekly') return '按周:'+fmtWeeks(row[p+'_weeks']); return '不参加'; }
+    function fmtOther(row) { const acc = row.other_accompany||'no'; if (acc==='no') return ''; const rel = row.other_relation||'其它亲属'; const detail = acc==='full'?'全程':'按周:'+fmtWeeks(row.other_weeks); return rel+':'+detail; }
 
-    const headers = ['ID','联系人','手机号','微信号','孩子数','孩子详情','报名产品',
-      '父亲陪同','母亲陪同','Q1','Q2','推荐人','渠道','备注','原价','陪同费','总价','报名时间'];
+    const headers = ['ID','联系人','手机号','微信号','孩子数','孩子详情(含身份证)','报名产品',
+      '父亲陪同','母亲陪同','其它亲属','Q1','Q2','推荐人','渠道','备注','原价','陪同费','总价','报名时间'];
     const lines = [headers.map(esc).join(',')];
 
     for (const row of records) {
-      const kids = row.children.map((c,i) => `${i+1}.${c.name}(${c.gender}${c.age}岁${c.grade})${c.has_special_needs==='yes'?'[特需]':''}`).join('; ');
+      const kids = row.children.map((c,i) => `${i+1}.${c.name}(${c.gender}${c.age}岁${c.grade} ID:${c.id_number||'—'})${c.has_special_needs==='yes'?'[特需]':''}`).join('; ');
       lines.push([
         row.id, row.parent_name, row.phone, row.wechat, row.child_count, kids,
-        pLabels[row.product]||row.product, fmtParent(row,'father'), fmtParent(row,'mother'),
+        pLabels[row.product]||row.product, fmtParent(row,'father'), fmtParent(row,'mother'), fmtOther(row),
         row.qa1, row.qa2, row.referrer, row.source, row.notes,
         row.base_price, row.accompany_fee, row.total_price, row.created_at
       ].map(esc).join(','));

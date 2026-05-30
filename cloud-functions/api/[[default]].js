@@ -170,6 +170,7 @@ function validate(data) {
       if (!ch.name || !ch.name.trim()) errors.push(`孩子${i+1}姓名不能为空`);
       if (!ch.gender || !['男','女'].includes(ch.gender)) errors.push(`请选择孩子${i+1}的性别`);
       if (!ch.age || ch.age < 5 || ch.age > 18) errors.push(`孩子${i+1}年龄需在5-18岁`);
+      if (!ch.id_number || !/^\d{17}[\dXx]$/.test(ch.id_number)) errors.push(`孩子${i+1}身份证号格式错误`);
     });
   }
   if (!data.product || !['7','14','21'].includes(data.product)) errors.push('请选择报名产品');
@@ -189,8 +190,14 @@ function buildEmailBody(record) {
     if (acc === 'full') return label+'：全程 ¥3,580';
     return label+'：按周('+fmtWeeks(record[p+'_weeks'])+')';
   }
-  let kids = record.children.map((c,i) => `<p><b>孩子${i+1}：</b>${c.name} | ${c.gender} | ${c.age}岁 | ${c.grade}${c.has_special_needs==='yes'?' | 特需:'+c.special_needs_detail:''}</p>`).join('');
-  return `<h3>📋 新报名通知</h3><p><b>联系人：</b>${record.parent_name} | ${record.phone}${record.wechat ? ' | '+record.wechat : ''}</p><p><b>产品：</b>${pLabels[record.product]||record.product} | ${record.child_count}孩</p>${kids}<p><b>${fmtParent('father','父亲')}</b></p><p><b>${fmtParent('mother','母亲')}</b></p><p><b>合计：</b>¥${record.total_price.toLocaleString()}</p><p><b>Q1：</b>${record.qa1}</p><p><b>Q2：</b>${record.qa2}</p>`;
+  let kids = record.children.map((c,i) => `<p><b>孩子${i+1}：</b>${c.name} | ${c.gender} | ${c.age}岁 | ${c.grade} | 身份证：${c.id_number||'—'}${c.has_special_needs==='yes'?' | 特需:'+c.special_needs_detail:''}</p>`).join('');
+  let extraHtml = '';
+  if (record.other_accompany && record.other_accompany !== 'no') {
+    const otherLabel = record.other_relation || '其它亲属';
+    const accLabel = record.other_accompany === 'full' ? '全程 ¥3,580' : '按周('+fmtWeeks(record.other_weeks)+')';
+    extraHtml = `<p><b>${otherLabel}：</b>${accLabel}</p>`;
+  }
+  return `<h3>📋 新报名通知</h3><p><b>联系人：</b>${record.parent_name} | ${record.phone}${record.wechat ? ' | '+record.wechat : ''}</p><p><b>产品：</b>${pLabels[record.product]||record.product} | ${record.child_count}孩</p>${kids}<p><b>${fmtParent('father','父亲')}</b></p><p><b>${fmtParent('mother','母亲')}</b></p>${extraHtml}<p><b>合计：</b>¥${record.total_price.toLocaleString()}</p><p><b>Q1：</b>${record.qa1}</p><p><b>Q2：</b>${record.qa2}</p>`;
 }
 
 // ── 路由处理函数（async）────────────────────────────
@@ -217,6 +224,9 @@ async function handleRegister(req, res) {
       mother_accompany: data.mother_accompany || 'no',
       father_weeks: Array.isArray(data.father_weeks) ? data.father_weeks : [],
       mother_weeks: Array.isArray(data.mother_weeks) ? data.mother_weeks : [],
+      other_accompany: data.other_accompany || 'no',
+      other_relation: (data.other_relation || '').trim(),
+      other_weeks: Array.isArray(data.other_weeks) ? data.other_weeks : [],
       child_count: data.child_count || data.children.length,
       qa1: (data.qa1 || '').trim(),
       qa2: (data.qa2 || '').trim(),
@@ -271,11 +281,12 @@ async function handleExport(req, res) {
     const weekNames = { 1:'第一周(8/1-7)', 2:'第二周(8/8-14)', 3:'第三周(8/15-21)' };
     function fmtWeeks(arr) { return Array.isArray(arr) && arr.length > 0 ? arr.map(w => weekNames[w]||w).join('、') : ''; }
     function fmtParent(row, p) { const acc = row[p+'_accompany']||'no'; if (acc==='full') return '全程'; if (acc==='weekly') return '按周:'+fmtWeeks(row[p+'_weeks']); return '不参加'; }
-    const headers = ['ID','联系人','手机号','微信号','孩子数','孩子详情','产品','父亲陪同','母亲陪同','Q1','Q2','推荐人','渠道','备注','原价','陪同费','总价','时间'];
+    function fmtOther(row) { const acc = row.other_accompany||'no'; if (acc==='no') return ''; const rel = row.other_relation||'其它亲属'; const detail = acc==='full'?'全程':'按周:'+fmtWeeks(row.other_weeks); return rel+':'+detail; }
+    const headers = ['ID','联系人','手机号','微信号','孩子数','孩子详情(含身份证)','产品','父亲陪同','母亲陪同','其它亲属','Q1','Q2','推荐人','渠道','备注','原价','陪同费','总价','时间'];
     const lines = [headers.map(esc).join(',')];
     for (const row of records) {
-      const kids = row.children.map((c,i) => `${i+1}.${c.name}(${c.gender}${c.age}岁${c.grade})`).join('; ');
-      lines.push([row.id,row.parent_name,row.phone,row.wechat,row.child_count,kids,pLabels[row.product]||row.product,fmtParent(row,'father'),fmtParent(row,'mother'),row.qa1,row.qa2,row.referrer,row.source,row.notes,row.base_price,row.accompany_fee,row.total_price,row.created_at].map(esc).join(','));
+      const kids = row.children.map((c,i) => `${i+1}.${c.name}(${c.gender}${c.age}岁${c.grade} ID:${c.id_number||'—'})`).join('; ');
+      lines.push([row.id,row.parent_name,row.phone,row.wechat,row.child_count,kids,pLabels[row.product]||row.product,fmtParent(row,'father'),fmtParent(row,'mother'),fmtOther(row),row.qa1,row.qa2,row.referrer,row.source,row.notes,row.base_price,row.accompany_fee,row.total_price,row.created_at].map(esc).join(','));
     }
     res.setHeader('Content-Type', 'text/csv; charset=utf-8');
     res.setHeader('Content-Disposition', `attachment; filename="registrations_${Date.now()}.csv"`);
