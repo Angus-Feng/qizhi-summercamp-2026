@@ -92,6 +92,20 @@ async function main() {
   }));
   children.push(new Paragraph({
     alignment: AlignmentType.CENTER,
+    spacing: { after: 60 },
+    children: [
+      new TextRun({ text: '时间：2026年8月1日 — 8月21日（共21天）', size: 22, bold: true, color: GREEN, font: '微软雅黑' })
+    ]
+  }));
+  children.push(new Paragraph({
+    alignment: AlignmentType.CENTER,
+    spacing: { after: 200 },
+    children: [
+      new TextRun({ text: '地点：淮安日月洲度假村（淮安经济技术开发区南马厂大道99号）', size: 22, bold: true, color: GREEN, font: '微软雅黑' })
+    ]
+  }));
+  children.push(new Paragraph({
+    alignment: AlignmentType.CENTER,
     spacing: { after: 200 },
     children: [new TextRun({ text: '请在下方表格中直接填写，填写完毕后保存发回工作人员', size: 18, color: GRAY, italics: true })]
   }));
