@@ -187,8 +187,10 @@ function buildEmailBody(record) {
   function fmtParent(p, label) {
     const acc = record[p+'_accompany'] || 'no';
     if (acc === 'no') return label+'：不参加';
-    if (acc === 'full') return label+'：全程 ¥3,580';
-    return label+'：按周('+fmtWeeks(record[p+'_weeks'])+')';
+    const name = record[p+'_name'] || '';
+    const nameStr = name ? name+' | ' : '';
+    if (acc === 'full') return label+'：'+nameStr+'全程 ¥3,580';
+    return label+'：'+nameStr+'按周('+fmtWeeks(record[p+'_weeks'])+')';
   }
   let kids = record.children.map((c,i) => `<p><b>孩子${i+1}：</b>${c.name} | ${c.gender} | ${c.age}岁 | ${c.grade} | 身份证：${c.id_number||'—'}${c.has_special_needs==='yes'?' | 特需:'+c.special_needs_detail:''}</p>`).join('');
   let extraHtml = '';
@@ -222,11 +224,17 @@ async function handleRegister(req, res) {
       children: data.children,
       product: data.product,
       father_accompany: data.father_accompany || 'no',
+      father_name: (data.father_name || '').trim(),
+      father_phone: (data.father_phone || '').trim(),
       mother_accompany: data.mother_accompany || 'no',
+      mother_name: (data.mother_name || '').trim(),
+      mother_phone: (data.mother_phone || '').trim(),
       father_weeks: Array.isArray(data.father_weeks) ? data.father_weeks : [],
       mother_weeks: Array.isArray(data.mother_weeks) ? data.mother_weeks : [],
       other_accompany: data.other_accompany || 'no',
       other_relation: (data.other_relation || '').trim(),
+      other_name: (data.other_name || '').trim(),
+      other_phone: (data.other_phone || '').trim(),
       other_weeks: Array.isArray(data.other_weeks) ? data.other_weeks : [],
       child_count: data.child_count || data.children.length,
       qa1: (data.qa1 || '').trim(),

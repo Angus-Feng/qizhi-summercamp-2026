@@ -200,6 +200,14 @@ async function main() {
       spacing: { before: 60 },
       children: [new TextRun({ text: title, bold: true, size: 22, font: '微软雅黑' })]
     }));
+    children.push(new Table({
+      width: { size: TABLE_WIDTH, type: WidthType.DXA },
+      columnWidths: [2400, 6626],
+      rows: [
+        fieldRow('  姓名', prefix+'_name', '参加请填写姓名', false),
+        fieldRow('  手机号', prefix+'_phone', '参加请填写手机号', false),
+      ]
+    }));
     children.push(new Paragraph({
       children: [new TextRun({ text: '参与方式（请勾选一项）：', size: 20, color: GRAY })]
     }));
@@ -227,6 +235,8 @@ async function main() {
     columnWidths: [2400, 6626],
     rows: [
       fieldRow('与孩子关系', 'other_relation', '请注明身份（如：爷爷、舅舅等）', false),
+      fieldRow('姓名', 'other_name', '参加请填写姓名', false),
+      fieldRow('手机号', 'other_phone', '参加请填写手机号', false),
     ]
   }));
   children.push(new Paragraph({

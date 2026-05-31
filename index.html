@@ -1501,11 +1501,15 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
     <div class="parent-accompany-row">
       <div class="parent-accompany-item">
         <label class="form-label">母亲</label>
-        <select class="form-select" id="motherAccompany" onchange="updatePrice()">
+        <select class="form-select" id="motherAccompany" onchange="onParentAccompanyChange('mother')">
           <option value="no">不参加</option>
           <option value="full">全程 ¥3,580</option>
           <option value="weekly">按周 ¥980/7天</option>
         </select>
+        <div id="motherInfoGroup" style="display:none;margin-top:6px">
+          <input type="text" class="form-input" id="motherName" placeholder="姓名" onchange="saveFormData()" style="font-size:0.82rem;margin-bottom:4px">
+          <input type="tel" class="form-input" id="motherPhone" placeholder="手机号" onchange="saveFormData()" style="font-size:0.82rem">
+        </div>
         <div id="motherWeeksGroup" style="display:none;margin-top:8px">
           <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.82rem;cursor:pointer"><input type="checkbox" value="1" onchange="updatePrice()"> 第一周（8月1日-7日）</label>
           <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.82rem;cursor:pointer"><input type="checkbox" value="2" onchange="updatePrice()"> 第二周（8月8日-14日）</label>
@@ -1514,11 +1518,15 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
       </div>
       <div class="parent-accompany-item">
         <label class="form-label">父亲</label>
-        <select class="form-select" id="fatherAccompany" onchange="updatePrice()">
+        <select class="form-select" id="fatherAccompany" onchange="onParentAccompanyChange('father')">
           <option value="no">不参加</option>
           <option value="full">全程 ¥3,580</option>
           <option value="weekly">按周 ¥980/7天</option>
         </select>
+        <div id="fatherInfoGroup" style="display:none;margin-top:6px">
+          <input type="text" class="form-input" id="fatherName" placeholder="姓名" onchange="saveFormData()" style="font-size:0.82rem;margin-bottom:4px">
+          <input type="tel" class="form-input" id="fatherPhone" placeholder="手机号" onchange="saveFormData()" style="font-size:0.82rem">
+        </div>
         <div id="fatherWeeksGroup" style="display:none;margin-top:8px">
           <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.82rem;cursor:pointer"><input type="checkbox" value="1" onchange="updatePrice()"> 第一周（8月1日-7日）</label>
           <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.82rem;cursor:pointer"><input type="checkbox" value="2" onchange="updatePrice()"> 第二周（8月8日-14日）</label>
@@ -1533,6 +1541,10 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
           <option value="weekly">按周 ¥980/7天</option>
         </select>
         <input type="text" class="form-input" id="otherRelation" placeholder="请注明身份（如：爷爷、舅舅等）" onchange="saveFormData()" style="margin-top:8px;font-size:0.82rem">
+        <div id="otherInfoGroup" style="display:none;margin-top:6px">
+          <input type="text" class="form-input" id="otherName" placeholder="姓名" onchange="saveFormData()" style="font-size:0.82rem;margin-bottom:4px">
+          <input type="tel" class="form-input" id="otherPhone" placeholder="手机号" onchange="saveFormData()" style="font-size:0.82rem">
+        </div>
         <div id="otherWeeksGroup" style="display:none;margin-top:8px">
           <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.82rem;cursor:pointer"><input type="checkbox" value="1" onchange="updatePrice()"> 第一周（8月1日-7日）</label>
           <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.82rem;cursor:pointer"><input type="checkbox" value="2" onchange="updatePrice()"> 第二周（8月8日-14日）</label>
@@ -1779,11 +1791,17 @@ function saveFormData() {
       wechat: document.getElementById('wechat').value,
       product: document.getElementById('product').value,
       fatherAccompany: document.getElementById('fatherAccompany').value,
+      fatherName: document.getElementById('fatherName').value,
+      fatherPhone: document.getElementById('fatherPhone').value,
       fatherWeeks: getParentWeeks('father'),
       motherAccompany: document.getElementById('motherAccompany').value,
+      motherName: document.getElementById('motherName').value,
+      motherPhone: document.getElementById('motherPhone').value,
       motherWeeks: getParentWeeks('mother'),
       otherAccompany: document.getElementById('otherAccompany').value,
       otherRelation: document.getElementById('otherRelation').value,
+      otherName: document.getElementById('otherName').value,
+      otherPhone: document.getElementById('otherPhone').value,
       otherWeeks: getParentWeeks('other'),
       qa1: document.getElementById('qa1').value,
       qa2: document.getElementById('qa2').value,
@@ -1826,6 +1844,8 @@ function restoreFormData() {
           if (cb) cb.checked = true;
         });
       }
+      if (data.fatherName) document.getElementById('fatherName').value = data.fatherName;
+      if (data.fatherPhone) document.getElementById('fatherPhone').value = data.fatherPhone;
     }
     if (data.motherAccompany) {
       document.getElementById('motherAccompany').value = data.motherAccompany;
@@ -1836,6 +1856,8 @@ function restoreFormData() {
           if (cb) cb.checked = true;
         });
       }
+      if (data.motherName) document.getElementById('motherName').value = data.motherName;
+      if (data.motherPhone) document.getElementById('motherPhone').value = data.motherPhone;
     }
     if (data.otherAccompany) {
       document.getElementById('otherAccompany').value = data.otherAccompany;
@@ -1848,6 +1870,8 @@ function restoreFormData() {
       }
     }
     if (data.otherRelation) document.getElementById('otherRelation').value = data.otherRelation;
+    if (data.otherName) document.getElementById('otherName').value = data.otherName;
+    if (data.otherPhone) document.getElementById('otherPhone').value = data.otherPhone;
     if (data.qa1) document.getElementById('qa1').value = data.qa1;
     if (data.qa2) document.getElementById('qa2').value = data.qa2;
     if (data.referrer) document.getElementById('referrer').value = data.referrer;
@@ -1974,8 +1998,11 @@ function getChildrenData() {
 /* ── 家长陪同 ──────────────────────────────── */
 function onParentAccompanyChange(parent) {
   var weeksGroup = document.getElementById(parent+'WeeksGroup');
+  var infoGroup = document.getElementById(parent+'InfoGroup');
   var select = document.getElementById(parent+'Accompany');
-  weeksGroup.style.display = select.value === 'weekly' ? 'block' : 'none';
+  var val = select.value;
+  if (weeksGroup) weeksGroup.style.display = val === 'weekly' ? 'block' : 'none';
+  if (infoGroup) infoGroup.style.display = val !== 'no' ? 'block' : 'none';
   updatePrice();
 }
 
@@ -2086,10 +2113,16 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
     product: product,
     father_accompany: document.getElementById('fatherAccompany').value,
     mother_accompany: document.getElementById('motherAccompany').value,
+    father_name: document.getElementById('fatherName').value.trim(),
+    father_phone: document.getElementById('fatherPhone').value.trim(),
+    mother_name: document.getElementById('motherName').value.trim(),
+    mother_phone: document.getElementById('motherPhone').value.trim(),
     father_weeks: getParentWeeks('father'),
     mother_weeks: getParentWeeks('mother'),
     other_accompany: document.getElementById('otherAccompany').value,
     other_relation: document.getElementById('otherRelation').value.trim(),
+    other_name: document.getElementById('otherName').value.trim(),
+    other_phone: document.getElementById('otherPhone').value.trim(),
     other_weeks: getParentWeeks('other'),
     qa1: document.getElementById('qa1').value.trim(),
     qa2: document.getElementById('qa2').value.trim(),
