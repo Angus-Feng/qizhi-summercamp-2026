@@ -135,7 +135,7 @@ async function main() {
       rows: [
         fieldRow('  姓名', `child${i}_name`, `孩子${i}姓名`, i === 1),
         dropdownRow('  性别', `child${i}_gender`, ['男', '女'], i === 1),
-        fieldRow('  年龄(5岁以上)', `child${i}_age`, '如：10', i === 1),
+        fieldRow('  年龄(5-18)', `child${i}_age`, '如：10（超龄请加微信）', i === 1),
         fieldRow('  身份证号', `child${i}_idnum`, '18位身份证号，必填', i === 1),
       ]
     }));
