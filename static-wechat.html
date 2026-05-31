@@ -182,66 +182,6 @@ body { padding-top: 0; } /* push content below nav+banner */
   );
 }
 
-.hero-bg {
-  position: absolute; inset: 0; pointer-events: none;
-}
-
-/* Mountain layers - CSS art */
-.hero-mountain-1 {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  height: 35%;
-  background: linear-gradient(175deg,
-    transparent 0%,
-    rgba(91,123,94,0.06) 30%,
-    rgba(91,123,94,0.12) 60%,
-    rgba(91,123,94,0.18) 100%
-  );
-  clip-path: polygon(
-    0% 100%, 0% 60%, 8% 50%, 16% 58%, 24% 45%, 32% 52%,
-    40% 40%, 48% 48%, 56% 38%, 64% 44%, 72% 35%, 80% 42%,
-    88% 48%, 95% 55%, 100% 50%, 100% 100%
-  );
-}
-
-.hero-mountain-2 {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  height: 25%;
-  background: linear-gradient(175deg,
-    transparent 0%,
-    rgba(160,82,45,0.04) 40%,
-    rgba(160,82,45,0.10) 80%,
-    rgba(160,82,45,0.14) 100%
-  );
-  clip-path: polygon(
-    0% 100%, 0% 70%, 10% 62%, 22% 68%, 34% 58%, 46% 64%,
-    58% 55%, 68% 60%, 78% 54%, 88% 62%, 100% 58%, 100% 100%
-  );
-}
-
-/* Mist effect */
-.hero-mist {
-  position: absolute; bottom: 20%; left: -10%; right: -10%;
-  height: 120px;
-  background: radial-gradient(ellipse at center,
-    rgba(250,247,242,0.7) 0%,
-    rgba(250,247,242,0.3) 60%,
-    transparent 100%
-  );
-  filter: blur(20px);
-}
-
-/* Sun circle */
-.hero-sun {
-  position: absolute; top: 18%; right: 12%;
-  width: 80px; height: 80px;
-  background: radial-gradient(circle,
-    rgba(160,82,45,0.15) 0%,
-    rgba(160,82,45,0.06) 50%,
-    transparent 70%
-  );
-  border-radius: 50%;
-}
-
 .hero-content {
   position: relative; z-index: 2;
   text-align: center; max-width: 500px;
@@ -1187,12 +1127,6 @@ body { padding-top: 0; } /* push content below nav+banner */
      1. Hero Section
      ═══════════════════════════════════════════════════════ -->
 <section class="hero" id="hero">
-  <div class="hero-bg">
-    <div class="hero-sun"></div>
-    <div class="hero-mountain-2"></div>
-    <div class="hero-mountain-1"></div>
-    <div class="hero-mist"></div>
-  </div>
 
   <div class="hero-content">
     <div class="hero-tag">2026 暑期 · 家庭生命成长道场</div>
