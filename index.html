@@ -1890,7 +1890,7 @@ function createChildHTML(idx) {
   h += '<div class="form-group"><label class="form-label">性别<span class="required">*</span></label><select class="form-select child-gender" required><option value="">请选择</option><option value="男">男</option><option value="女">女</option></select></div>';
   h += '</div>';
   h += '<div class="form-row-2">';
-  h += '<div class="form-group"><label class="form-label">年龄(5-18)<span class="required">*</span></label><input type="number" class="form-input child-age" placeholder="年龄" min="5" max="18" required></div>';
+  h += '<div class="form-group"><label class="form-label">年龄(5岁以上)<span class="required">*</span></label><input type="number" class="form-input child-age" placeholder="年龄" min="5" required></div>';
   h += '<div class="form-group"><label class="form-label">年级</label><select class="form-select child-grade"><option value="">请选择</option><option value="学前">学前</option><option value="小1-3">小学1-3年级</option><option value="小4-6">小学4-6年级</option><option value="初中">初中</option><option value="高中">高中</option></select></div>';
   h += '</div>';
   h += '<div class="form-group"><label class="form-label">身份证号<span class="required">*</span></label><input type="text" class="form-input child-idnum" placeholder="18位身份证号" maxlength="18" required></div>';
@@ -2030,7 +2030,7 @@ function validateForm() {
     var entry = document.querySelectorAll('.child-entry')[i];
     if (!ch.name) { var el = entry.querySelector('.child-name'); el.classList.add('error'); valid = false; if (!firstErrorEl) firstErrorEl = el; }
     if (!ch.gender) { var el2 = entry.querySelector('.child-gender'); el2.classList.add('error'); valid = false; if (!firstErrorEl) firstErrorEl = el2; }
-    if (!ch.age || ch.age < 5 || ch.age > 18) { var el3 = entry.querySelector('.child-age'); el3.classList.add('error'); valid = false; if (!firstErrorEl) firstErrorEl = el3; }
+    if (!ch.age || ch.age < 5) { var el3 = entry.querySelector('.child-age'); el3.classList.add('error'); valid = false; if (!firstErrorEl) firstErrorEl = el3; }
     if (!ch.id_number || !/^\d{17}[\dXx]$/.test(ch.id_number)) { var el4 = entry.querySelector('.child-idnum'); el4.classList.add('error'); valid = false; if (!firstErrorEl) firstErrorEl = el4; }
   });
   if (!product) { showFieldError('product','请选择报名产品'); valid = false; if (!firstErrorEl) firstErrorEl = document.getElementById('product'); }

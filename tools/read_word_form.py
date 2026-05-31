@@ -226,7 +226,7 @@ def validate_data(data):
         for i, ch in enumerate(data['children']):
             if not ch.get('name'): errors.append(f'孩子{i+1}姓名不能为空')
             if not ch.get('gender') or ch['gender'] not in ('男', '女'): errors.append(f'孩子{i+1}性别无效')
-            if not ch.get('age') or ch['age'] < 5 or ch['age'] > 18: errors.append(f'孩子{i+1}年龄需在5-18岁')
+            if not ch.get('age') or ch['age'] < 5: errors.append(f'孩子{i+1}年龄需在5岁以上')
             if not ch.get('id_number') or not re.match(r'^\d{17}[\dXx]$', ch.get('id_number', '')): errors.append(f'孩子{i+1}身份证号格式错误')
     if not data.get('product') or data['product'] not in ('7', '14', '21'): errors.append('请选择报名产品')
     if not data.get('qa1'): errors.append('请填写开放性问题1')
