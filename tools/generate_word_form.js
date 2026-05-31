@@ -117,6 +117,7 @@ async function main() {
     columnWidths: [2400, 6626],
     rows: [
       fieldRow('联系人姓名', 'parent_name', '请输入您的姓名', true),
+      dropdownRow('与孩子的关系', 'relation', ['母亲','父亲','爷爷','奶奶','外公','外婆','舅舅','其他亲属'], true),
       fieldRow('手机号', 'phone', '请输入11位手机号', true),
       fieldRow('微信号', 'wechat', '请输入微信号（选填）', false),
     ]

@@ -80,8 +80,9 @@ def extract_form_data(doc):
     if len(tables) >= 1:
         v = cell_vals(0)
         if len(v)>=1: data['parent_name'] = v[0]
-        if len(v)>=2: data['phone'] = v[1]
-        if len(v)>=3: data['wechat'] = v[2]
+        if len(v)>=2: data['relation'] = v[1]
+        if len(v)>=3: data['phone'] = v[2]
+        if len(v)>=4: data['wechat'] = v[3]
 
     # ── 孩子(表1/3/5=基本信息, 表2/4/6=特殊说明) + 段落勾选 ──
     children = []

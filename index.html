@@ -1454,10 +1454,27 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
         <span class="error-msg" id="phoneError"></span>
       </div>
     </div>
-    <div class="form-group">
-      <label class="form-label" for="wechat">微信号 <span style="color:#888;font-size:12px;font-weight:400">（选填）</span></label>
-      <input type="text" class="form-input" id="wechat" placeholder="便于联系沟通，选填">
-      <span class="error-msg" id="wechatError"></span>
+    <div class="form-row-2">
+      <div class="form-group">
+        <label class="form-label">与孩子的关系 <span class="required">*</span></label>
+        <select class="form-select" id="relation" required onchange="saveFormData()">
+          <option value="">请选择</option>
+          <option value="母亲">母亲</option>
+          <option value="父亲">父亲</option>
+          <option value="爷爷">爷爷</option>
+          <option value="奶奶">奶奶</option>
+          <option value="外公">外公</option>
+          <option value="外婆">外婆</option>
+          <option value="舅舅">舅舅</option>
+          <option value="其他亲属">其他亲属</option>
+        </select>
+        <span class="error-msg" id="relationError"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="wechat">微信号 <span style="color:#888;font-size:12px;font-weight:400">（选填）</span></label>
+        <input type="text" class="form-input" id="wechat" placeholder="便于联系沟通">
+        <span class="error-msg" id="wechatError"></span>
+      </div>
     </div>
 
     <!-- 孩子信息（动态添加）-->
@@ -1757,6 +1774,7 @@ function saveFormData() {
   try {
     var data = {
       parentName: document.getElementById('parentName').value,
+      relation: document.getElementById('relation').value,
       phone: document.getElementById('phone').value,
       wechat: document.getElementById('wechat').value,
       product: document.getElementById('product').value,
@@ -1795,6 +1813,7 @@ function restoreFormData() {
     if (!raw) return;
     var data = JSON.parse(raw);
     if (data.parentName) document.getElementById('parentName').value = data.parentName;
+    if (data.relation) document.getElementById('relation').value = data.relation;
     if (data.phone) document.getElementById('phone').value = data.phone;
     if (data.wechat) document.getElementById('wechat').value = data.wechat;
     if (data.product) document.getElementById('product').value = data.product;
@@ -2022,6 +2041,7 @@ function validateForm() {
   var firstErrorEl = null;
   var product = document.getElementById('product').value;
   if (!document.getElementById('parentName').value.trim()) { showFieldError('parentName','请输入联系人姓名'); valid = false; if (!firstErrorEl) firstErrorEl = document.getElementById('parentName'); }
+  if (!document.getElementById('relation').value) { showFieldError('relation','请选择与孩子的关系'); valid = false; if (!firstErrorEl) firstErrorEl = document.getElementById('relation'); }
   if (!/^1[3-9]\d{9}$/.test(document.getElementById('phone').value.trim())) { showFieldError('phone','请输入正确的11位手机号'); valid = false; if (!firstErrorEl) firstErrorEl = document.getElementById('phone'); }
   // 微信号选填，不验证
   var children = getChildrenData();
@@ -2059,6 +2079,7 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
   var otherFee = getParentFee('other');
   var body = {
     parent_name: document.getElementById('parentName').value.trim(),
+    relation: document.getElementById('relation').value,
     phone: document.getElementById('phone').value.trim(),
     wechat: document.getElementById('wechat').value.trim(),
     children: children,

@@ -109,7 +109,7 @@ function buildEmailBody(record) {
   }
   return `
     <h3>📋 新报名通知</h3>
-    <p><b>联系人：</b>${record.parent_name} | ${record.phone} | ${record.wechat}</p>
+    <p><b>联系人：</b>${record.parent_name}（${record.relation||'未填'}）| ${record.phone} | ${record.wechat}</p>
     <p><b>报名产品：</b>${productLabels[record.product] || record.product} | ${record.child_count}个孩子</p>
     ${childrenHtml}
     <p><b>${fmtParent('father','父亲')}</b></p>
@@ -137,6 +137,7 @@ app.post('/api/register', (req, res) => {
     const record = {
       id: nextId(records),
       parent_name: data.parent_name.trim(),
+      relation: (data.relation || '').trim(),
       phone: data.phone,
       wechat: data.wechat.trim(),
       children: data.children,
@@ -212,14 +213,14 @@ app.get('/api/export', adminAuth, (req, res) => {
     function fmtParent(row, p) { const acc = row[p+'_accompany']||'no'; if (acc==='full') return '全程'; if (acc==='weekly') return '按周:'+fmtWeeks(row[p+'_weeks']); return '不参加'; }
     function fmtOther(row) { const acc = row.other_accompany||'no'; if (acc==='no') return ''; const rel = row.other_relation||'其它亲属'; const detail = acc==='full'?'全程':'按周:'+fmtWeeks(row.other_weeks); return rel+':'+detail; }
 
-    const headers = ['ID','联系人','手机号','微信号','孩子数','孩子详情(含身份证)','报名产品',
+    const headers = ['ID','联系人','关系','手机号','微信号','孩子数','孩子详情(含身份证)','报名产品',
       '父亲陪同','母亲陪同','其它亲属','Q1','Q2','推荐人','渠道','备注','原价','陪同费','总价','报名时间'];
     const lines = [headers.map(esc).join(',')];
 
     for (const row of records) {
       const kids = row.children.map((c,i) => `${i+1}.${c.name}(${c.gender}${c.age}岁${c.grade} ID:${c.id_number||'—'})${c.has_special_needs==='yes'?'[特需]':''}`).join('; ');
       lines.push([
-        row.id, row.parent_name, row.phone, row.wechat, row.child_count, kids,
+        row.id, row.parent_name, row.relation||'', row.phone, row.wechat, row.child_count, kids,
         pLabels[row.product]||row.product, fmtParent(row,'father'), fmtParent(row,'mother'), fmtOther(row),
         row.qa1, row.qa2, row.referrer, row.source, row.notes,
         row.base_price, row.accompany_fee, row.total_price, row.created_at
