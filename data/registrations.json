@@ -369,5 +369,48 @@
     "accompany_fee": 0,
     "total_price": 2980,
     "created_at": "2026-06-02T11:55:24.472Z"
+  },
+  {
+    "id": 9,
+    "parent_name": "左悦余",
+    "relation": "母亲",
+    "phone": "18252334939",
+    "wechat": "ainm191314",
+    "children": [
+      {
+        "name": "吕沁妍",
+        "gender": "女",
+        "age": 10,
+        "grade": "小1-3",
+        "id_number": "320801201710212346",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "21",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "full",
+    "mother_name": "左悦余",
+    "mother_phone": "18252334939",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "下楼去玩时她想和不太熟悉的小朋友玩时，总是在旁边转悠，看着他们玩，很少主动融入进去，就是融入了有人多次碰到她，她也不说就有情绪退出不玩了\n2.课堂上回答问题，都能考虑好久不开腔，事后与她沟通时会说怕回答的不好",
+    "qa2": "通过游戏也好，事件也好能够让她看清她自己，了解背后的真相，触动到她破她的玻璃心",
+    "referrer": "高娟",
+    "source": "其他",
+    "notes": "",
+    "base_price": 6980,
+    "children_total": 6980,
+    "accompany_fee": 3580,
+    "total_price": 10560,
+    "created_at": "2026-06-02T22:36:44.908Z"
   }
 ]
