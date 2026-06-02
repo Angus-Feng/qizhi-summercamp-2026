@@ -240,5 +240,48 @@
     "accompany_fee": 3580,
     "total_price": 10560,
     "created_at": "2026-06-02T08:17:48.298Z"
+  },
+  {
+    "id": 6,
+    "parent_name": "郭小胜",
+    "relation": "母亲",
+    "phone": "15873136943",
+    "wechat": "shuixin6",
+    "children": [
+      {
+        "name": "刘郭钦澄",
+        "gender": "男",
+        "age": 6,
+        "grade": "学前",
+        "id_number": "430105202005250133",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "21",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "full",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "那天跟他说起他长大一点就要离开爸爸妈妈的，他就要哭了，说不离开。于是感到我们亲子之间的依恋还是太深了，阻碍了他的独立。",
+    "qa2": "希望自己能跟老师们学习如何更好地看见孩子、引领孩子；希望从更多孩子的案例中对教育有更多实践性认知。希望孩子更独立，能去表达自己，能遵守规则，听从指令，融入群体。",
+    "referrer": "",
+    "source": "其他",
+    "notes": "",
+    "base_price": 6980,
+    "children_total": 6980,
+    "accompany_fee": 3580,
+    "total_price": 10560,
+    "created_at": "2026-06-02T11:41:08.690Z"
   }
 ]
