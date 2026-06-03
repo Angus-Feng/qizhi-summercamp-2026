@@ -455,5 +455,50 @@
     "accompany_fee": 3580,
     "total_price": 10560,
     "created_at": "2026-06-03T00:59:33.922Z"
+  },
+  {
+    "id": 11,
+    "parent_name": "曾楚琁",
+    "relation": "母亲",
+    "phone": "18360726876",
+    "wechat": "18360726876",
+    "children": [
+      {
+        "name": "刘旭泽",
+        "gender": "男",
+        "age": 18,
+        "grade": "高中",
+        "id_number": "320804200904043733",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "7",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "weekly",
+    "mother_name": "曾楚琁",
+    "mother_phone": "18360726876",
+    "father_weeks": [],
+    "mother_weeks": [
+      1
+    ],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "经常给我挤牙膏",
+    "qa2": "提升自己的各项能力和能量，解决自我关系和财富关系。\n提升儿子的组织管理能力，控制情绪的能力，找到学习的动力。清晰自己的学习目标。",
+    "referrer": "",
+    "source": "",
+    "notes": "",
+    "base_price": 2980,
+    "children_total": 2980,
+    "accompany_fee": 980,
+    "total_price": 3960,
+    "created_at": "2026-06-03T04:37:53.950Z"
   }
 ]
