@@ -673,5 +673,48 @@
     "accompany_fee": 0,
     "total_price": 2980,
     "created_at": "2026-06-10T02:12:03.207Z"
+  },
+  {
+    "id": 16,
+    "parent_name": "杨丽丽",
+    "relation": "母亲",
+    "phone": "15805537638",
+    "wechat": "15805537638",
+    "children": [
+      {
+        "name": "章子苒",
+        "gender": "女",
+        "age": 14,
+        "grade": "初中",
+        "id_number": "340221201112020025",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "21",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "full",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "昨天让她和我一起去散步晒太阳，我带上了小狗，她当时有点生气，但扭不过我威逼利诱，说给她20元，绕了公园一圈。后她发朋友圈骂我，别人告诉我了，我当时心里有点生气，但转念想想，她病了不计较。下午她请我帮她一起安装柜子，等她情绪好了跟我说，她今天发朋友圈骂我。我趁机告诉她，在朋友圈骂我是不对的，不是因为我生气而且别人看到了，觉得这本身是非常不礼貌的行为。她也意识到自己的错误，说早就删了。她不会控制自己的情绪，现在做事有点极端。慢慢来吧！",
+    "qa2": "希望她学点控制情绪，调节情绪的方法，犯病时学会求救。",
+    "referrer": "",
+    "source": "",
+    "notes": "",
+    "base_price": 6980,
+    "children_total": 6980,
+    "accompany_fee": 3580,
+    "total_price": 10560,
+    "created_at": "2026-06-10T06:06:51.908Z"
   }
 ]
