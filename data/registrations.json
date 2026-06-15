@@ -759,5 +759,50 @@
     "accompany_fee": 0,
     "total_price": 4980,
     "created_at": "2026-06-10T13:21:26.802Z"
+  },
+  {
+    "id": 18,
+    "parent_name": "赵峰",
+    "relation": "父亲",
+    "phone": "18252341343",
+    "wechat": "ZHAOFENG345678",
+    "children": [
+      {
+        "name": "赵可欣",
+        "gender": "男",
+        "age": 15,
+        "grade": "初中",
+        "id_number": "320804201207021111",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "21",
+    "father_accompany": "weekly",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [
+      2
+    ],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "其实他什么都懂 只是没有找到本我",
+    "qa2": "我希望孩子 找到本自具足的自己 独立自主 自由选择人生",
+    "referrer": "高涓",
+    "source": "朋友推荐",
+    "notes": "",
+    "base_price": 6980,
+    "children_total": 6980,
+    "accompany_fee": 980,
+    "total_price": 7960,
+    "created_at": "2026-06-15T09:11:24.636Z"
   }
 ]
