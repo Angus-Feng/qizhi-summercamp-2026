@@ -946,5 +946,50 @@
     "accompany_fee": 980,
     "total_price": 3960,
     "created_at": "2026-07-02T01:06:10.700Z"
+  },
+  {
+    "id": 22,
+    "parent_name": "Emma极光",
+    "relation": "母亲",
+    "phone": "15169178063",
+    "wechat": "15169178063",
+    "children": [
+      {
+        "name": "小板栗",
+        "gender": "女",
+        "age": 8,
+        "grade": "小1-3",
+        "id_number": "370102201711200248",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "7",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "weekly",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [
+      1
+    ],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "在我专注做自己的事情时，她可以独立完成洗澡，洗头，吹头发，读书以及睡觉等一系列事情",
+    "qa2": "我希望我和孩子都能体验自然生长，期待完成“自然生长”这个课题。然后有时间接触，学习，或者完成认识自我，增进亲子关系，训练自己成为孩子需要，认可，信赖的“妈妈”",
+    "referrer": "王逸祁",
+    "source": "线下活动",
+    "notes": "",
+    "base_price": 2980,
+    "children_total": 2980,
+    "accompany_fee": 980,
+    "total_price": 3960,
+    "created_at": "2026-07-03T08:26:11.520Z"
   }
 ]
