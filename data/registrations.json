@@ -1034,5 +1034,48 @@
     "accompany_fee": 0,
     "total_price": 2980,
     "created_at": "2026-07-04T15:52:16.683Z"
+  },
+  {
+    "id": 24,
+    "parent_name": "赵小婷",
+    "relation": "母亲",
+    "phone": "15896000506",
+    "wechat": "15896000506",
+    "children": [
+      {
+        "name": "费凌雲",
+        "gender": "男",
+        "age": 10,
+        "grade": "小1-3",
+        "id_number": "321202201705160013",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "21",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "孩子学会煎鸡蛋，自己煮面",
+    "qa2": "健康开心，做他自己喜欢的事，认可自己的价值，提升专注力、心智成长",
+    "referrer": "周静",
+    "source": "朋友推荐",
+    "notes": "",
+    "base_price": 6980,
+    "children_total": 6980,
+    "accompany_fee": 0,
+    "total_price": 6980,
+    "created_at": "2026-07-05T09:12:16.776Z"
   }
 ]
