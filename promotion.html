@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="启智归塾·2026年8月夏令营——一份写给有缘家庭的说明">
+<title>启智归塾·2026夏令营宣讲 - 一份写给有缘家庭的说明</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAF7F2;
+  --text: #3D322C;
+  --text-light: #6B5E56;
+  --green: #5B7B5E;
+  --green-lt: #E8EFE9;
+  --green-dk: #3D5A40;
+  --sienna: #A0522D;
+  --sienna-lt: #F5EDE8;
+  --white: #FFFFFF;
+  --border: #E0D8CF;
+  --gold: #B8860B;
+  --gold-lt: #DAA520;
+  --shadow-sm: 0 2px 8px rgba(61,50,44,0.06);
+  --font-serif: 'Noto Serif SC', 'STSong', 'Songti SC', 'SimSun', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --max-w: 720px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; -webkit-tap-highlight-color: transparent; }
+
+body { font-family: var(--font-sans); color: var(--text); background: var(--bg); line-height: 1.9; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+.article { max-width: var(--max-w); margin: 0 auto; padding: 0 20px; }
+
+/* Hero */
+.hero { text-align: center; padding: 60px 20px 40px; background: linear-gradient(180deg, var(--green-lt) 0%, var(--bg) 100%); }
+.hero h1 { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 900; color: var(--text); line-height: 1.4; margin-bottom: 8px; }
+.hero .subtitle { font-family: var(--font-serif); font-size: 1rem; color: var(--green-dk); letter-spacing: 1px; }
+
+/* Section */
+.section { padding: 36px 0; }
+.section-title { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.divider { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.divider::before, .divider::after { content: ''; height: 1px; flex: 1; background: var(--border); }
+.divider span { color: var(--green); font-size: 0.8rem; }
+
+/* Text */
+.para { font-size: 0.92rem; color: var(--text); line-height: 2; margin-bottom: 16px; }
+.para-bold { font-size: 0.92rem; color: var(--text); line-height: 2; font-weight: 700; margin-bottom: 16px; }
+.para-indent { font-size: 0.92rem; color: var(--text); line-height: 2; margin-bottom: 16px; padding-left: 20px; border-left: 3px solid var(--green-lt); }
+
+/* List */
+.list { list-style: none; margin-bottom: 20px; }
+.list li { font-size: 0.9rem; color: var(--text); padding: 6px 0 6px 24px; position: relative; line-height: 1.8; }
+.list li::before { content: '◆'; position: absolute; left: 0; top: 6px; color: var(--green); font-size: 0.7rem; }
+.list-bold li { font-weight: 700; }
+
+/* Quote / highlight */
+.highlight { font-family: var(--font-serif); font-size: 1.05rem; color: var(--green-dk); text-align: center; padding: 20px 24px; border-left: 3px solid var(--green); border-right: 3px solid var(--green); background: var(--green-lt); border-radius: 8px; margin-bottom: 20px; line-height: 1.8; }
+
+/* Phase card */
+.phase-card { background: var(--white); border-radius: 12px; padding: 20px; margin-bottom: 14px; box-shadow: var(--shadow-sm); border-left: 4px solid var(--green); }
+.phase-card .phase-num { font-size: 0.75rem; color: var(--gold); font-weight: 700; letter-spacing: 2px; margin-bottom: 4px; }
+.phase-card .phase-title { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.phase-card .phase-desc { font-size: 0.88rem; color: var(--text); line-height: 1.9; }
+
+/* 道法术器 */
+.dao-card { background: var(--white); border-radius: 12px; padding: 20px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
+.dao-card .dao-label { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 700; color: var(--green-dk); margin-bottom: 6px; }
+.dao-card .dao-desc { font-size: 0.88rem; color: var(--text); line-height: 1.9; }
+
+/* Audio */
+.audio-section { text-align: center; padding: 32px 20px; background: var(--green-lt); border-radius: 20px; margin-bottom: 28px; }
+.audio-title { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 700; color: var(--green-dk); margin-bottom: 12px; }
+.audio-hint { font-size: 0.8rem; color: var(--text-light); margin-bottom: 20px; }
+audio { width: 100%; max-width: 500px; }
+
+/* Pricing */
+.pricing-table { width: 100%; border-collapse: collapse; border-radius: 10px; overflow: hidden; box-shadow: var(--shadow-sm); margin-bottom: 12px; }
+.pricing-table th { background: var(--green); color: #fff; font-size: 0.82rem; font-weight: 700; padding: 10px; text-align: left; }
+.pricing-table th:last-child { text-align: center; }
+.pricing-table td { padding: 10px; font-size: 0.82rem; border-bottom: 1px solid var(--border); }
+.pricing-table td:last-child { text-align: center; font-weight: 700; color: var(--green); }
+.pricing-table tr:nth-child(odd) td { background: var(--white); }
+.pricing-table tr:nth-child(even) td { background: var(--bg); }
+
+/* CTA */
+.cta { text-align: center; padding: 36px 20px; background: var(--green-lt); border-radius: 20px; }
+.cta-title { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 700; color: var(--green-dk); margin-bottom: 16px; }
+.cta-info { font-size: 0.9rem; color: var(--text); line-height: 2; margin-bottom: 16px; }
+.cta-link { display: inline-block; background: var(--green); color: #fff; padding: 10px 28px; border-radius: 25px; font-size: 0.88rem; font-weight: 700; }
+
+/* Closing */
+.closing { text-align: center; padding: 40px 0; }
+.closing-tagline { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 700; color: var(--green-dk); letter-spacing: 2px; }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>启智归塾 · 2026年8月夏令营</h1>
+  <p class="subtitle">——一份写给有缘家庭的说明</p>
+</section>
+
+<div class="article">
+
+<!-- 音频区 -->
+<section class="audio-section" style="margin: 24px 0;">
+  <div class="audio-title">▶ 点击收听宣讲录音</div>
+  <audio controls style="width:100%;max-width:500px">
+    <source src="audio/promotion-recording.mp3" type="audio/mpeg">
+    您的浏览器不支持音频播放，请升级浏览器或点击下方链接收听。
+  </audio>
+  <div style="margin-top:8px">
+    <label style="font-size:0.8rem;color:var(--text-light);cursor:pointer">
+      播放速度
+      <select id="audioSpeed" onchange="document.querySelector('audio').playbackRate=this.value" style="font-size:0.8rem;padding:2px 6px;border-radius:4px;border:1px solid var(--border);background:var(--white);color:var(--text)">
+        <option value="1">1.0x</option>
+        <option value="1.25">1.25x</option>
+        <option value="1.5">1.5x</option>
+        <option value="1.75">1.75x</option>
+        <option value="2">2.0x</option>
+      </select>
+    </label>
+  </div>
+</section>
+
+<!-- 一、人的一生 -->
+<section class="section">
+  <h2 class="section-title">一、人的一生，是一个完整的整体</h2>
+  <div class="divider"><span>◆</span></div>
+
+  <p class="para">每个人都有一条属于自己的生命时间线。</p>
+  <p class="para">从父母结合之前，到备孕、孕育、出生，到童年、少年、青年、壮年，直到老年、离世——这是一个生命的完整路程。</p>
+  <p class="para">而人生这条路上，几乎每个人都会遇到同样的命题：</p>
+
+  <ul class="list list-bold">
+    <li><b>教育与成长</b>——孩子怎么教，天赋怎么识别，什么样的孩子适合什么样的成长方式？</li>
+    <li><b>爱情与感情</b>——爱情的本质是什么，什么是依赖和消耗，如何找到真正的生命伴侣而不是互相拖累？</li>
+    <li><b>婚姻与家庭</b>——婚姻的本质是什么，如何实现家庭幸福，家庭环境又是如何塑造孩子的？</li>
+    <li><b>财富与事业</b>——财富的底层密码是什么，如何选择事业，如何在事业与家庭之间找到真正的平衡？</li>
+    <li><b>健康与养生</b>——身体是一切的基础，如何实现身心真正的健康，而不只是头痛医头、脚痛医脚？</li>
+    <li><b>死亡与告别</b>——死亡不是禁忌，而是最终的镜子。如何让最后一程有尊严、无遗憾？</li>
+    <li><b>向死而生</b>——当一个人真正想清楚了死亡，才能真正明白现在最值得投入的是什么。</li>
+  </ul>
+
+  <p class="para">这些命题不是孤立的，而是同一条生命线索的不同切面。</p>
+  <p class="para-indent">教育问题从来不只是孩子的问题——焦虑、叛逆、厌学，常常是家庭关系的投射；</p>
+  <p class="para-indent">婚姻问题也不只是两个人的问题——冲突的根源，可能藏在事业的失衡、财富观的断裂；</p>
+  <p class="para-indent">事业的困顿，更不是单纯的能力不足——选择的迷茫，本质是一个人不知道自己是谁、真正适合什么；</p>
+  <p class="para-indent">而对自己的陌生，也不是一朝一夕——它的根，埋在更早的成长土壤里：童年是否真正被看见，生命力是否得到过滋养，自然生长是否完整地走过。</p>
+  <p class="para">所有问题，都是同一个问题在不同时段、不同侧面的显现。所有的焦虑，本质上都指向同一件事：我们不知道如何过好这一生。</p>
+  <p class="para">我们做的事，就是以一生为维度，陪伴孩子和家庭走好当下的每一步。</p>
+  <p class="para">这意味着：孩子的教育规划，不是盯着眼前的分数，而是看清这个孩子是什么样的生命、适合走一条什么样的路；健康出了问题，不是头痛医头，而是回溯身体背后的生活方式、情绪状态和家庭环境；婚恋走到了困境，不是给出一个交往技巧，而是帮助一个人真正看清自己的关系模式，从根上调整。</p>
+  <div class="highlight">每一个当下的问题，我们都以一生为参照来回答它。</div>
+</section>
+
+<!-- 二、六阶教育 -->
+<section class="section">
+  <h2 class="section-title">二、一个人能走多远，取决于他站在哪个高度看自己</h2>
+  <div class="divider"><span>◆</span></div>
+
+  <p class="para">除了人生的时间历程，还有另一个维度同样重要：一个人看待自己、看待世界的高度。</p>
+  <p class="para">同样是面对困难，有人只看到当下的麻烦，有人能看到背后的模式；同样是养育孩子，有人只看到眼前的成绩，有人能看到孩子一生的状态。</p>
+  <p class="para">这种高度，不是天生的，是可以一步步修炼的。历史上，孔子、老子、王阳明，走的都是这样一条由凡入圣的路。这条路并不神秘，有次第可循。启智书院把它归纳为六个阶段：</p>
+
+  <div class="phase-card">
+    <div class="phase-num">第一阶</div>
+    <div class="phase-title">自然生长</div>
+    <p class="phase-desc">让生命回到它本来的状态。玩耍、劳动、运动、静定——这不是课外活动，是孩子建立安全感、生命力与感受力的根基。一个没有经历真正自然生长的孩子，身体和心理的地基是松的，后面的一切都是空中楼阁。</p>
+  </div>
+
+  <div class="phase-card">
+    <div class="phase-num">第二阶</div>
+    <div class="phase-title">认识自我</div>
+    <p class="phase-desc">知道自己是谁，是成长的第一功课。认识自己的情绪从哪里来，自己的念头是怎么运作的，自己真正的天赋和短板在哪里。大多数人终其一生都在应对外部世界，却从未向内看见过真正的自己。</p>
+  </div>
+
+  <div class="phase-card">
+    <div class="phase-num">第三阶</div>
+    <div class="phase-title">改造自我</div>
+    <p class="phase-desc">在认识自己的基础上，主动调整。扬长补短，重塑习惯，一人一法——没有统一的方案，只有针对每个人真实状态的定制路径。</p>
+  </div>
+
+  <div class="phase-card">
+    <div class="phase-num">第四阶</div>
+    <div class="phase-title">认识世界</div>
+    <p class="phase-desc">当自我的根基稳了，才能真正客观地认识外部世界。学科知识、社会规律、人文历史——不是为了考试，而是为了真正理解这个世界是怎么运转的。</p>
+  </div>
+
+  <div class="phase-card">
+    <div class="phase-num">第五阶</div>
+    <div class="phase-title">改造世界</div>
+    <p class="phase-desc">只有主体成立，改造世界才有意义。在认识自我、改造自我的根基上，有方向、有能力地去创造价值、影响他人、推动改变。</p>
+  </div>
+
+  <div class="phase-card">
+    <div class="phase-num">第六阶</div>
+    <div class="phase-title">融合回归</div>
+    <p class="phase-desc">主体与客体的融合，小我与大我的融合，过去、现在与未来的融合，碳基生命与硅基生命的融合。这是生命成长的终极状态——天人合一，如如不动，了了分明。</p>
+  </div>
+
+  <p class="para">这六个阶段，每一阶都是下一阶的根基，不可逾越，也无法替代。</p>
+  <div class="highlight">当一个人真正站到更高的维度，很多低维的问题会自然脱落。<br>看清楚自己的位置，是一切改变的起点。</div>
+</section>
+
+<!-- 三、夏令营 -->
+<section class="section">
+  <h2 class="section-title">三、夏令营，是开始这段旅程的入口</h2>
+  <div class="divider"><span>◆</span></div>
+
+  <p class="para">看清楚人生的路，看清楚自己所处的位置——这是认知层面的事。但认知之后，怎么真正迈出第一步？</p>
+  <p class="para-bold">对于我们来说，答案是：从夏令营开始。</p>
+  <p class="para">无论孩子多大，无论家庭现在处在什么状态，夏令营都是一个真实的起点。</p>
+  <p class="para-bold">这个入口背后，依靠的是启智书院道法术器一体圆融的完整体系：</p>
+
+  <div class="dao-card">
+    <div class="dao-label">道：看清规律</div>
+    <p class="dao-desc">人生成长有其底层规律，教育有其本质，生命有其次第。懂得道，才不会在错误的方向上越走越远。</p>
+  </div>
+  <div class="dao-card">
+    <div class="dao-label">法：明确方向</div>
+    <p class="dao-desc">基于规律，判断什么才是对的方向——是培养会考试的孩子，还是养育一个完整的人？是追求短期成绩，还是扎根长期成长？</p>
+  </div>
+  <div class="dao-card">
+    <div class="dao-label">术：落地方法</div>
+    <p class="dao-desc">方向确定之后，才谈具体的实践路径。一人一法，针对每个孩子和家庭的真实状态，因材施教，动态调整。</p>
+  </div>
+  <div class="dao-card">
+    <div class="dao-label">器：借助工具</div>
+    <p class="dao-desc">课程、平台、测评体系，都是服务于道、法、术的载体，有了方法才知道该用什么工具。</p>
+  </div>
+
+  <p class="para">这四者不是割裂的，而是一体圆融的。有道无术，术可求；有术无道，止于术。</p>
+  <p class="para-bold">启智书院依据道法术器，建立了覆盖人生主要阶段的12大类应用公司、上百个项目——从恋爱、婚姻、孕育、养育、教育，到事业、健康、养生、养老、善终，每一个人生阶段都有对应的道场、方向、产品和服务。我们不止于理论，而是经过13年实践、有持续样本积累验证的落地体系。</p>
+  <p class="para">在这里，我们会用心去看每一个孩子和家庭的真实状态，做出准确的测评与规划，陪伴家庭走好后续的路。</p>
+  <div class="highlight">夏令营不是一次活动，而是一段长期关系的开始。踏进来这一步，才能展开后面的一切。</div>
+</section>
+
+<!-- 四、录音大纲 -->
+<section class="section">
+  <h2 class="section-title">四、这两小时，我们讲了什么</h2>
+  <div class="divider"><span>◆</span></div>
+
+  <p class="para-bold">▶ [点击收听 · 约2小时宣讲录音]</p>
+  <p class="para">以下是录音的主要内容大纲：</p>
+
+  <ul class="list">
+    <li>AI时代正在发生什么，传统教育的根本局限在哪里</li>
+    <li>六阶教育体系的完整逻辑，每一阶具体在训练什么</li>
+    <li>自然生长的五个维度：玩、劳动、运动、社交，以及静定的修炼</li>
+    <li>认识自我的核心：静定功夫，如何帮助孩子向内看见自己</li>
+    <li>夏令营的具体安排：一人一法、家庭共修、长期陪伴</li>
+    <li>什么样的家庭适合来</li>
+    <li>现场答疑</li>
+  </ul>
+</section>
+
+<!-- 五、关于夏令营 -->
+<section class="section">
+  <h2 class="section-title">五、关于这次夏令营</h2>
+  <div class="divider"><span>◆</span></div>
+
+  <p class="para-bold">时间：2026年8月（第27期 全新改版）</p>
+  <p class="para-bold">地点：启智归塾道场（淮安日月洲）</p>
+  <p class="para-bold">对象：有成长意愿的孩子与家庭，各年龄段均欢迎</p>
+  <p class="para">总教练：韩丰，王逸祁</p>
+  <p class="para-bold">报名截止：2026年7月20日</p>
+
+  <p class="para-bold" style="margin-top: 16px;">参营费用</p>
+  <table class="pricing-table">
+    <tr><th>参营方式</th><th>费用</th></tr>
+    <tr><td>21天全程（孩子）</td><td>6,980元</td></tr>
+    <tr><td>14天（孩子）</td><td>4,980元</td></tr>
+    <tr><td>7天（孩子）</td><td>2,980元</td></tr>
+    <tr><td>家长全程陪同</td><td>3,580元/人</td></tr>
+    <tr><td>家长按周参加</td><td>980元/周<br><span style="font-size:0.7rem;font-weight:400;color:var(--text-light)">（含三餐及活动）</span></td></tr>
+  </table>
+</section>
+
+<!-- 报名 -->
+<section class="cta" style="margin-bottom: 20px;">
+  <div class="cta-title">报名方式</div>
+  <a class="cta-link" href="https://summercamp26.qizhishuyuan.cn/" target="_blank">点击前往报名网站</a>
+</section>
+
+</div>
+
+<footer style="background:#3D5A40;color:rgba(255,255,255,.85);padding:32px 20px 24px;text-align:center">
+  <div style="font-family:var(--font-serif);font-size:1rem;font-weight:700;color:#fff;letter-spacing:2px;margin-bottom:10px">启智归塾 · 2026夏令营</div>
+  <div style="font-size:.75rem;line-height:2;margin-bottom:16px;color:rgba(255,255,255,.7)">
+    联合主办：启智书院 · 日月洲度假村 · 江淮书院<br>
+    咨询电话：请添加微信联系<br>
+    顺势归心 · 自在成长
+  </div>
+  <div style="width:40px;height:1px;background:rgba(255,255,255,.2);margin:0 auto 12px"></div>
+  <div style="font-size:.68rem;color:rgba(255,255,255,.45)">
+    © 2026 启智书院 · 日月洲度假村 · 江淮书院 联合主办<br>
+    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.5);text-decoration:none">鲁ICP备2026030533号</a>
+    <span style="margin:0 6px;color:rgba(255,255,255,.3)">|</span>
+    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=37010302001800" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.5);text-decoration:none">鲁公网安备37010302001800号</a>
+  </div>
+</footer>
+</body>
+</html>
