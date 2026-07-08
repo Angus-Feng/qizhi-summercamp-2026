@@ -1253,5 +1253,57 @@
     "accompany_fee": 0,
     "total_price": 2980,
     "created_at": "2026-07-08T10:53:34.444Z"
+  },
+  {
+    "id": 29,
+    "parent_name": "贾爱秋（秋瑶）",
+    "relation": "母亲",
+    "phone": "15396938138",
+    "wechat": "Jiachen369874",
+    "children": [
+      {
+        "name": "房珏宇",
+        "gender": "女",
+        "age": 12,
+        "grade": "小4-6",
+        "id_number": "321302201407190260",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      },
+      {
+        "name": "房裕杰",
+        "gender": "男",
+        "age": 8,
+        "grade": "小1-3",
+        "id_number": "320812201812161614",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "7",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "weekly",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 2,
+    "qa1": "关于楼下流浪猫的幼崽救助，其实我不太想救的，但是两个孩子一致要求，而且哭的撕心裂肺，于是决定先救命。最近回老家，三只幼崽死了一只，又是哭的稀里哗啦，但就在那一瞬间，他们很坦然的接受了这件事的发生，我挺触动的。",
+    "qa2": "希望自己在这次夏令营当中，能够找到自己在家庭中真正的定位，对我说，做一个妈妈，做一个妻子。我真正的尺度在哪里？如何更好的与孩子、与先生和谐相处。\n希望两个孩子在夏令营的体验过程当中，能够真正的找回自己,知道如何养育自己内在的灵魂，每天，每个当下，知道自己在干什么。\n挖掘自身去做事的这个内驱力，寻找有意义的方向。(具体的其实也没太想好，先写这么多吧。)",
+    "referrer": "秋瑶",
+    "source": "",
+    "notes": "",
+    "base_price": 2980,
+    "children_total": 5960,
+    "accompany_fee": 0,
+    "total_price": 5960,
+    "created_at": "2026-07-08T11:44:16.734Z"
   }
 ]
