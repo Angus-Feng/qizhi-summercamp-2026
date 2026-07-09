@@ -1305,5 +1305,48 @@
     "accompany_fee": 0,
     "total_price": 5960,
     "created_at": "2026-07-08T11:44:16.734Z"
+  },
+  {
+    "id": 30,
+    "parent_name": "陈娟",
+    "relation": "母亲",
+    "phone": "18650671398",
+    "wechat": "",
+    "children": [
+      {
+        "name": "夏梓洋",
+        "gender": "男",
+        "age": 10,
+        "grade": "小4-6",
+        "id_number": "32080220170116073X",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "21",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "独立做了一道菜。",
+    "qa2": "随性随行",
+    "referrer": "高娟",
+    "source": "朋友推荐",
+    "notes": "",
+    "base_price": 6980,
+    "children_total": 6980,
+    "accompany_fee": 0,
+    "total_price": 6980,
+    "created_at": "2026-07-09T12:14:37.866Z"
   }
 ]
