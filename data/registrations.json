@@ -1590,5 +1590,59 @@
     "accompany_fee": 0,
     "total_price": 2980,
     "created_at": "2026-07-10T01:23:45.526232Z"
+  },
+  {
+    "id": 37,
+    "parent_name": "鲁冰雪",
+    "relation": "母亲",
+    "phone": "13052056001",
+    "wechat": "13052056001",
+    "children": [
+      {
+        "name": "槐浩鲁",
+        "gender": "男",
+        "age": 12,
+        "grade": "小4-6",
+        "id_number": "37010520131027005X",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      },
+      {
+        "name": "槐浩然",
+        "gender": "男",
+        "age": 6,
+        "grade": "学前",
+        "id_number": "37010520200123005X",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "7",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "weekly",
+    "mother_name": "鲁冰雪",
+    "mother_phone": "13052056001",
+    "father_weeks": [],
+    "mother_weeks": [
+      1
+    ],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 2,
+    "qa1": "浩鲁最近一段时间都开始不太主动回到我们一起居住的家了，让我觉得和他的距离开始变的越来越远。",
+    "qa2": "希望我和孩子们都能更好的建立起自己的生活节奏，相处的更融洽。",
+    "referrer": "韩丰",
+    "source": "其他",
+    "notes": "",
+    "base_price": 2980,
+    "children_total": 5960,
+    "accompany_fee": 980,
+    "total_price": 6940,
+    "created_at": "2026-07-10T01:56:26.149Z"
   }
 ]
