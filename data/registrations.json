@@ -1351,19 +1351,19 @@
   },
   {
     "id": 31,
-    "parent_name": "赵欣熠",
+    "parent_name": "赵芯熠",
     "relation": "母亲",
-    "phone": "13770388866",
+    "phone": "13511534114",
     "wechat": "",
     "children": [
       {
         "name": "戴嘉澍",
         "gender": "男",
-        "age": 17,
+        "age": 20,
         "grade": "高中",
         "id_number": "320802200601311531",
         "has_special_needs": "no",
-        "special_needs_detail": ""
+        "special_needs_detail": "身体健康 心理健康 目标持续落地 自主快乐阳光幸福感强"
       }
     ],
     "product": "21",
@@ -1381,15 +1381,58 @@
     "other_phone": "",
     "other_weeks": [],
     "child_count": 1,
-    "qa1": "努力做好自己的事情",
-    "qa2": "希望学习到东西",
+    "qa1": "在事件沟通上，说我傲慢让我震惊自己没注意自己，本来也是自己的以为强加与他，而他在外吃饭时，他自然的夹菜给你，在你有情绪时彼此沟通不愉快时，也还是会事后过阵子再复盘，我们一起的卡点，而不是直接逃离，这一点说明他还是有隐忍精神的，同时发现他的思维有时比我清醒。",
+    "qa2": "一句话点亮人生，一段经历助力往后余生。期待他心理身体健康，自主力量更强劲，动力感更足够，可持续幸福感平稳。",
     "referrer": "",
-    "source": "",
+    "source": "微信朋友圈",
     "notes": "",
     "base_price": 6980,
     "children_total": 6980,
     "accompany_fee": 0,
     "total_price": 6980,
     "created_at": "2026-07-09T14:57:10.962Z"
+  },
+  {
+    "id": 32,
+    "parent_name": "高娟",
+    "relation": "母亲",
+    "phone": "18052375858",
+    "wechat": "18052375828",
+    "children": [
+      {
+        "name": "严柳清",
+        "gender": "男",
+        "age": 22,
+        "grade": "高中",
+        "id_number": "320811200404260516",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "7",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "",
+    "qa2": "",
+    "referrer": "",
+    "source": "word手动录入",
+    "notes": "",
+    "base_price": 2980,
+    "children_total": 2980,
+    "accompany_fee": 0,
+    "total_price": 2980,
+    "created_at": "2026-07-10T01:04:22.769678Z"
   }
 ]
