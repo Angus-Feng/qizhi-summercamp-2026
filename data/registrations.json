@@ -1677,5 +1677,48 @@
     "accompany_fee": 0,
     "total_price": 6980,
     "created_at": "2026-07-11T03:33:57.637Z"
+  },
+  {
+    "id": 39,
+    "parent_name": "朱月英",
+    "relation": "母亲",
+    "phone": "13915102378",
+    "wechat": "13915102378",
+    "children": [
+      {
+        "name": "王晓晓",
+        "gender": "女",
+        "age": 18,
+        "grade": "高中",
+        "id_number": "411425199302134862",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "14",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "主动联系",
+    "qa2": "无",
+    "referrer": "",
+    "source": "",
+    "notes": "",
+    "base_price": 4980,
+    "children_total": 4980,
+    "accompany_fee": 0,
+    "total_price": 4980,
+    "created_at": "2026-07-11T05:16:20.714Z"
   }
 ]
