@@ -1765,5 +1765,42 @@
     "accompany_fee": 0,
     "total_price": 3580,
     "created_at": "2026-07-12T09:38:28.536359Z"
+  },
+  {
+    "id": 42,
+    "parent_name": "朱月英",
+    "relation": "母亲",
+    "phone": "13915102378",
+    "wechat": "",
+    "children": [],
+    "product": "7",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "weekly",
+    "mother_name": "朱月英",
+    "mother_phone": "13915102378",
+    "father_weeks": [],
+    "mother_weeks": [
+      1
+    ],
+    "other_accompany": "weekly",
+    "other_relation": "儿媳+儿子",
+    "other_name": "王晓晓、席时辰",
+    "other_phone": "",
+    "other_weeks": [
+      1
+    ],
+    "child_count": 0,
+    "qa1": "",
+    "qa2": "",
+    "referrer": "",
+    "source": "word手动录入",
+    "notes": "朱月英（母亲）+ 王晓晓（儿媳）+ 席时辰（儿子），三人都作为成年人参加第一周，各¥980",
+    "base_price": 2940,
+    "children_total": 0,
+    "accompany_fee": 2940,
+    "total_price": 2940,
+    "created_at": "2026-07-13T02:25:40.184907Z"
   }
 ]
