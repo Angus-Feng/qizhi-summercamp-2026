@@ -1985,5 +1985,57 @@
     "accompany_fee": 0,
     "total_price": 2980,
     "created_at": "2026-07-15T07:25:16.753Z"
+  },
+  {
+    "id": 47,
+    "parent_name": "乔旸",
+    "relation": "母亲",
+    "phone": "15189691159",
+    "wechat": "15189691159",
+    "children": [
+      {
+        "name": "乔艺茹",
+        "gender": "女",
+        "age": 13,
+        "grade": "初中",
+        "id_number": "320802201408052026",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      },
+      {
+        "name": "李忆菓",
+        "gender": "女",
+        "age": 8,
+        "grade": "小1-3",
+        "id_number": "320113201905222445",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "7",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 2,
+    "qa1": "开始有自主性，理性判断和劝奶奶，人生有自己的活法，不要在意别人的看法和怎么说，对人生有思考了。",
+    "qa2": "孩子怕黑，特别敏感，而且容易走内，遇到委屈或者事情，都是自己独自流泪消化的，表达不够准确，比较感性，缺少理性。",
+    "referrer": "",
+    "source": "",
+    "notes": "",
+    "base_price": 2980,
+    "children_total": 5960,
+    "accompany_fee": 0,
+    "total_price": 5960,
+    "created_at": "2026-07-15T15:40:49.441Z"
   }
 ]
