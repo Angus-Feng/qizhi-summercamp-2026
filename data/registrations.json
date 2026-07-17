@@ -2037,5 +2037,48 @@
     "accompany_fee": 0,
     "total_price": 5960,
     "created_at": "2026-07-15T15:40:49.441Z"
+  },
+  {
+    "id": 48,
+    "parent_name": "崔琴",
+    "relation": "母亲",
+    "phone": "13511550997",
+    "wechat": "13511550997",
+    "children": [
+      {
+        "name": "耿子清",
+        "gender": "女",
+        "age": 10,
+        "grade": "小1-3",
+        "id_number": "320804201610197029",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "21",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "我们家庭氛围比较融洽，亲子关系和谐。耿子清在家很依赖姐姐，姐姐说的话她都听",
+    "qa2": "希望耿子清成为一名自信大方，勇敢善良的女孩。她现在专注力有点欠缺，学习做事不是太主动",
+    "referrer": "高绢",
+    "source": "朋友推荐",
+    "notes": "",
+    "base_price": 6980,
+    "children_total": 6980,
+    "accompany_fee": 0,
+    "total_price": 6980,
+    "created_at": "2026-07-17T02:47:03.018Z"
   }
 ]
