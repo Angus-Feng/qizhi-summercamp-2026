@@ -2123,5 +2123,48 @@
     "accompany_fee": 0,
     "total_price": 2980,
     "created_at": "2026-07-18T01:45:12.910Z"
+  },
+  {
+    "id": 50,
+    "parent_name": "周波",
+    "relation": "父亲",
+    "phone": "18653760521",
+    "wechat": "",
+    "children": [
+      {
+        "name": "牛艺畅",
+        "gender": "男",
+        "age": 10,
+        "grade": "小4-6",
+        "id_number": "370802201607011218",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "21",
+    "father_accompany": "full",
+    "father_name": "周波",
+    "father_phone": "18653760521",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "喜欢研究和评论时事与社会现象，展现出了一定的分析推理及自我反思的能力与潜质",
+    "qa2": "寻求和提升教育及亲子认知",
+    "referrer": "",
+    "source": "word报名表录入",
+    "notes": "周波（父亲）报名，孩子牛艺畅21天完整版，父亲全程陪同¥3580",
+    "base_price": 6980,
+    "children_total": 6980,
+    "accompany_fee": 3580,
+    "total_price": 10560,
+    "created_at": "2026-07-18T03:31:35.000Z"
   }
 ]
