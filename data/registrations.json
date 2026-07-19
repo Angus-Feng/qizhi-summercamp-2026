@@ -2211,5 +2211,51 @@
     "accompany_fee": 0,
     "total_price": 6980,
     "created_at": "2026-07-19T11:20:37.815Z"
+  },
+  {
+    "id": 53,
+    "parent_name": "陈澜心",
+    "relation": "母亲",
+    "phone": "18873018402",
+    "wechat": "18873018402",
+    "children": [
+      {
+        "name": "唐铭谦",
+        "gender": "男",
+        "age": 12,
+        "grade": "小4-6",
+        "id_number": "430621201403050332",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "14",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "weekly",
+    "mother_name": "陈澜心",
+    "mother_phone": "18873018402",
+    "father_weeks": [],
+    "mother_weeks": [
+      1,
+      2
+    ],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "无",
+    "qa2": "希望孩子找到自己的主体性，学会对自己负责",
+    "referrer": "",
+    "source": "",
+    "notes": "",
+    "base_price": 4980,
+    "children_total": 4980,
+    "accompany_fee": 1960,
+    "total_price": 6940,
+    "created_at": "2026-07-19T14:19:14.443Z"
   }
 ]
