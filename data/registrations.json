@@ -2123,5 +2123,50 @@
     "accompany_fee": 3580,
     "total_price": 10560,
     "created_at": "2026-07-18T03:31:35.000Z"
+  },
+  {
+    "id": 51,
+    "parent_name": "姚敏",
+    "relation": "父亲",
+    "phone": "15189575866",
+    "wechat": "15189575866",
+    "children": [
+      {
+        "name": "姚剑清",
+        "gender": "男",
+        "age": 8,
+        "grade": "小1-3",
+        "id_number": "320801201902252334",
+        "has_special_needs": "yes",
+        "special_needs_detail": "家长陪同，早晚接送，不住宿"
+      }
+    ],
+    "product": "7",
+    "father_accompany": "weekly",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [
+      1
+    ],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "有爱心，体贴人",
+    "qa2": "能让孩子静下来，提升专注力",
+    "referrer": "高涓",
+    "source": "朋友推荐",
+    "notes": "",
+    "base_price": 2980,
+    "children_total": 2980,
+    "accompany_fee": 980,
+    "total_price": 3960,
+    "created_at": "2026-07-19T07:46:06.686Z"
   }
 ]
