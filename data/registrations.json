@@ -2257,5 +2257,52 @@
     "accompany_fee": 1960,
     "total_price": 6940,
     "created_at": "2026-07-19T14:19:14.443Z"
+  },
+  {
+    "id": 54,
+    "parent_name": "戴伟",
+    "relation": "父亲",
+    "phone": "15896437117",
+    "wechat": "",
+    "children": [
+      {
+        "name": "戴子谦",
+        "gender": "男",
+        "age": 8,
+        "grade": "小1-3",
+        "id_number": "320812201806042416",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "7",
+    "father_accompany": "weekly",
+    "father_name": "戴伟",
+    "father_phone": "15896437117",
+    "mother_accompany": "weekly",
+    "mother_name": "杨娟",
+    "mother_phone": "13615144533",
+    "father_weeks": [
+      1
+    ],
+    "mother_weeks": [
+      1
+    ],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "戴子谦每次我给他弄好吃的，他总是第1个想起来我没吃。他会强迫我也吃。我看到了我的小时候。",
+    "qa2": "希望做更好的自己。",
+    "referrer": "",
+    "source": "",
+    "notes": "",
+    "base_price": 2980,
+    "children_total": 2980,
+    "accompany_fee": 1960,
+    "total_price": 4940,
+    "created_at": "2026-07-20T03:19:29.549Z"
   }
 ]
