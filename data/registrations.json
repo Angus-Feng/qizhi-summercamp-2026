@@ -2304,5 +2304,48 @@
     "accompany_fee": 1960,
     "total_price": 4940,
     "created_at": "2026-07-20T03:19:29.549Z"
+  },
+  {
+    "id": 55,
+    "parent_name": "左小佩",
+    "relation": "母亲",
+    "phone": "13390816708",
+    "wechat": "13390816708",
+    "children": [
+      {
+        "name": "项家旭",
+        "gender": "男",
+        "age": 14,
+        "grade": "初中",
+        "id_number": "320801201201292034",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "7",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "主动打扫卫生",
+    "qa2": "生存技能",
+    "referrer": "楚老师",
+    "source": "其他",
+    "notes": "",
+    "base_price": 2980,
+    "children_total": 2980,
+    "accompany_fee": 0,
+    "total_price": 2980,
+    "created_at": "2026-07-20T06:23:55.483Z"
   }
 ]
