@@ -1060,7 +1060,7 @@
         "special_needs_detail": ""
       }
     ],
-    "product": "21",
+    "product": "7",
     "father_accompany": "no",
     "father_name": "",
     "father_phone": "",
@@ -1080,10 +1080,10 @@
     "referrer": "周静",
     "source": "朋友推荐",
     "notes": "",
-    "base_price": 6980,
-    "children_total": 6980,
+    "base_price": 2980,
+    "children_total": 2980,
     "accompany_fee": 0,
-    "total_price": 6980,
+    "total_price": 2980,
     "created_at": "2026-07-05T09:12:16.776Z"
   },
   {
