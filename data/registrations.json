@@ -2402,5 +2402,51 @@
     "accompany_fee": 980,
     "total_price": 980,
     "created_at": "2026-07-21T07:12:00.000Z"
+  },
+  {
+    "id": 59,
+    "parent_name": "张诗婧",
+    "relation": "母亲",
+    "phone": "18573737391",
+    "wechat": "18573737391",
+    "children": [
+      {
+        "name": "杨笙跃",
+        "gender": "女",
+        "age": 10,
+        "grade": "小1-3",
+        "id_number": "431028201607170160",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "14",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "weekly",
+    "mother_name": "张诗婧",
+    "mother_phone": "18573737391",
+    "father_weeks": [],
+    "mother_weeks": [
+      1,
+      2
+    ],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "孩子今年刚满十岁，跟九岁的时候差别特别大。以前多多少少还能听进去几句建议，现在大人说啥她都抵触，一点意见都不肯接受。\n\n上次在夏令营上课，她偷偷跟旁边同学玩石头剪刀布，后来她跑过来跟我说事儿，我随口提醒她上课要尊重老师、认真听讲。她当场就生气了，扭头就走。等她回来，我想喊住她聊聊，她压根不理我，径直坐回自己座位。可没过一会儿，我就看见她躲在一边偷偷掉眼泪。其实是有点心疼的，外表看着犟得很，其实心思敏感、内心特别脆弱。\n后来听了韩老师说的一番话，我调整好了自己的心态，不再上去开导她，就安安静静让她相应我。我一句话都没再多讲，没想到她自己没多久就缓过来了，情绪自然而然就好了。",
+    "qa2": "期待一起共修。",
+    "referrer": "",
+    "source": "",
+    "notes": "",
+    "base_price": 4980,
+    "children_total": 4980,
+    "accompany_fee": 1960,
+    "total_price": 6940,
+    "created_at": "2026-07-21T07:20:23.452Z"
   }
 ]
