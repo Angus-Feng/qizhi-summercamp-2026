@@ -957,13 +957,13 @@
   },
   {
     "id": 22,
-    "parent_name": "Emma极光",
+    "parent_name": "刘倩倩",
     "relation": "母亲",
     "phone": "15169178063",
     "wechat": "15169178063",
     "children": [
       {
-        "name": "小板栗",
+        "name": "管博雅",
         "gender": "女",
         "age": 8,
         "grade": "小1-3",
@@ -1246,10 +1246,10 @@
     "referrer": "谢老师",
     "source": "word手动录入",
     "notes": "本人作为学员参加第一周",
-    "base_price": 2980,
+    "base_price": 980,
     "children_total": 0,
-    "accompany_fee": 0,
-    "total_price": 2980,
+    "accompany_fee": 980,
+    "total_price": 980,
     "created_at": "2026-07-08T10:53:34.444Z"
   },
   {
