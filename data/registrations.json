@@ -2503,5 +2503,48 @@
     "accompany_fee": 5540,
     "total_price": 15500,
     "created_at": "2026-07-21T07:43:33.485Z"
+  },
+  {
+    "id": 61,
+    "parent_name": "汤宏",
+    "relation": "母亲",
+    "phone": "15570121065",
+    "wechat": "15570121065",
+    "children": [
+      {
+        "name": "甘东乔",
+        "gender": "男",
+        "age": 13,
+        "grade": "初中",
+        "id_number": "360721201304260817",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "21",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "我是单亲妈妈，独立抚养儿子10年，这两年儿子有些叛逆。尤其今年力不从心，然后我就想着孩子出去了，我一个人孤苦无依。开玩笑的和孩子说，我去找对象结婚了，我儿说，尊重你的意愿。瞬间心酸",
+    "qa2": "都说我儿心智发育更慢，比别人成熟晚。我也总觉得他不知道现在的处境，没有体会现在的艰辛。我想这次夏令营，他可以明白为什么学习？找到学习的动力。他可以了解自己想做什么？未来的方向，以及情绪控制，而不是经常情绪化表达。和老师也容易发生冲突",
+    "referrer": "卫佩民",
+    "source": "朋友圈",
+    "notes": "",
+    "base_price": 6980,
+    "children_total": 6980,
+    "accompany_fee": 0,
+    "total_price": 6980,
+    "created_at": "2026-07-21T07:59:26.460Z"
   }
 ]
