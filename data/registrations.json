@@ -2546,5 +2546,57 @@
     "accompany_fee": 0,
     "total_price": 6980,
     "created_at": "2026-07-21T07:59:26.460Z"
+  },
+  {
+    "id": 62,
+    "parent_name": "刘倩如",
+    "relation": "母亲",
+    "phone": "15974146661",
+    "wechat": "15974146661",
+    "children": [
+      {
+        "name": "刘雨橙",
+        "gender": "女",
+        "age": 10,
+        "grade": "小4-6",
+        "id_number": "43010520160811016X",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      },
+      {
+        "name": "兰熙乐",
+        "gender": "女",
+        "age": 7,
+        "grade": "小1-3",
+        "id_number": "430105201902260089",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "21",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 2,
+    "qa1": "最近姐妹俩在夏令营，她们很开心，姐姐给我们打电话声音都变温柔了",
+    "qa2": "希望老大可以控制情绪、去掉内心的浮躁、减肥；妹妹能够及时表达出自己的情绪；改善缓和姐姐妹妹关系",
+    "referrer": "",
+    "source": "",
+    "notes": "",
+    "base_price": 6980,
+    "children_total": 13960,
+    "accompany_fee": 0,
+    "total_price": 13960,
+    "created_at": "2026-07-22T03:11:46.317Z"
   }
 ]
