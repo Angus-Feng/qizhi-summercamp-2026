@@ -2631,5 +2631,57 @@
     "accompany_fee": 0,
     "total_price": 3580,
     "created_at": "2026-07-22T09:08:53.000Z"
+  },
+  {
+    "id": 64,
+    "parent_name": "张梅芳",
+    "relation": "母亲",
+    "phone": "15074962467",
+    "wechat": "15074962467",
+    "children": [
+      {
+        "name": "肖雨鑫",
+        "gender": "女",
+        "age": 14,
+        "grade": "初中",
+        "id_number": "430124201204090165",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      },
+      {
+        "name": "肖明秀",
+        "gender": "女",
+        "age": 9,
+        "grade": "小4-6",
+        "id_number": "430124201701130543",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "14",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "full",
+    "mother_name": "张梅芳",
+    "mother_phone": "15074962467",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 2,
+    "qa1": "从肖雨鑫的曼陀罗画里解读出存在学业压力，虽然我们作为父母的也偶尔能感受到，但孩子没有跟我们表达出来，我们平时也没有和孩子好好聊过关于她压力这块。关于引导孩子这块我们作为父母还是比较缺乏这方面的能力的。\n肖明秀比姐姐爱表达，而且更希望得到我们父母的关注，但我有时因为忙而敷衍她或没有用心去倾听她的感受和想法，以后要多去倾听她，让她多表达自己的想法和感受。",
+    "qa2": "希望孩子在这个新的群体中，能够勇敢打开自己，学会表达内心真实感受，释放学业带来的压力。提升人际交往能力，懂得看见自己、接纳自己，在集体生活里建立自信，学会做自己。同时也希望我们家长借着这次夏令营，学会更好地引导孩子，懂得倾听孩子内心，陪伴孩子一同成长，成为更好的自己。",
+    "referrer": "刘珊",
+    "source": "朋友推荐",
+    "notes": "",
+    "base_price": 4980,
+    "children_total": 9960,
+    "accompany_fee": 3580,
+    "total_price": 13540,
+    "created_at": "2026-07-22T12:01:13.207Z"
   }
 ]
