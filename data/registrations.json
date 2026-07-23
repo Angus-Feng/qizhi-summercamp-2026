@@ -1901,7 +1901,8 @@
         "grade": "小4-6",
         "id_number": "320804201602182919",
         "has_special_needs": "no",
-        "special_needs_detail": ""
+        "special_needs_detail": "",
+        "week": 2
       }
     ],
     "product": "7",
@@ -1923,7 +1924,7 @@
     "qa2": "希望能成长得更自信更大方",
     "referrer": "",
     "source": "",
-    "notes": "",
+    "notes": "孩子袁皓然报名第二周(7天)",
     "base_price": 2980,
     "children_total": 2980,
     "accompany_fee": 0,
