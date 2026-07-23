@@ -367,6 +367,106 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
   display: flex; flex-direction: column; align-items: center; gap: 6px;
   animation: bounce 2s infinite;
 }
+
+/* ═══════════════════════════════════════════════════════
+   Notice Banner - 报名提示
+   ═══════════════════════════════════════════════════════ */
+.notice-banner {
+  background: linear-gradient(135deg, #FFF8E1 0%, #FFE8CC 50%, #FFDCC8 100%);
+  border-top: 1px solid #FFCC80;
+  border-bottom: 1px solid #FFCC80;
+  padding: 18px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.notice-banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #FF6B35, #F7931E, #FF6B35);
+  background-size: 200% 100%;
+  animation: noticeShine 3s linear infinite;
+}
+
+@keyframes noticeShine {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.notice-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.notice-icon {
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, #FF6B35, #F7931E);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  box-shadow: 0 3px 12px rgba(255,107,53,0.3);
+  animation: noticePulse 2s ease-in-out infinite;
+}
+
+@keyframes noticePulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 3px 12px rgba(255,107,53,0.3); }
+  50% { transform: scale(1.08); box-shadow: 0 4px 18px rgba(255,107,53,0.45); }
+}
+
+.notice-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notice-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #C62828;
+  letter-spacing: 2px;
+  margin-bottom: 2px;
+}
+
+.notice-text {
+  font-size: 0.88rem;
+  color: #BF360C;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.notice-text .highlight {
+  color: #D32F2F;
+  font-weight: 700;
+}
+
+.notice-btn {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #FF6B35, #F7931E);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 20px;
+  white-space: nowrap;
+  box-shadow: 0 2px 10px rgba(255,107,53,0.3);
+  transition: all 0.3s;
+  letter-spacing: 1px;
+}
+
+.notice-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255,107,53,0.4);
+}
+
+@media (max-width: 600px) {
+  .notice-inner { flex-wrap: wrap; }
+  .notice-btn { width: 100%; text-align: center; padding: 8px; }
+  .notice-text { font-size: 0.82rem; }
+}
 @keyframes bounce {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(8px); }
@@ -1288,6 +1388,20 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
   <div class="hero-scroll-hint">
     <span>向下探索</span>
     <div class="hero-scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     Notice Banner - 报名提示
+     ═══════════════════════════════════════════════════════ -->
+<section class="notice-banner" id="notice">
+  <div class="notice-inner">
+    <div class="notice-icon">📢</div>
+    <div class="notice-content">
+      <div class="notice-label">报名提示</div>
+      <p class="notice-text">夏令营<span class="highlight">首周名额已满</span>！第二周、第三周名额紧张，<span class="highlight">欲报从速，招满截止</span>。</p>
+    </div>
+    <a href="#register" class="notice-btn">立即报名</a>
   </div>
 </section>
 
