@@ -2108,12 +2108,13 @@
     "qa2": "能让孩子静下来，提升专注力",
     "referrer": "高涓",
     "source": "朋友推荐",
-    "notes": "",
+    "notes": "父亲和孩子都不住宿",
     "base_price": 2980,
     "children_total": 2980,
     "accompany_fee": 980,
     "total_price": 3960,
-    "created_at": "2026-07-19T07:46:06.686Z"
+    "created_at": "2026-07-19T07:46:06.686Z",
+    "no_dorm": true
   },
   {
     "id": 52,
