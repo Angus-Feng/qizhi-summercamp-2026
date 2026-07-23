@@ -2735,5 +2735,41 @@
     "accompany_fee": 980,
     "total_price": 10940,
     "created_at": "2026-07-22T14:54:48.314Z"
+  },
+  {
+    "id": 66,
+    "parent_name": "刘平华",
+    "relation": "父亲",
+    "phone": "13327313347",
+    "wechat": "13327313347",
+    "children": [],
+    "product": "7",
+    "father_accompany": "weekly",
+    "father_name": "刘平华",
+    "father_phone": "13327313347",
+    "father_weeks": [
+      2,
+      3
+    ],
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 0,
+    "qa1": "",
+    "qa2": "",
+    "referrer": "",
+    "source": "手动报名",
+    "notes": "刘平华（父亲），手动报名，参加第二周和第三周，2×980=¥1960",
+    "base_price": 0,
+    "children_total": 0,
+    "accompany_fee": 1960,
+    "total_price": 1960,
+    "created_at": "2026-07-23T14:12:00.000Z"
   }
 ]
