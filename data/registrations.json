@@ -2771,5 +2771,48 @@
     "accompany_fee": 1960,
     "total_price": 1960,
     "created_at": "2026-07-23T14:12:00.000Z"
+  },
+  {
+    "id": 67,
+    "parent_name": "胡冬",
+    "relation": "母亲",
+    "phone": "17873081789",
+    "wechat": "同手机号",
+    "children": [
+      {
+        "name": "陈佳裕",
+        "gender": "男",
+        "age": 12,
+        "grade": "小4-6",
+        "id_number": "430621201403060338",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "14",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "独自带抱着最小的弟弟去奶奶家，把弟弟照顾得很好。",
+    "qa2": "让孩子爱上大自然，有敬畏心",
+    "referrer": "陈澜心",
+    "source": "其他",
+    "notes": "亲戚",
+    "base_price": 4980,
+    "children_total": 4980,
+    "accompany_fee": 0,
+    "total_price": 4980,
+    "created_at": "2026-07-24T05:21:11.429Z"
   }
 ]
