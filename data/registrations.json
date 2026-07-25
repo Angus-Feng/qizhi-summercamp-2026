@@ -2368,7 +2368,8 @@
     "children_total": 0,
     "accompany_fee": 0,
     "total_price": 3580,
-    "created_at": "2026-07-21T07:12:00.000Z"
+    "created_at": "2026-07-21T07:12:00.000Z",
+    "gender": "男"
   },
   {
     "id": 58,
