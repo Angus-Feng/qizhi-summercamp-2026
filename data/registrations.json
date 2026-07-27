@@ -2815,5 +2815,50 @@
     "accompany_fee": 0,
     "total_price": 4980,
     "created_at": "2026-07-24T05:21:11.429Z"
+  },
+  {
+    "id": 68,
+    "parent_name": "胡咏玲",
+    "relation": "母亲",
+    "phone": "13705238660",
+    "wechat": "15861792992",
+    "children": [
+      {
+        "name": "葛禹辰",
+        "gender": "男",
+        "age": 14,
+        "grade": "初中",
+        "id_number": "320802201308123034",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "7",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "weekly",
+    "mother_name": "胡咏玲",
+    "mother_phone": "13705238660",
+    "father_weeks": [],
+    "mother_weeks": [
+      1
+    ],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "",
+    "qa2": "",
+    "referrer": "",
+    "source": "手动报名",
+    "notes": "胡咏玲母子报名一周(第1周)，孩子¥2980+母亲¥980=¥3960",
+    "base_price": 2980,
+    "children_total": 2980,
+    "accompany_fee": 980,
+    "total_price": 3960,
+    "created_at": "2026-07-27T13:39:00.000Z"
   }
 ]
