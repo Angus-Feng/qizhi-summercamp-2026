@@ -948,12 +948,14 @@
     "qa2": "希望我和孩子可以更平和的交流和相处，尤其是我可以情绪稳定，带着他一起情绪稳定。",
     "referrer": "",
     "source": "线下活动",
-    "notes": "",
+    "notes": "【已取消】家庭不参加",
     "base_price": 4980,
     "children_total": 4980,
     "accompany_fee": 980,
     "total_price": 5960,
-    "created_at": "2026-07-02T01:06:10.700Z"
+    "created_at": "2026-07-02T01:06:10.700Z",
+    "cancelled": true,
+    "cancelled_note": "家庭不来了，2026-07-27标记"
   },
   {
     "id": 22,
