@@ -2914,5 +2914,50 @@
     "accompany_fee": 0,
     "total_price": 4980,
     "created_at": "2026-07-28T11:03:02.600Z"
+  },
+  {
+    "id": 70,
+    "parent_name": "李鑫",
+    "relation": "母亲",
+    "phone": "15387494943",
+    "wechat": "15387494943",
+    "children": [
+      {
+        "name": "黄子珊",
+        "gender": "女",
+        "age": 12,
+        "grade": "初中",
+        "id_number": "43011120140402016X",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "7",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "weekly",
+    "mother_name": "李鑫",
+    "mother_phone": "15387494943",
+    "father_weeks": [],
+    "mother_weeks": [
+      1
+    ],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "搬家时，孩子对",
+    "qa2": "孩子能通过做成一件件事收获自信，更能认识自己，在自然相处中获得乐趣。家长获得针对性的养育方针",
+    "referrer": "湖南启智书院",
+    "source": "其他",
+    "notes": "",
+    "base_price": 2980,
+    "children_total": 2980,
+    "accompany_fee": 980,
+    "total_price": 3960,
+    "created_at": "2026-07-29T12:34:59.782Z"
   }
 ]
