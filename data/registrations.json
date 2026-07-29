@@ -2899,7 +2899,8 @@
         "grade": "小4-6",
         "id_number": "430111201704120285",
         "has_special_needs": "yes",
-        "special_needs_detail": "有虫牙，少吃甜食"
+        "special_needs_detail": "有虫牙，少吃甜食",
+        "week": 1
       }
     ],
     "product": "14",
@@ -2921,11 +2922,11 @@
     "qa2": "主要是减重，养成良好的饮食、作息生活习惯； 提高自我情绪管理，能减少负能量的时间",
     "referrer": "刘平华",
     "source": "其他",
-    "notes": "田一君+田一岑两姐妹14天¥9960",
-    "base_price": 9960,
-    "children_total": 9960,
+    "notes": "田一君14天¥4980 + 田一岑7天(第1周)¥2980",
+    "base_price": 7960,
+    "children_total": 7960,
     "accompany_fee": 0,
-    "total_price": 9960,
+    "total_price": 7960,
     "created_at": "2026-07-28T11:03:02.600Z"
   },
   {
