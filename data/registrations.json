@@ -2891,6 +2891,15 @@
         "id_number": "430111201206060144",
         "has_special_needs": "yes",
         "special_needs_detail": "需要减重，饮食减少碳水"
+      },
+      {
+        "name": "田一岑",
+        "gender": "女",
+        "age": 9,
+        "grade": "小4-6",
+        "id_number": "430111201704120285",
+        "has_special_needs": "yes",
+        "special_needs_detail": "有虫牙，少吃甜食"
       }
     ],
     "product": "14",
@@ -2907,16 +2916,16 @@
     "other_name": "",
     "other_phone": "",
     "other_weeks": [],
-    "child_count": 1,
+    "child_count": 2,
     "qa1": "深夜陪妈妈去急诊看病，全程陪同处理事情",
     "qa2": "主要是减重，养成良好的饮食、作息生活习惯； 提高自我情绪管理，能减少负能量的时间",
     "referrer": "刘平华",
     "source": "其他",
-    "notes": "",
-    "base_price": 4980,
-    "children_total": 4980,
+    "notes": "田一君+田一岑两姐妹14天¥9960",
+    "base_price": 9960,
+    "children_total": 9960,
     "accompany_fee": 0,
-    "total_price": 4980,
+    "total_price": 9960,
     "created_at": "2026-07-28T11:03:02.600Z"
   },
   {
@@ -3002,11 +3011,13 @@
     "qa2": "能较好的管理情绪，平和接纳不完美的瞬间",
     "referrer": "张梅芳",
     "source": "其他",
-    "notes": "",
+    "notes": "【已取消】田一岑归入谢红玉家庭",
     "base_price": 2980,
     "children_total": 2980,
     "accompany_fee": 0,
     "total_price": 2980,
-    "created_at": "2026-07-29T13:17:21.477Z"
+    "created_at": "2026-07-29T13:17:21.477Z",
+    "cancelled": true,
+    "cancelled_note": "田一岑归入谢红玉家庭"
   }
 ]
