@@ -3065,5 +3065,50 @@
     "accompany_fee": 980,
     "total_price": 6940,
     "created_at": "2026-07-30T02:40:22.912Z"
+  },
+  {
+    "id": 73,
+    "parent_name": "黎和阳",
+    "relation": "父亲",
+    "phone": "13305236788",
+    "wechat": "",
+    "children": [
+      {
+        "name": "黎馨好",
+        "gender": "女",
+        "age": 13,
+        "grade": "初中",
+        "id_number": "320804201307290044",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "7",
+    "father_accompany": "weekly",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [
+      1
+    ],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "不给手机玩 咬人  脾气爆燥  不尊重父亲",
+    "qa2": "减少对手机的依赖  亲子关系改善  提高学习兴趣  知道学习的目的",
+    "referrer": "高总",
+    "source": "线下活动",
+    "notes": "",
+    "base_price": 2980,
+    "children_total": 2980,
+    "accompany_fee": 980,
+    "total_price": 3960,
+    "created_at": "2026-07-30T08:00:28.526Z"
   }
 ]
