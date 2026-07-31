@@ -3110,5 +3110,48 @@
     "accompany_fee": 980,
     "total_price": 3960,
     "created_at": "2026-07-30T08:00:28.526Z"
+  },
+  {
+    "id": 74,
+    "parent_name": "章丽萍",
+    "relation": "母亲",
+    "phone": "18949142130",
+    "wechat": "手机同号",
+    "children": [
+      {
+        "name": "王语晨",
+        "gender": "女",
+        "age": 16,
+        "grade": "初中",
+        "id_number": "341102201110052425",
+        "has_special_needs": "no",
+        "special_needs_detail": ""
+      }
+    ],
+    "product": "21",
+    "father_accompany": "no",
+    "father_name": "",
+    "father_phone": "",
+    "mother_accompany": "no",
+    "mother_name": "",
+    "mother_phone": "",
+    "father_weeks": [],
+    "mother_weeks": [],
+    "other_accompany": "no",
+    "other_relation": "",
+    "other_name": "",
+    "other_phone": "",
+    "other_weeks": [],
+    "child_count": 1,
+    "qa1": "孩子就是爱打游戏，有点抑郁焦虑，自私，搞点钱就爱点外卖，不太合群，喜欢第五人格装备\n触动的就是最近把自已房间重新布置",
+    "qa2": "正常生活，不要整天打游戏，作息规律到点吃饭，到点睡觉，正常交现实中的朋友，因为平时喜欢交网络上的朋友，喜欢聊天，朋友圈什么都发，希望引导孩子什么朋友该交什么朋友不该交。",
+    "referrer": "",
+    "source": "朋友推荐",
+    "notes": "王凯新",
+    "base_price": 6980,
+    "children_total": 6980,
+    "accompany_fee": 0,
+    "total_price": 6980,
+    "created_at": "2026-07-31T06:17:55.357Z"
   }
 ]
