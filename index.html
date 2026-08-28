@@ -1210,6 +1210,7 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
 .toast.show { display: block; animation: toastIn 0.3s; }
 .toast.success { border-color: var(--green); }
 .toast.error { border-color: #C0392B; }
+.toast.info { border-color: #8A7A6A; }
 
 @keyframes toastIn {
   from { opacity: 0; transform: translateX(-50%) translateY(-12px); }
@@ -1381,7 +1382,7 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
       </div>
     </div>
 
-    <a href="#register" class="btn-primary">立即报名</a>
+    <a href="#why" class="btn-primary">本期报名已结束</a>
     <a href="promotion.html" class="btn-outline" style="margin-top:12px">夏令营宣讲（含录音）</a>
   </div>
 
@@ -1398,10 +1399,10 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
   <div class="notice-inner">
     <div class="notice-icon">📢</div>
     <div class="notice-content">
-      <div class="notice-label">报名提示</div>
-      <p class="notice-text">夏令营<span class="highlight">首周名额已满</span>！第二周、第三周名额紧张，<span class="highlight">欲报从速，招满截止</span>。</p>
+      <div class="notice-label">活动公告</div>
+      <p class="notice-text">本期夏令营已<span class="highlight">圆满收官</span>，感谢所有家庭的信任与同行。后续营地正在筹备，<span class="highlight">敬请期待</span>。</p>
     </div>
-    <a href="#register" class="notice-btn">立即报名</a>
+    <a href="#why" class="notice-btn">了解启智</a>
   </div>
 </section>
 
@@ -1773,7 +1774,7 @@ body { padding-top: calc(var(--nav-h) + 36px); } /* push content below nav+banne
       <div class="price-total"><span>合计</span><span id="summaryTotal">¥0</span></div>
     </div>
 
-    <button type="submit" class="form-submit" id="submitBtn">提交报名</button>
+    <button type="submit" class="form-submit" id="submitBtn" disabled>报名已结束</button>
   </form>
 </section>
 
@@ -2277,6 +2278,8 @@ function validateForm() {
 /* ── 提交 ──────────────────────────────────── */
 document.getElementById('registrationForm').addEventListener('submit', async function(e) {
   e.preventDefault();
+  showToast('本期夏令营已结束，不再接受报名。敬请期待后续营地安排！', 'info');
+  return;
   if (!validateForm()) return;
   var submitBtn = document.getElementById('submitBtn');
   submitBtn.disabled = true; submitBtn.textContent = '提交中...';
